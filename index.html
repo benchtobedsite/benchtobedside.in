@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="BenchToBedside — Clinical microbiology from the lab bench to the bedside. Hepatitis, AMR, diagnostic stewardship and real case insights by Dr. Deepika Chakraborty, GIPMER New Delhi."/>
+<title>BenchToBedside — Dr. Deepika Chakraborty</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ── TOKENS ── */
+:root{
+  --indigo:    #1a1040;
+  --indigo-md: #2d1f6e;
+  --violet:    #7c3aed;
+  --violet-lt: #a78bfa;
+  --violet-pale:#ede9fe;
+  --amber:     #f59e0b;
+  --amber-lt:  #fcd34d;
+  --emerald:   #059669;
+  --rose:      #e11d48;
+  --ink:       #0f0a1e;
+  --text:      #1e1b4b;
+  --text-mid:  #4c4576;
+  --text-lt:   #7c7a9c;
+  --border:    #e5e2f0;
+  --surface:   #f8f7ff;
+  --white:     #ffffff;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans:  'DM Sans', system-ui, sans-serif;
+  --mono:  'DM Mono', monospace;
+  --r: 12px;
+  --sh: 0 4px 24px rgba(124,58,237,0.12);
+  --sh-lg: 0 12px 48px rgba(124,58,237,0.18);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:var(--sans);background:var(--white);color:var(--text);line-height:1.7;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;font-family:var(--sans);}
+img{max-width:100%;display:block;}
+::selection{background:var(--violet-pale);color:var(--indigo);}
+.skip{position:absolute;left:-9999px;top:0;background:var(--violet);color:#fff;padding:.5rem 1rem;z-index:9999;}
+.skip:focus{left:0;}
+
+/* ── MICRO DOODLES ── */
+/* SVG doodle elements scattered around the page */
+.doodle{position:absolute;pointer-events:none;opacity:.18;z-index:0;}
+.doodle-hero{position:absolute;pointer-events:none;z-index:0;}
+.doodle svg{display:block;}
+
+/* Section doodle containers */
+.sec-doodle-wrap{position:relative;overflow:hidden;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  transition:background .3s,box-shadow .3s;
+  padding:0 2rem;
+}
+nav.scrolled{background:rgba(26,16,64,.97);backdrop-filter:blur(12px);box-shadow:0 2px 24px rgba(0,0,0,.3);}
+.nav-inner{max-width:1200px;margin:0 auto;height:68px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{display:flex;flex-direction:column;line-height:1;}
+.nav-logo-name{font-family:var(--serif);font-size:1.35rem;font-weight:900;color:#fff;letter-spacing:-.02em;}
+.nav-logo-divider{display:inline-block;color:var(--amber-lt);margin:0 .2rem;}
+.nav-logo-tag{font-family:var(--mono);font-size:.55rem;color:var(--violet-lt);letter-spacing:.14em;text-transform:uppercase;margin-top:.1rem;}
+.nav-links{display:flex;align-items:center;gap:.2rem;list-style:none;}
+.nav-links a{
+  font-size:.8rem;font-weight:600;color:rgba(255,255,255,.7);
+  padding:.4rem .9rem;border-radius:6px;
+  transition:all .18s;letter-spacing:.01em;
+}
+.nav-links a:hover,.nav-links a.active{color:#fff;background:rgba(124,58,237,.3);}
+.nav-cta{
+  background:var(--violet)!important;color:#fff!important;
+  padding:.45rem 1.2rem!important;border-radius:8px!important;
+  font-weight:700!important;transition:background .18s!important;
+}
+.nav-cta:hover{background:var(--violet-lt)!important;color:var(--indigo)!important;}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:6px;background:none;border:none;}
+.hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:.3s;}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  background:radial-gradient(ellipse at 20% 50%, #2d1f6e 0%, #1a1040 50%, #0a0520 100%);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:8rem 2rem 5rem;
+  position:relative;overflow:hidden;
+}
+canvas#petri{position:absolute;inset:0;opacity:.5;pointer-events:none;}
+.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 460px;gap:5rem;align-items:center;position:relative;z-index:1;}
+.hero-pill{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(124,58,237,.2);border:1px solid rgba(124,58,237,.4);
+  color:var(--violet-lt);border-radius:50px;
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.3rem 1rem;margin-bottom:1.6rem;
+}
+.pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--violet-lt);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.7);}}
+.hero-h1{
+  font-family:var(--serif);font-size:clamp(2.4rem,5vw,4rem);font-weight:900;
+  color:#fff;line-height:1.1;margin-bottom:1.4rem;letter-spacing:-.02em;
+}
+.hero-h1 .hl{
+  background:linear-gradient(135deg,var(--violet-lt),var(--amber-lt));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,.7);line-height:1.8;max-width:500px;margin-bottom:2.5rem;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;font-size:.88rem;padding:.85rem 2rem;border-radius:10px;border:none;transition:all .2s;}
+.btn-v{background:var(--violet);color:#fff;}
+.btn-v:hover{background:#6d28d9;transform:translateY(-2px);box-shadow:var(--sh);}
+.btn-g{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);}
+.btn-g:hover{background:rgba(255,255,255,.18);}
+
+/* Petri dish panel */
+.hero-panel{position:relative;}
+.petri-panel{
+  background:rgba(255,255,255,.04);border:1px solid rgba(124,58,237,.3);
+  border-radius:20px;padding:2rem;backdrop-filter:blur(8px);
+}
+.panel-tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;}
+.ptab{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:.3rem .8rem;border-radius:6px;border:1px solid rgba(255,255,255,.15);
+  background:none;color:rgba(255,255,255,.5);transition:all .18s;
+}
+.ptab.active,.ptab:hover{background:rgba(124,58,237,.4);border-color:var(--violet);color:#fff;}
+.panel-content{display:none;}
+.panel-content.show{display:block;}
+.report-line{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.06);
+  font-size:.8rem;
+}
+.report-line:last-child{border-bottom:none;}
+.rl-key{font-family:var(--mono);font-size:.62rem;color:rgba(255,255,255,.5);}
+.rl-val{font-weight:600;font-size:.82rem;}
+.r-pos{color:#f87171;}
+.r-neg{color:#6ee7b7;}
+.r-flag{color:var(--amber-lt);}
+.panel-footer{
+  margin-top:1rem;padding:.8rem 1rem;
+  background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);
+  border-radius:8px;font-size:.72rem;color:var(--amber-lt);line-height:1.5;
+}
+.stat-row-hero{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1.2rem;}
+.stat-box{background:rgba(255,255,255,.05);border-radius:8px;padding:.9rem;text-align:center;}
+.stat-num{font-family:var(--serif);font-size:1.8rem;font-weight:900;color:var(--violet-lt);line-height:1;}
+.stat-lbl{font-size:.65rem;color:rgba(255,255,255,.5);margin-top:.2rem;font-family:var(--mono);}
+
+/* ── SCROLL MARQUEE ── */
+.marquee-wrap{
+  background:var(--violet);overflow:hidden;white-space:nowrap;
+  padding:.65rem 0;border-top:1px solid rgba(255,255,255,.1);
+}
+.marquee-track{display:inline-block;animation:marquee 30s linear infinite;}
+.marquee-track:hover{animation-play-state:paused;}
+.marquee-item{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--mono);font-size:.68rem;font-weight:500;
+  letter-spacing:.06em;color:#fff;margin-right:3rem;
+}
+.marquee-item .dot{width:5px;height:5px;border-radius:50%;background:var(--amber-lt);flex-shrink:0;}
+@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ── SECTION BASICS ── */
+.sec{padding:6rem 2rem;position:relative;overflow:hidden;}
+.sec-alt{background:var(--surface);}
+.sec-dark{background:var(--indigo);}
+.sec-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1;}
+.sec-eyebrow{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--violet);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;
+}
+.sec-eyebrow::before{content:'';display:block;width:20px;height:2px;background:var(--violet);}
+.sec-dark .sec-eyebrow{color:var(--violet-lt);}
+.sec-dark .sec-eyebrow::before{background:var(--violet-lt);}
+.sec-h2{
+  font-family:var(--serif);font-size:clamp(1.7rem,3vw,2.5rem);font-weight:900;
+  color:var(--indigo);line-height:1.15;margin-bottom:.8rem;letter-spacing:-.01em;
+}
+.sec-dark .sec-h2{color:#fff;}
+.sec-lead{font-size:.97rem;color:var(--text-mid);line-height:1.8;max-width:600px;margin-bottom:3rem;}
+.sec-dark .sec-lead{color:rgba(255,255,255,.65);}
+
+/* ── TOPIC CHIPS ── */
+.chips-wrap{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+.chip-btn{
+  font-family:var(--mono);font-size:.63rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:.35rem 1rem;border-radius:50px;border:1px solid var(--border);
+  background:var(--white);color:var(--text-mid);transition:all .15s;font-weight:500;
+}
+.chip-btn:hover{border-color:var(--violet);color:var(--violet);}
+.chip-btn.on{background:var(--violet);color:#fff;border-color:var(--violet);}
+
+/* ── ARTICLE LAYOUT ── */
+.articles-layout{display:grid;grid-template-columns:1fr 340px;gap:2.5rem;align-items:start;}
+.article-featured{
+  border:1px solid var(--border);border-radius:var(--r);overflow:hidden;
+  background:var(--white);margin-bottom:1.5rem;
+  display:grid;grid-template-columns:5px 1fr;
+  transition:box-shadow .2s;
+}
+.article-featured:hover{box-shadow:var(--sh);}
+.af-accent{background:linear-gradient(180deg,var(--violet),var(--indigo-md));}
+.af-body{padding:2rem;}
+.article-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.article-card-sm{
+  border:1px solid var(--border);border-radius:var(--r);overflow:hidden;
+  background:var(--white);transition:box-shadow .2s,transform .2s;
+  display:flex;flex-direction:column;
+}
+.article-card-sm:hover{box-shadow:var(--sh);transform:translateY(-3px);}
+.ac-bar{height:3px;}
+.bar-v{background:linear-gradient(90deg,#7c3aed,#a78bfa);}
+.bar-b{background:linear-gradient(90deg,#059669,#34d399);}
+.bar-s{background:linear-gradient(90deg,#2563eb,#60a5fa);}
+.bar-a{background:linear-gradient(90deg,#dc2626,#f87171);}
+.bar-m{background:linear-gradient(90deg,#92400e,#fbbf24);}
+.bar-c{background:linear-gradient(90deg,#0891b2,#67e8f9);}
+.ac-body{padding:1.2rem;flex:1;display:flex;flex-direction:column;}
+.ac-cat{
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+  font-weight:500;margin-bottom:.5rem;
+}
+.cv{color:#7c3aed;} .cb{color:#059669;} .cs{color:#2563eb;}
+.ca{color:#dc2626;} .cm{color:#92400e;} .cc{color:#0891b2;}
+.ac-title{
+  font-family:var(--serif);font-size:.95rem;font-weight:700;
+  color:var(--indigo);line-height:1.3;margin-bottom:.6rem;
+}
+.af-title{
+  font-family:var(--serif);font-size:1.3rem;font-weight:900;
+  color:var(--indigo);line-height:1.25;margin-bottom:.8rem;
+}
+.ac-excerpt,.af-excerpt{font-size:.82rem;color:var(--text-mid);line-height:1.65;flex:1;margin-bottom:1rem;}
+.ac-foot,.af-foot{
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:.62rem;color:var(--text-lt);
+  border-top:1px solid var(--border);padding-top:.7rem;margin-top:auto;
+}
+.read-link{color:var(--violet);font-weight:600;transition:letter-spacing .15s;}
+.article-card-sm:hover .read-link,.article-featured:hover .read-link{letter-spacing:.04em;}
+
+/* ── EMPTY STATE ── */
+.empty-state{
+  border:1px dashed var(--violet-lt);border-radius:var(--r);
+  background:var(--surface);
+  padding:3.5rem 2rem;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:.9rem;
+}
+.empty-state.on-dark{background:rgba(255,255,255,.03);border-color:rgba(167,139,250,.4);}
+.es-icon{
+  width:60px;height:60px;border-radius:50%;
+  background:var(--violet-pale);
+  display:flex;align-items:center;justify-content:center;font-size:1.7rem;
+}
+.empty-state.on-dark .es-icon{background:rgba(124,58,237,.2);}
+.es-title{font-family:var(--serif);font-size:1.25rem;font-weight:900;color:var(--indigo);}
+.empty-state.on-dark .es-title{color:#fff;}
+.es-text{font-size:.88rem;color:var(--text-mid);line-height:1.7;max-width:420px;}
+.empty-state.on-dark .es-text{color:rgba(255,255,255,.65);}
+.es-tags{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-top:.4rem;}
+.es-tag{
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:.32rem 1rem;border-radius:50px;border:1px solid var(--border);
+  background:var(--white);color:var(--text-mid);font-weight:500;
+}
+
+/* ── SIDEBAR ── */
+.sidebar{display:flex;flex-direction:column;gap:1.5rem;position:sticky;top:90px;}
+.side-widget{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--white);}
+.sw-head{
+  background:var(--indigo);padding:.85rem 1.2rem;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--violet-lt);display:flex;align-items:center;gap:.5rem;
+}
+.sw-head::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--violet-lt);}
+.sw-body{padding:1.2rem;}
+.fact-item{display:flex;gap:.75rem;padding:.75rem 0;border-bottom:1px solid var(--border);}
+.fact-item:last-child{border-bottom:none;}
+.fi-icon{font-size:1.1rem;flex-shrink:0;margin-top:.1rem;}
+.fi-text strong{display:block;font-size:.8rem;color:var(--indigo);margin-bottom:.15rem;}
+.fi-text span{font-size:.75rem;color:var(--text-mid);line-height:1.5;}
+.gloss-entry{padding:.65rem 0;border-bottom:1px solid var(--border);}
+.gloss-entry:last-child{border-bottom:none;}
+.ge-term{font-family:var(--mono);font-size:.65rem;font-weight:500;color:var(--violet);margin-bottom:.2rem;}
+.ge-def{font-size:.75rem;color:var(--text-mid);line-height:1.55;}
+.mini-sub-input{width:100%;padding:.65rem .9rem;border:1px solid var(--border);border-radius:8px;font-family:var(--sans);font-size:.82rem;outline:none;color:var(--text);margin-bottom:.6rem;transition:border-color .15s;}
+.mini-sub-input:focus{border-color:var(--violet);}
+.mini-sub-btn{width:100%;background:var(--violet);color:#fff;border:none;border-radius:8px;padding:.7rem;font-weight:700;font-size:.8rem;transition:background .18s;}
+.mini-sub-btn:hover{background:#6d28d9;}
+
+/* ── Q&A ── */
+.qa-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:var(--r);overflow:hidden;}
+.qa-item{background:var(--white);}
+.qa-btn{
+  width:100%;text-align:left;background:none;border:none;
+  padding:1.25rem 1.4rem;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;
+  transition:background .15s;
+}
+.qa-btn:hover{background:var(--violet-pale);}
+.qa-btn[aria-expanded="true"]{background:var(--violet-pale);}
+.qa-q{font-size:.88rem;font-weight:600;color:var(--indigo);line-height:1.4;}
+.qa-icon{
+  width:26px;height:26px;border-radius:50%;border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;color:var(--text-lt);flex-shrink:0;
+  transition:all .2s;font-family:var(--mono);
+}
+.qa-btn[aria-expanded="true"] .qa-icon{background:var(--violet);border-color:var(--violet);color:#fff;transform:rotate(45deg);}
+.qa-answer{display:none;padding:0 1.4rem 1.4rem;font-size:.83rem;color:var(--text-mid);line-height:1.8;}
+.qa-answer.open{display:block;}
+.qa-tip{
+  background:var(--violet-pale);border-left:3px solid var(--violet);
+  border-radius:0 6px 6px 0;padding:.7rem 1rem;
+  margin-top:.8rem;font-size:.8rem;color:var(--indigo);font-style:italic;
+}
+.qa-tip strong{font-style:normal;color:var(--violet);display:block;font-size:.65rem;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.2rem;}
+
+/* ── CASE OF MONTH ── */
+.case-layout{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.case-meta{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.case-tag{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.3rem .8rem;border-radius:6px;font-weight:500;
+}
+.ct-mycology{background:#fef3c7;color:#92400e;}
+.ct-keratitis{background:#e0f2fe;color:#0369a1;}
+.case-h3{font-family:var(--serif);font-size:1.5rem;font-weight:900;color:var(--indigo);line-height:1.2;margin-bottom:1rem;}
+.case-p{font-size:.88rem;color:var(--text-mid);line-height:1.85;margin-bottom:.9rem;}
+.teaching-box{
+  background:var(--violet-pale);border:1px solid rgba(124,58,237,.2);
+  border-radius:var(--r);padding:1.4rem;
+}
+.tb-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--violet);margin-bottom:.8rem;display:flex;align-items:center;gap:.4rem;}
+.tb-label::before{content:'🎓';}
+.tb-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.tb-list li{display:flex;gap:.6rem;font-size:.82rem;color:var(--text-mid);line-height:1.6;}
+.tb-list li::before{content:'→';color:var(--violet);flex-shrink:0;font-weight:700;}
+.lab-card{
+  border:1px solid var(--border);border-radius:var(--r);overflow:hidden;
+  box-shadow:var(--sh);background:var(--white);
+}
+.lc-header{background:var(--indigo);padding:1rem 1.3rem;display:flex;justify-content:space-between;align-items:center;}
+.lc-title{font-family:var(--mono);font-size:.6rem;color:var(--violet-lt);letter-spacing:.12em;text-transform:uppercase;}
+.lc-status{display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.58rem;color:#6ee7b7;}
+.lc-status::before{content:'●';font-size:.5rem;}
+.lc-row{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.3rem;border-bottom:1px solid var(--border);gap:1rem;}
+.lc-row:last-child{border-bottom:none;}
+.lc-k{font-family:var(--mono);font-size:.62rem;color:var(--text-lt);}
+.lc-v{font-size:.82rem;font-weight:700;}
+.lv-pos{color:#dc2626;} .lv-neg{color:#059669;} .lv-flag{color:#d97706;}
+.lc-note{background:#fffbeb;border-top:1px solid #fde68a;padding:.9rem 1.3rem;font-size:.72rem;color:#92400e;line-height:1.6;}
+
+/* ── TOPICS EXPLORER ── */
+.topics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
+.topic-card{
+  border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:1.8rem;
+  transition:all .2s;cursor:pointer;position:relative;overflow:hidden;
+}
+.topic-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 100% 0%, rgba(124,58,237,.15) 0%, transparent 60%);
+  opacity:0;transition:opacity .2s;
+}
+.topic-card:hover{border-color:rgba(124,58,237,.4);transform:translateY(-3px);}
+.topic-card:hover::before{opacity:1;}
+.topic-icon-wrap{
+  width:48px;height:48px;border-radius:12px;
+  background:rgba(124,58,237,.2);display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;margin-bottom:1rem;
+  transition:background .2s;
+}
+.topic-card:hover .topic-icon-wrap{background:rgba(124,58,237,.4);}
+.topic-name{font-family:var(--serif);font-size:1rem;font-weight:700;color:#fff;margin-bottom:.4rem;}
+.topic-desc{font-size:.77rem;color:rgba(255,255,255,.6);line-height:1.6;margin-bottom:1rem;}
+.topic-count{font-family:var(--mono);font-size:.58rem;color:var(--violet-lt);letter-spacing:.1em;}
+
+/* ── NEWSLETTER BAND ── */
+.nl-band{
+  background:linear-gradient(135deg,#4c1d95 0%,#7c3aed 50%,#6d28d9 100%);
+  padding:5rem 2rem;text-align:center;position:relative;overflow:hidden;
+}
+.nl-band::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.nl-inner{max-width:580px;margin:0 auto;position:relative;}
+.nl-tag{font-family:var(--mono);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber-lt);margin-bottom:.8rem;}
+.nl-h2{font-family:var(--serif);font-size:2.2rem;font-weight:900;color:#fff;line-height:1.2;margin-bottom:1rem;}
+.nl-p{font-size:.92rem;color:rgba(255,255,255,.8);line-height:1.75;margin-bottom:2rem;}
+.nl-form{display:flex;gap:.8rem;max-width:440px;margin:0 auto 1rem;}
+.nl-input{
+  flex:1;padding:.85rem 1.2rem;border:none;border-radius:10px;
+  font-family:var(--sans);font-size:.9rem;outline:none;color:var(--text);
+}
+.nl-btn{
+  background:var(--indigo);color:#fff;border:none;border-radius:10px;
+  padding:.85rem 1.6rem;font-weight:700;font-size:.85rem;
+  white-space:nowrap;transition:background .18s;
+}
+.nl-btn:hover{background:#0f0a1e;}
+.nl-fine{font-size:.68rem;color:rgba(255,255,255,.5);}
+.nl-perks{display:flex;justify-content:center;gap:2rem;margin-bottom:2rem;flex-wrap:wrap;}
+.nl-perk{display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:rgba(255,255,255,.8);}
+.nl-perk::before{content:'✓';color:var(--amber-lt);font-weight:700;}
+
+/* ── ABOUT STRIP ── */
+.about-strip{display:grid;grid-template-columns:auto 1fr;gap:3rem;align-items:center;}
+.about-avi{
+  width:140px;height:140px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--violet),var(--indigo-md));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:2.8rem;font-weight:900;color:#fff;
+  border:4px solid var(--violet-pale);box-shadow:var(--sh);
+}
+.about-name{font-family:var(--serif);font-size:1.4rem;font-weight:900;color:var(--indigo);margin-bottom:.2rem;}
+.about-role{font-family:var(--mono);font-size:.65rem;color:var(--violet);letter-spacing:.06em;margin-bottom:1rem;}
+.about-bio{font-size:.9rem;color:var(--text-mid);line-height:1.8;margin-bottom:1.2rem;}
+.about-socials{display:flex;gap:.7rem;flex-wrap:wrap;}
+.social-btn{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.75rem;font-weight:700;padding:.4rem 1rem;
+  border-radius:8px;border:1.5px solid var(--border);color:var(--text-mid);
+  transition:all .18s;
+}
+.social-btn:hover{border-color:var(--violet);color:var(--violet);background:var(--violet-pale);}
+
+/* ── DISCLAIMER ── */
+.disclaimer-bar{
+  background:#fffbeb;border-top:1px solid #fde68a;border-bottom:1px solid #fde68a;
+  padding:1rem 2rem;
+}
+.disclaimer-inner{max-width:1200px;margin:0 auto;display:flex;gap:.75rem;align-items:flex-start;font-size:.75rem;color:#92400e;line-height:1.6;}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);padding:4rem 2rem 0;}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;}
+.f-brand{font-family:var(--serif);font-size:1.5rem;font-weight:900;color:#fff;margin-bottom:.6rem;}
+.f-brand span{color:var(--amber-lt);}
+.f-desc{font-size:.78rem;color:#6b7280;line-height:1.65;}
+.f-col h5{font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-lt);margin-bottom:1rem;}
+.f-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+.f-col li a{font-size:.8rem;color:#6b7280;transition:color .15s;}
+.f-col li a:hover{color:#fff;}
+.footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid #1f2937;padding:1.5rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;}
+.footer-bottom span{font-family:var(--mono);font-size:.62rem;color:#4b5563;}
+
+/* ── BACK TOP ── */
+#btt{
+  position:fixed;bottom:2rem;right:2rem;z-index:400;
+  width:46px;height:46px;border-radius:50%;border:none;
+  background:var(--violet);color:#fff;font-size:1.1rem;
+  box-shadow:var(--sh-lg);opacity:0;pointer-events:none;
+  transition:opacity .2s,transform .2s;
+  display:flex;align-items:center;justify-content:center;
+}
+#btt.show{opacity:1;pointer-events:all;}
+#btt:hover{transform:translateY(-3px);}
+
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease;}
+.rv.in{opacity:1;transform:none;}
+.rv-d1{transition-delay:.1s;} .rv-d2{transition-delay:.2s;} .rv-d3{transition-delay:.3s;}
+
+/* ── DOODLE STYLES ── */
+/* Hero doodles */
+.hero-doodle{position:absolute;pointer-events:none;}
+.doodle-bacteria-1{top:12%;right:8%;opacity:.12;animation:floatDoodle 8s ease-in-out infinite;}
+.doodle-bacteria-2{bottom:18%;left:4%;opacity:.1;animation:floatDoodle 11s ease-in-out infinite 2s;}
+.doodle-cocci{top:30%;right:2%;opacity:.1;animation:floatDoodle 9s ease-in-out infinite 1s;}
+.doodle-dna{bottom:30%;right:12%;opacity:.09;animation:floatDoodle 12s ease-in-out infinite 3s;}
+
+/* Section doodles (light bg) */
+.doodle-petri{position:absolute;pointer-events:none;opacity:.06;right:-40px;top:40px;}
+.doodle-scope{position:absolute;pointer-events:none;opacity:.06;left:-30px;bottom:20px;}
+.doodle-erlen{position:absolute;pointer-events:none;opacity:.05;right:20px;bottom:60px;}
+.doodle-plate{position:absolute;pointer-events:none;opacity:.05;left:40px;top:20px;}
+
+/* Dark section doodles */
+.doodle-dark{opacity:.07 !important;}
+.doodle-micro-left{position:absolute;left:10px;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.07;}
+.doodle-micro-right{position:absolute;right:10px;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.07;}
+
+/* NL band doodles */
+.nl-doodle-l{position:absolute;left:2%;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.08;}
+.nl-doodle-r{position:absolute;right:2%;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.08;}
+
+@keyframes floatDoodle{
+  0%,100%{transform:translateY(0) rotate(0deg);}
+  33%{transform:translateY(-12px) rotate(3deg);}
+  66%{transform:translateY(6px) rotate(-2deg);}
+}
+
+/* B2B logo bridge graphic */
+.logo-bridge{
+  display:inline-flex;align-items:center;gap:0;
+}
+.logo-bench{color:#fff;}
+.logo-arrow{color:var(--amber-lt);margin:0 2px;font-style:normal;}
+.logo-bedside{color:var(--violet-lt);}
+
+/* ── MOBILE ── */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;}
+  .petri-panel{display:none;}
+  .articles-layout{grid-template-columns:1fr;}
+  .sidebar{position:static;}
+  .article-mini-grid{grid-template-columns:1fr;}
+  .qa-grid{grid-template-columns:1fr;}
+  .case-layout{grid-template-columns:1fr;}
+  .topics-grid{grid-template-columns:1fr 1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .about-strip{grid-template-columns:1fr;text-align:center;}
+  .about-avi{margin:0 auto;}
+  .about-socials{justify-content:center;}
+  nav{padding:0 1.2rem;}
+  .nav-links{display:none;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(26,16,64,.98);padding:1rem 0;}
+  .nav-links.open{display:flex;}
+  .nav-links a{line-height:1;padding:.9rem 2rem;}
+  .hamburger{display:flex;}
+  .nl-form{flex-direction:column;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .hero-doodle{display:none;}
+}
+@media(max-width:600px){
+  .topics-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .hero-h1{font-size:2.2rem;}
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+
+<!-- CANVAS background -->
+<canvas id="petri-bg" style="position:fixed;inset:0;pointer-events:none;opacity:0;z-index:-1;"></canvas>
+
+<!-- ══ HERO DOODLES ══ -->
+<!-- Bacteria rod (bacilli) - top right -->
+<div class="hero-doodle doodle-bacteria-1">
+<svg width="120" height="80" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Rod-shaped bacterium with flagella -->
+  <ellipse cx="60" cy="40" rx="38" ry="16" fill="none" stroke="rgba(167,139,250,0.8)" stroke-width="2.5"/>
+  <!-- Internal dividing line (septum) -->
+  <line x1="60" y1="25" x2="60" y2="55" stroke="rgba(167,139,250,0.5)" stroke-width="1.5" stroke-dasharray="2,2"/>
+  <!-- Flagella -->
+  <path d="M98 40 Q115 25 112 10 Q109 -2 122 -8" stroke="rgba(167,139,250,0.6)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M98 38 Q118 32 120 20" stroke="rgba(167,139,250,0.5)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <path d="M22 40 Q5 50 2 65" stroke="rgba(167,139,250,0.5)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <!-- Ribosomes dots inside -->
+  <circle cx="45" cy="38" r="2" fill="rgba(167,139,250,0.5)"/>
+  <circle cx="55" cy="43" r="2" fill="rgba(167,139,250,0.5)"/>
+  <circle cx="70" cy="37" r="2" fill="rgba(167,139,250,0.5)"/>
+  <circle cx="78" cy="44" r="2" fill="rgba(167,139,250,0.5)"/>
+  <circle cx="36" cy="42" r="1.5" fill="rgba(167,139,250,0.4)"/>
+</svg>
+</div>
+
+<!-- Cocci cluster - right side -->
+<div class="hero-doodle doodle-cocci">
+<svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Staphylococcus-like cluster -->
+  <circle cx="30" cy="30" r="13" fill="none" stroke="rgba(252,211,77,0.7)" stroke-width="2"/>
+  <circle cx="57" cy="28" r="13" fill="none" stroke="rgba(252,211,77,0.7)" stroke-width="2"/>
+  <circle cx="30" cy="57" r="13" fill="none" stroke="rgba(252,211,77,0.7)" stroke-width="2"/>
+  <circle cx="57" cy="57" r="13" fill="none" stroke="rgba(252,211,77,0.7)" stroke-width="2"/>
+  <!-- Small dots inside -->
+  <circle cx="30" cy="30" r="4" fill="rgba(252,211,77,0.3)"/>
+  <circle cx="57" cy="28" r="4" fill="rgba(252,211,77,0.3)"/>
+  <circle cx="30" cy="57" r="4" fill="rgba(252,211,77,0.3)"/>
+  <circle cx="57" cy="57" r="4" fill="rgba(252,211,77,0.3)"/>
+</svg>
+</div>
+
+<!-- Spiral bacterium (spirochete) - bottom left -->
+<div class="hero-doodle doodle-bacteria-2">
+<svg width="100" height="60" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5 30 Q15 10 25 30 Q35 50 45 30 Q55 10 65 30 Q75 50 85 30 Q92 16 98 22" 
+        stroke="rgba(167,139,250,0.7)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Flagellum tip -->
+  <path d="M5 30 Q0 20 3 12" stroke="rgba(167,139,250,0.5)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+</svg>
+</div>
+
+<!-- DNA helix - bottom right hero area -->
+<div class="hero-doodle doodle-dna">
+<svg width="60" height="140" viewBox="0 0 60 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left strand -->
+  <path d="M10 10 Q30 25 10 40 Q-10 55 10 70 Q30 85 10 100 Q-10 115 10 130" 
+        stroke="rgba(167,139,250,0.7)" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Right strand -->
+  <path d="M50 10 Q30 25 50 40 Q70 55 50 70 Q30 85 50 100 Q70 115 50 130" 
+        stroke="rgba(252,211,77,0.6)" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Rungs -->
+  <line x1="10" y1="25" x2="50" y2="25" stroke="rgba(200,180,255,0.4)" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <line x1="10" y1="40" x2="50" y2="40" stroke="rgba(200,180,255,0.4)" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <line x1="10" y1="55" x2="50" y2="55" stroke="rgba(200,180,255,0.4)" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <line x1="10" y1="70" x2="50" y2="70" stroke="rgba(200,180,255,0.4)" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <line x1="10" y1="85" x2="50" y2="85" stroke="rgba(200,180,255,0.4)" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <line x1="10" y1="100" x2="50" y2="100" stroke="rgba(200,180,255,0.4)" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <line x1="10" y1="115" x2="50" y2="115" stroke="rgba(200,180,255,0.4)" stroke-width="1.5" stroke-dasharray="3,2"/>
+</svg>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+<div class="nav-inner">
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-name">
+      <span class="logo-bench">Bench</span><span class="logo-arrow">→</span><span class="logo-bedside">Bedside</span>
+    </span>
+    <span class="nav-logo-tag">benchtobedside.in · Dr. Deepika Chakraborty</span>
+  </a>
+  <ul class="nav-links" id="navlinks">
+    <li><a href="#articles">Articles</a></li>
+    <li><a href="#ask">Q&amp;A</a></li>
+    <li><a href="#topics">Topics</a></li>
+    <li><a href="#case">Case</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#newsletter" class="nav-cta">Subscribe Free</a></li>
+  </ul>
+  <button class="hamburger" id="hbg" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="main">
+<canvas id="petri" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.4;"></canvas>
+<div class="hero-inner">
+  <div>
+    <div class="hero-pill"><span class="pulse-dot"></span>Clinical Microbiology · benchtobedside.in · New Delhi</div>
+    <h1 class="hero-h1">From the lab bench<br>straight to the<br><span class="hl">bedside — clearly</span></h1>
+    <p class="hero-sub">Plain-language clinical microbiology for doctors, residents, and students. Hepatitis diagnostics, AMR, diagnostic stewardship, and real case insights — written from the bench, for the bedside.</p>
+    <div class="hero-btns">
+      <a href="#articles" class="btn btn-v">Start Reading →</a>
+      <a href="#ask" class="btn btn-g">Ask a Question</a>
+    </div>
+  </div>
+  <div class="hero-panel">
+    <div class="petri-panel">
+      <div class="panel-tabs">
+        <button class="ptab active" onclick="switchTab(this,'hcv')">HCV Report</button>
+        <button class="ptab" onclick="switchTab(this,'hbv')">HBV Report</button>
+        <button class="ptab" onclick="switchTab(this,'amr')">AMR Report</button>
+      </div>
+      <p style="font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin:-.8rem 0 1rem;">Illustrative teaching example — not a patient report</p>
+      <div id="hcv" class="panel-content show">
+        <div class="report-line"><span class="rl-key">Anti-HCV ELISA (Gen 4)</span><span class="rl-val r-pos">Reactive</span></div>
+        <div class="report-line"><span class="rl-key">HCV RNA (RT-PCR)</span><span class="rl-val r-neg">Not Detected</span></div>
+        <div class="report-line"><span class="rl-key">Viral Load</span><span class="rl-val r-neg">&lt; LLOQ</span></div>
+        <div class="report-line"><span class="rl-key">Anti-HCV S/CO Ratio</span><span class="rl-val r-flag">3.2</span></div>
+        <div class="report-line"><span class="rl-key">Interpretation</span><span class="rl-val r-flag">Discordant</span></div>
+        <div class="panel-footer">💡 This pattern could mean spontaneous clearance, past treated infection, or rarely a false positive. RNA negativity on two samples ≥12 weeks apart confirms clearance.</div>
+      </div>
+      <div id="hbv" class="panel-content">
+        <div class="report-line"><span class="rl-key">HBsAg</span><span class="rl-val r-neg">Non-Reactive</span></div>
+        <div class="report-line"><span class="rl-key">Anti-HBc Total</span><span class="rl-val r-pos">Reactive</span></div>
+        <div class="report-line"><span class="rl-key">IgM Anti-HBc</span><span class="rl-val r-neg">Non-Reactive</span></div>
+        <div class="report-line"><span class="rl-key">Anti-HBs</span><span class="rl-val r-neg">Non-Reactive</span></div>
+        <div class="report-line"><span class="rl-key">HBV DNA</span><span class="rl-val r-flag">Pending</span></div>
+        <div class="panel-footer">⚠ HBsAg-negative, anti-HBc-positive pattern: check HBV DNA before immunosuppression. Occult HBV reactivation is a real risk.</div>
+      </div>
+      <div id="amr" class="panel-content">
+        <div class="report-line"><span class="rl-key">Organism</span><span class="rl-val" style="color:#c4b5fd">K. pneumoniae</span></div>
+        <div class="report-line"><span class="rl-key">Meropenem</span><span class="rl-val r-pos">R (MIC ≥8)</span></div>
+        <div class="report-line"><span class="rl-key">Cefepime</span><span class="rl-val r-flag">SDD</span></div>
+        <div class="report-line"><span class="rl-key">Aztreonam-Avi</span><span class="rl-val r-neg">S</span></div>
+        <div class="report-line"><span class="rl-key">Carbapenemase</span><span class="rl-val r-flag">NDM (MBL)</span></div>
+        <div class="panel-footer">💡 SDD ≠ Susceptible. Cefepime SDD requires extended infusion (4h) or high dose. For NDM producers, aztreonam-avibactam is the key combination.</div>
+      </div>
+      <div class="stat-row-hero">
+        <div class="stat-box"><div class="stat-num">CLSI</div><div class="stat-lbl">Ed36 — latest standards applied</div></div>
+        <div class="stat-box"><div class="stat-num">GIPMER</div><div class="stat-lbl">New Delhi · clinical microbiology</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap" aria-label="Clinical updates ticker" role="marquee">
+<div class="marquee-track">
+  <span class="marquee-item"><span class="dot"></span>CLSI Ed36: Cefepime reclassified to SDD for Enterobacterales</span>
+  <span class="marquee-item"><span class="dot"></span>Aztreonam-avibactam: first β-lactam active against NDM producers</span>
+  <span class="marquee-item"><span class="dot"></span>HCV seronegative viraemia: when RNA testing overrides serology</span>
+  <span class="marquee-item"><span class="dot"></span>Graus 2016: mandatory criteria before ordering AE antibody panels</span>
+  <span class="marquee-item"><span class="dot"></span>Occult HBV: screen anti-HBc before immunosuppression</span>
+  <span class="marquee-item"><span class="dot"></span>Scopulariopsis keratitis: voriconazole, not natamycin</span>
+  <span class="marquee-item"><span class="dot"></span>CLSI Ed36: Cefepime reclassified to SDD for Enterobacterales</span>
+  <span class="marquee-item"><span class="dot"></span>Aztreonam-avibactam: first β-lactam active against NDM producers</span>
+  <span class="marquee-item"><span class="dot"></span>HCV seronegative viraemia: when RNA testing overrides serology</span>
+  <span class="marquee-item"><span class="dot"></span>Graus 2016: mandatory criteria before ordering AE antibody panels</span>
+  <span class="marquee-item"><span class="dot"></span>Occult HBV: screen anti-HBc before immunosuppression</span>
+  <span class="marquee-item"><span class="dot"></span>Scopulariopsis keratitis: voriconazole, not natamycin</span>
+</div>
+</div>
+
+<!-- ARTICLES — with petri dish doodle -->
+<section class="sec" id="articles">
+<!-- Petri dish doodle, top-right corner -->
+<div class="doodle-petri">
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer petri dish -->
+  <circle cx="100" cy="100" r="90" fill="none" stroke="#7c3aed" stroke-width="3"/>
+  <!-- Inner agar surface -->
+  <circle cx="100" cy="100" r="80" fill="none" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- Colony clusters -->
+  <circle cx="70" cy="75" r="10" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="73" cy="78" r="5" fill="rgba(124,58,237,0.15)"/>
+  <circle cx="130" cy="80" r="14" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="133" cy="83" r="7" fill="rgba(124,58,237,0.15)"/>
+  <circle cx="95" cy="130" r="12" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="98" cy="133" r="6" fill="rgba(124,58,237,0.15)"/>
+  <circle cx="145" cy="125" r="8" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+  <!-- Streaks -->
+  <path d="M55 100 Q80 95 110 105 Q135 112 160 100" stroke="#7c3aed" stroke-width="1" fill="none" stroke-dasharray="3,4" opacity="0.5"/>
+  <path d="M60 120 Q90 115 110 125 Q140 132 155 120" stroke="#7c3aed" stroke-width="1" fill="none" stroke-dasharray="3,4" opacity="0.5"/>
+</svg>
+</div>
+<!-- Microscope scope doodle, bottom-left -->
+<div class="doodle-scope">
+<svg width="80" height="140" viewBox="0 0 80 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Eyepiece -->
+  <rect x="30" y="5" width="20" height="30" rx="4" fill="none" stroke="#7c3aed" stroke-width="2"/>
+  <line x1="40" y1="35" x2="40" y2="55" stroke="#7c3aed" stroke-width="2.5"/>
+  <!-- Arm -->
+  <path d="M40 55 Q40 70 55 75" stroke="#7c3aed" stroke-width="2.5" fill="none"/>
+  <line x1="55" y1="75" x2="55" y2="100" stroke="#7c3aed" stroke-width="2.5"/>
+  <!-- Objective lens -->
+  <circle cx="55" cy="105" r="8" fill="none" stroke="#7c3aed" stroke-width="2"/>
+  <!-- Stage -->
+  <rect x="25" y="110" width="50" height="6" rx="2" fill="none" stroke="#7c3aed" stroke-width="2"/>
+  <!-- Base -->
+  <path d="M15 130 Q40 125 65 130" stroke="#7c3aed" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Light beam suggestion -->
+  <line x1="40" y1="116" x2="40" y2="125" stroke="#7c3aed" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+</svg>
+</div>
+
+<div class="sec-inner">
+  <div class="rv"><p class="sec-eyebrow">Articles</p><h2 class="sec-h2">Clinical insights,<br>written clearly</h2><p class="sec-lead">Every article will answer a real question from the lab or the ward — hepatitis diagnostics, diagnostic stewardship, AMR and CLSI updates, rare organisms, and mycology — with the depth a clinician needs and none of the textbook padding.</p></div>
+  <div class="articles-layout">
+    <div class="main-articles">
+      <div class="empty-state rv">
+        <div class="es-icon">📝</div>
+        <div class="es-title">First articles publishing soon</div>
+        <p class="es-text">This is where new clinical microbiology articles will appear — each one a clear, evidence-based answer to a real question from the lab or the ward. Subscribe below to get the first one in your inbox.</p>
+        <div class="es-tags">
+          <span class="es-tag">Virology</span>
+          <span class="es-tag">Bacteriology</span>
+          <span class="es-tag">Stewardship</span>
+          <span class="es-tag">AMR</span>
+          <span class="es-tag">Mycology</span>
+        </div>
+        <a href="#newsletter" class="btn btn-v" style="font-size:.85rem;margin-top:.6rem;">Get notified →</a>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="side-widget rv">
+        <div class="sw-head">Quick Clinical Facts</div>
+        <div class="sw-body">
+          <div class="fact-item"><span class="fi-icon">🧫</span><div class="fi-text"><strong>HCV window period</strong><span>Anti-HCV antibody may be undetectable for 8–12 weeks post-exposure. RNA becomes positive within 1–2 weeks — test RNA if acute infection is suspected.</span></div></div>
+          <div class="fact-item"><span class="fi-icon">⚡</span><div class="fi-text"><strong>SDD means dose harder</strong><span>Cefepime SDD requires either 2g q8h extended infusion (4h) or high-dose regimens. Standard 2g q12h will fail PK/PD targets.</span></div></div>
+          <div class="fact-item"><span class="fi-icon">🧠</span><div class="fi-text"><strong>LGI1 encephalitis clue</strong><span>Faciobrachial dystonic seizures (FBDS) are the pathognomonic prodrome — often misdiagnosed as epilepsy before AE workup is considered.</span></div></div>
+          <div class="fact-item"><span class="fi-icon">🦠</span><div class="fi-text"><strong>Occult HBV reactivation</strong><span>Screen all immunosuppression candidates with HBsAg + anti-HBc total. A positive anti-HBc warrants HBV DNA before starting biologics or chemotherapy.</span></div></div>
+        </div>
+      </div>
+      <div class="side-widget rv rv-d1">
+        <div class="sw-head">Glossary</div>
+        <div class="sw-body">
+          <div class="gloss-entry"><div class="ge-term">PPV — Positive Predictive Value</div><div class="ge-def">Probability a positive test means true infection. Falls as prevalence drops — why HCV ELISA positives in low-risk groups need RNA confirmation.</div></div>
+          <div class="gloss-entry"><div class="ge-term">LLOQ</div><div class="ge-def">Lower Limit of Quantification. "Detected, below LLOQ" = virus present but unquantifiable. Not the same as undetectable.</div></div>
+          <div class="gloss-entry"><div class="ge-term">SDD</div><div class="ge-def">Susceptible-Dose-Dependent. Standard dosing fails. High dose or extended infusion required to achieve pharmacodynamic target.</div></div>
+          <div class="gloss-entry"><div class="ge-term">Seronegative Viraemia</div><div class="ge-def">Detectable viral RNA despite non-reactive serology. Occurs in immunosuppression, early acute infection, or assay failure.</div></div>
+        </div>
+      </div>
+      <div class="side-widget rv rv-d2">
+        <div class="sw-head">Get Updates</div>
+        <div class="sw-body">
+          <p style="font-size:.8rem;color:var(--text-mid);margin-bottom:.8rem;line-height:1.6;">New articles and case vignettes delivered to your inbox as they publish.</p>
+          <input class="mini-sub-input" type="email" placeholder="your@email.com"/>
+          <button class="mini-sub-btn">Subscribe →</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+</section>
+
+<!-- Q&A — with erlenmeyer flask doodle -->
+<section class="sec sec-alt" id="ask">
+<!-- Erlenmeyer flask doodle -->
+<div class="doodle-erlen">
+<svg width="90" height="130" viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Flask neck -->
+  <rect x="32" y="5" width="26" height="35" rx="4" fill="none" stroke="#7c3aed" stroke-width="2"/>
+  <!-- Flask body -->
+  <path d="M32 38 L10 115 Q10 125 45 125 Q80 125 80 115 L58 38 Z" fill="none" stroke="#7c3aed" stroke-width="2"/>
+  <!-- Liquid inside -->
+  <path d="M20 100 Q45 95 70 100 L75 115 Q45 120 15 115 Z" fill="rgba(124,58,237,0.12)" stroke="none"/>
+  <!-- Bubbles in liquid -->
+  <circle cx="35" cy="108" r="3" fill="none" stroke="#7c3aed" stroke-width="1.2"/>
+  <circle cx="50" cy="112" r="2" fill="none" stroke="#7c3aed" stroke-width="1.2"/>
+  <circle cx="60" cy="106" r="2.5" fill="none" stroke="#7c3aed" stroke-width="1.2"/>
+  <!-- Cap/stopper -->
+  <rect x="28" y="2" width="34" height="7" rx="3" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+</svg>
+</div>
+<!-- Colony plate doodle -->
+<div class="doodle-plate">
+<svg width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="55" cy="55" r="50" fill="none" stroke="#7c3aed" stroke-width="2"/>
+  <circle cx="55" cy="55" r="43" fill="none" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,3"/>
+  <!-- Colony dots of various sizes -->
+  <circle cx="38" cy="40" r="5" fill="rgba(124,58,237,0.15)" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="70" cy="35" r="7" fill="rgba(124,58,237,0.15)" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="55" cy="70" r="6" fill="rgba(124,58,237,0.15)" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="80" cy="65" r="4" fill="rgba(124,58,237,0.15)" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="30" cy="65" r="3" fill="rgba(124,58,237,0.15)" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="75" cy="82" r="5" fill="rgba(124,58,237,0.15)" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="42" cy="80" r="4" fill="rgba(124,58,237,0.15)" stroke="#7c3aed" stroke-width="1.5"/>
+</svg>
+</div>
+
+<div class="sec-inner">
+  <div class="rv"><p class="sec-eyebrow">Q&amp;A</p><h2 class="sec-h2">Questions the ward<br>asks the lab</h2><p class="sec-lead">Tap any question for a clear, evidence-based answer — no jargon, no padding.</p></div>
+  <div class="qa-grid rv">
+    <div class="qa-item">
+      <button class="qa-btn" aria-expanded="false" onclick="toggleQA(this)">
+        <span class="qa-q">Anti-HCV positive, RNA negative — is the infection cleared?</span>
+        <span class="qa-icon">+</span>
+      </button>
+      <div class="qa-answer">
+        <p>Most likely yes — about 25–30% of HCV-exposed individuals clear infection spontaneously, retaining lifelong anti-HCV antibody without detectable RNA. But a false-negative PCR can occur if the viral load is below the LLOQ, if the sample was poorly handled, or during very early acute infection.</p>
+        <div class="qa-tip"><strong>Clinical action</strong>Repeat RNA at 12 weeks. Two negative RNA results ≥12 weeks apart, in the right clinical context, confirms spontaneous clearance.</div>
+      </div>
+    </div>
+    <div class="qa-item">
+      <button class="qa-btn" aria-expanded="false" onclick="toggleQA(this)">
+        <span class="qa-q">What does "Susceptible-Dose-Dependent" mean on my cefepime report?</span>
+        <span class="qa-icon">+</span>
+      </button>
+      <div class="qa-answer">
+        <p>SDD means the organism can be treated with cefepime — but only with the right dose and infusion strategy. Standard dosing (2g q12h over 30 min) will fail to reach PK/PD targets. You need either 2g q8h as an extended infusion over 4 hours, or high-dose 2g q8h.</p>
+        <div class="qa-tip"><strong>Key point</strong>SDD ≠ Susceptible with standard dosing. In serious infections the difference is clinically significant.</div>
+      </div>
+    </div>
+    <div class="qa-item">
+      <button class="qa-btn" aria-expanded="false" onclick="toggleQA(this)">
+        <span class="qa-q">When should I suspect autoimmune encephalitis over infectious encephalitis?</span>
+        <span class="qa-icon">+</span>
+      </button>
+      <div class="qa-answer">
+        <p>Apply the Graus 2016 criteria: subacute onset (&lt;3 months) of working memory deficits, altered consciousness, or new psychiatric symptoms, plus at least one of: CSF pleocytosis, suggestive MRI, new-onset unexplained seizures, or abnormal EEG. Common infectious and structural causes must be excluded first — AE testing is a second-step investigation, not a first-line screen.</p>
+        <div class="qa-tip"><strong>Stewardship rule</strong>Order CSF culture, India ink, CBNAAT, and basic neuroimaging before reaching for the AE panel.</div>
+      </div>
+    </div>
+    <div class="qa-item">
+      <button class="qa-btn" aria-expanded="false" onclick="toggleQA(this)">
+        <span class="qa-q">My patient is HBsAg-negative. Safe to give immunosuppressants?</span>
+        <span class="qa-icon">+</span>
+      </button>
+      <div class="qa-answer">
+        <p>Not without checking anti-HBc total first. HBsAg negativity does not rule out hepatitis B. An anti-HBc-positive, HBsAg-negative patient may have occult HBV — and can reactivate when given rituximab, high-dose steroids, or other immunosuppressants, sometimes fatally.</p>
+        <div class="qa-tip"><strong>Protocol</strong>Screen with HBsAg + anti-HBc total. If anti-HBc is positive, check HBV DNA. Consider prophylactic tenofovir or entecavir in high-risk scenarios.</div>
+      </div>
+    </div>
+    <div class="qa-item">
+      <button class="qa-btn" aria-expanded="false" onclick="toggleQA(this)">
+        <span class="qa-q">The lab reported Burkholderia but gave no antibiogram. What now?</span>
+        <span class="qa-icon">+</span>
+      </button>
+      <div class="qa-answer">
+        <p>This is correct practice. CLSI M100 recommends against routine AST for Burkholderia cepacia complex because in-vitro susceptibility correlates poorly with clinical outcome. Treatment is guided by clinical evidence and expert consensus rather than the antibiogram.</p>
+        <div class="qa-tip"><strong>Treatment options</strong>TMP-SMX (drug of choice), ceftazidime, meropenem, minocycline. Call your clinical microbiologist — Bcc decisions need direct consultation.</div>
+      </div>
+    </div>
+    <div class="qa-item">
+      <button class="qa-btn" aria-expanded="false" onclick="toggleQA(this)">
+        <span class="qa-q">What is LLOQ and why does my viral load report say "below LLOQ"?</span>
+        <span class="qa-icon">+</span>
+      </button>
+      <div class="qa-answer">
+        <p>LLOQ (Lower Limit of Quantification) is the minimum viral load a PCR assay can measure accurately and reproducibly. Below this threshold, the virus may still be detected but cannot be reliably counted. "Detected, below LLOQ" means the virus is present — the patient is still viraemic.</p>
+        <div class="qa-tip"><strong>Clinical implication</strong>"Below LLOQ" ≠ undetectable. Do not reassure the patient that virus is absent. Each assay has its own LLOQ — do not compare numbers across different platforms.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- TOPICS — dark section with subtle micro doodles -->
+<section class="sec sec-dark" id="topics">
+<!-- Micro-left doodle: virus particle -->
+<div class="doodle-micro-left">
+<svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="35" cy="35" r="20" fill="none" stroke="rgba(167,139,250,0.8)" stroke-width="2"/>
+  <circle cx="35" cy="35" r="12" fill="rgba(124,58,237,0.15)"/>
+  <!-- Spikes (viral envelope projections) -->
+  <line x1="35" y1="15" x2="35" y2="5" stroke="rgba(167,139,250,0.8)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="35" y1="55" x2="35" y2="65" stroke="rgba(167,139,250,0.8)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="15" y1="35" x2="5" y2="35" stroke="rgba(167,139,250,0.8)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="55" y1="35" x2="65" y2="35" stroke="rgba(167,139,250,0.8)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="20" y1="20" x2="13" y2="13" stroke="rgba(167,139,250,0.8)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="50" y1="50" x2="57" y2="57" stroke="rgba(167,139,250,0.8)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="50" y1="20" x2="57" y2="13" stroke="rgba(167,139,250,0.8)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="20" y1="50" x2="13" y2="57" stroke="rgba(167,139,250,0.8)" stroke-width="2" stroke-linecap="round"/>
+  <!-- RNA inside -->
+  <path d="M26 32 Q32 28 38 32 Q44 36 38 40 Q32 44 26 40 Q20 36 26 32" fill="none" stroke="rgba(252,211,77,0.5)" stroke-width="1.2"/>
+</svg>
+</div>
+<!-- Micro-right doodle: flagellated cell -->
+<div class="doodle-micro-right">
+<svg width="70" height="100" viewBox="0 0 70 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="35" cy="45" rx="22" ry="30" fill="none" stroke="rgba(167,139,250,0.8)" stroke-width="2"/>
+  <!-- Nucleus -->
+  <ellipse cx="35" cy="42" rx="10" ry="12" fill="none" stroke="rgba(252,211,77,0.5)" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <!-- Flagellum -->
+  <path d="M35 75 Q30 85 40 90 Q50 95 42 100" stroke="rgba(167,139,250,0.7)" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Cilia suggestion -->
+  <line x1="14" y1="35" x2="8" y2="28" stroke="rgba(167,139,250,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="14" y1="45" x2="7" y2="42" stroke="rgba(167,139,250,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="56" y1="35" x2="62" y2="28" stroke="rgba(167,139,250,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="56" y1="45" x2="63" y2="42" stroke="rgba(167,139,250,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
+</div>
+
+<div class="sec-inner">
+  <div class="rv"><p class="sec-eyebrow">Learning Series</p><h2 class="sec-h2">Go deep on what<br>matters most</h2><p class="sec-lead">Each series is a structured sequence from first principles to bedside application — pick a topic and follow it through.</p></div>
+  <div class="topics-grid">
+    <div class="topic-card rv rv-d1"><div class="topic-icon-wrap">🔬</div><div class="topic-name">Hepatitis Diagnostics</div><div class="topic-desc">From how HCV ELISA works to interpreting discordant results, viral loads, co-infection patterns, and occult HBV. The full picture.</div><div class="topic-count">SERIES · COMING SOON</div></div>
+    <div class="topic-card rv rv-d2"><div class="topic-icon-wrap">📋</div><div class="topic-name">Diagnostic Stewardship</div><div class="topic-desc">When to order, when to hold back. Pre-test criteria for AE panels, FilmArray, and other high-cost investigations. Less testing, better outcomes.</div><div class="topic-count">SERIES · COMING SOON</div></div>
+    <div class="topic-card rv rv-d3"><div class="topic-icon-wrap">💊</div><div class="topic-name">AMR &amp; CLSI Updates</div><div class="topic-desc">Every CLSI M100 revision explained — what changed, why, and how it affects your antibiogram interpretation and empiric prescribing choices.</div><div class="topic-count">SERIES · COMING SOON</div></div>
+    <div class="topic-card rv rv-d1"><div class="topic-icon-wrap">🦠</div><div class="topic-name">Rare Organisms</div><div class="topic-desc">Myroides, Burkholderia cepacia complex, Scopulariopsis, and others that stump clinicians. Recognition, reporting, and treatment where evidence exists.</div><div class="topic-count">SERIES · COMING SOON</div></div>
+    <div class="topic-card rv rv-d2"><div class="topic-icon-wrap">🩺</div><div class="topic-name">Case Vignettes</div><div class="topic-desc">Clinical scenarios with structured teaching points — a self-test format for PGMEE preparation and clinical skill-building.</div><div class="topic-count">MONTHLY · COMING SOON</div></div>
+    <div class="topic-card rv rv-d3"><div class="topic-icon-wrap">🧬</div><div class="topic-name">HBV Deep Dive</div><div class="topic-desc">IgM anti-HBc, HBsAg seroclearance, occult HBV, reactivation risk — everything you need for hepatology-adjacent clinical decisions.</div><div class="topic-count">SERIES · IN DEVELOPMENT</div></div>
+  </div>
+</div>
+</section>
+
+<!-- CASE OF MONTH — with mould/hyphae doodle -->
+<section class="sec" id="case">
+<!-- Hyphae/mould doodle, background right -->
+<div style="position:absolute;right:-10px;top:50px;pointer-events:none;opacity:.05;">
+<svg width="180" height="220" viewBox="0 0 180 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main hypha -->
+  <path d="M20 200 Q30 170 40 140 Q50 110 60 80 Q70 50 80 20" stroke="#7c3aed" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Branch 1 -->
+  <path d="M45 130 Q65 120 85 100 Q100 85 120 80" stroke="#7c3aed" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Branch 2 -->
+  <path d="M55 100 Q80 95 100 80 Q118 65 140 60" stroke="#7c3aed" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Branch 3 -->
+  <path d="M65 70 Q85 65 105 55 Q125 45 145 35" stroke="#7c3aed" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Conidia (spores) at tips -->
+  <circle cx="120" cy="80" r="6" fill="rgba(124,58,237,0.4)" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="140" cy="60" r="5" fill="rgba(124,58,237,0.4)" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="145" cy="35" r="5" fill="rgba(124,58,237,0.4)" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="80" cy="20" r="7" fill="rgba(124,58,237,0.4)" stroke="#7c3aed" stroke-width="1.5"/>
+  <!-- Arthroconidia along main hypha -->
+  <rect x="57" y="88" width="8" height="6" rx="2" fill="rgba(124,58,237,0.3)" stroke="#7c3aed" stroke-width="1.2"/>
+  <rect x="50" y="115" width="8" height="6" rx="2" fill="rgba(124,58,237,0.3)" stroke="#7c3aed" stroke-width="1.2"/>
+  <rect x="38" y="150" width="8" height="6" rx="2" fill="rgba(124,58,237,0.3)" stroke="#7c3aed" stroke-width="1.2"/>
+  <!-- Septa (cross-walls) -->
+  <line x1="36" y1="145" x2="44" y2="138" stroke="#7c3aed" stroke-width="1.2"/>
+  <line x1="46" y1="118" x2="55" y2="112" stroke="#7c3aed" stroke-width="1.2"/>
+  <line x1="58" y1="90" x2="67" y2="84" stroke="#7c3aed" stroke-width="1.2"/>
+</svg>
+</div>
+
+<div class="sec-inner">
+  <div class="rv"><p class="sec-eyebrow">Case of the Month</p><h2 class="sec-h2">A clinical puzzle,<br>worked through</h2><p class="sec-lead">Each month, one teaching case — the report, the reasoning, and the decision points — built around a real clinical microbiology question and presented for education only.</p></div>
+  <div class="rv">
+    <div class="empty-state">
+      <div class="es-icon">🔬</div>
+      <div class="es-title">First case publishing soon</div>
+      <p class="es-text">The inaugural Case of the Month is in preparation. Each will pair a worked report with structured teaching points — useful at the bench, on the ward, and for exam prep. Subscribe to be notified when it goes live.</p>
+      <a href="#newsletter" class="btn btn-v" style="font-size:.85rem;margin-top:.6rem;">Get notified →</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- NEWSLETTER — with floating micro doodles -->
+<div class="nl-band" id="newsletter">
+<!-- Left doodle: test tube -->
+<div class="nl-doodle-l">
+<svg width="50" height="130" viewBox="0 0 50 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="15" y="5" width="20" height="90" rx="0" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2"/>
+  <path d="M15 95 Q15 125 25 125 Q35 125 35 95" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.8)" stroke-width="2"/>
+  <line x1="12" y1="5" x2="38" y2="5" stroke="rgba(255,255,255,0.8)" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Liquid level -->
+  <path d="M16 75 Q25 72 34 75 L34 95 Q34 118 25 118 Q16 118 16 95 Z" fill="rgba(167,139,250,0.25)"/>
+  <!-- Bubbles -->
+  <circle cx="22" cy="88" r="2.5" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
+  <circle cx="30" cy="82" r="2" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
+</svg>
+</div>
+<!-- Right doodle: petri dish simple -->
+<div class="nl-doodle-r">
+<svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="45" cy="45" r="40" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
+  <circle cx="45" cy="45" r="33" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.2" stroke-dasharray="3,3"/>
+  <circle cx="32" cy="38" r="6" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+  <circle cx="56" cy="35" r="8" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+  <circle cx="44" cy="58" r="7" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+  <circle cx="62" cy="55" r="5" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+</svg>
+</div>
+
+<div class="nl-inner">
+  <p class="nl-tag">Free Newsletter</p>
+  <h2 class="nl-h2">Stay sharp.<br>Straight to your inbox.</h2>
+  <p class="nl-p">New articles, case vignettes, and AMR updates as they publish — written for clinicians and residents who want to stay current without wading through journals.</p>
+  <div class="nl-perks">
+    <span class="nl-perk">New articles as they go live</span>
+    <span class="nl-perk">Teaching case vignettes</span>
+    <span class="nl-perk">AMR &amp; CLSI updates</span>
+    <span class="nl-perk">No spam, ever</span>
+  </div>
+  <form class="nl-form" onsubmit="subNL(event)">
+    <input class="nl-input" type="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address"/>
+    <button class="nl-btn" type="submit">Subscribe →</button>
+  </form>
+  <p class="nl-fine">No spam. Unsubscribe any time. Your email is never shared or sold.</p>
+</div>
+</div>
+
+<!-- ABOUT -->
+<section class="sec sec-alt" id="about">
+<div class="sec-inner">
+  <div class="rv"><p class="sec-eyebrow">About</p></div>
+  <div class="about-strip rv">
+    <div class="about-avi" aria-hidden="true">DC</div>
+    <div>
+      <div class="about-name">Dr. Deepika Chakraborty</div>
+      <div class="about-role">Senior Resident · Dept. of Microbiology · GIPMER &amp; Lok Nayak Hospital, New Delhi</div>
+      <p class="about-bio">I am a clinical microbiologist at GIPMER (Govind Ballabh Pant Institute of Postgraduate Medical Education and Research), New Delhi, where I work in clinical microbiology practice, academic research, and education. My interests span hepatitis B and C diagnostics, autoimmune encephalitis antibody stewardship, antimicrobial resistance, and translating CLSI guideline changes into clinical practice.</p>
+      <p class="about-bio">BenchToBedside exists because I kept seeing the same questions come up at ward rounds — about discordant hepatitis reports, about what SDD actually means for prescribing, about when not to order an AE panel. If the answers are useful to one clinician, they're useful to many. Beyond the lab, I run <strong>@deepsays</strong> on YouTube — a BookTube channel covering books, travel, and art.</p>
+      <div class="about-socials">
+        <a href="#" class="social-btn">🔗 LinkedIn</a>
+        <a href="#" class="social-btn">○ ORCID</a>
+        <a href="#" class="social-btn">📖 ResearchGate</a>
+        <a href="#" class="social-btn">📹 @deepsays</a>
+        <a href="#" class="social-btn">✉ Contact</a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- DISCLAIMER -->
+<div class="disclaimer-bar" role="note">
+<div class="disclaimer-inner">
+  <span>⚠️</span>
+  <span><strong>Educational content only.</strong> All articles, Q&amp;A, and case discussions on BenchToBedside are for educational purposes and do not constitute clinical advice. They are not a substitute for professional judgement, local guidelines, or direct consultation with a clinical microbiologist. Always apply content in the context of your individual patient's clinical situation.</span>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+<div class="footer-grid">
+  <div>
+    <div class="f-brand">Bench<span>→</span>Bedside</div>
+    <p class="f-desc">Clinical microbiology explained clearly — from the lab bench to the patient's bedside. Written from GIPMER, New Delhi, for doctors, residents, and students who use these reports every day.</p>
+    <p style="font-family:var(--mono);font-size:.58rem;color:#4b5563;margin-top:.8rem;letter-spacing:.08em;">benchtobedside.in</p>
+  </div>
+  <div class="f-col"><h5>Topics</h5><ul>
+    <li><a href="#articles">Hepatitis Diagnostics</a></li>
+    <li><a href="#articles">Diagnostic Stewardship</a></li>
+    <li><a href="#articles">AMR &amp; CLSI Updates</a></li>
+    <li><a href="#articles">Rare Organisms</a></li>
+    <li><a href="#articles">Mycology</a></li>
+  </ul></div>
+  <div class="f-col"><h5>Learn</h5><ul>
+    <li><a href="#ask">Q&amp;A Explorer</a></li>
+    <li><a href="#topics">Article Series</a></li>
+    <li><a href="#case">Case Vignettes</a></li>
+    <li><a href="#newsletter">Newsletter</a></li>
+  </ul></div>
+  <div class="f-col"><h5>Connect</h5><ul>
+    <li><a href="#">LinkedIn</a></li>
+    <li><a href="#">ORCID</a></li>
+    <li><a href="#">ResearchGate</a></li>
+    <li><a href="#">@deepsays (YouTube)</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul></div>
+</div>
+<div class="footer-bottom">
+  <span>© 2026 Dr. Deepika Chakraborty · benchtobedside.in</span>
+  <span>Educational content only — not clinical advice</span>
+</div>
+</footer>
+
+<button id="btt" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+/* ── PETRI DISH ANIMATION ── */
+(function(){
+  const canvas=document.getElementById('petri');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,orbs=[];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+  function randomOrb(){
+    return{
+      x:Math.random()*W,y:Math.random()*H,
+      r:Math.random()*3+1,
+      vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,
+      alpha:Math.random()*.6+.1,
+      color:Math.random()>.5?'124,58,237':'167,139,250'
+    };
+  }
+  for(let i=0;i<80;i++)orbs.push(randomOrb());
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    orbs.forEach(o=>{
+      o.x+=o.vx;o.y+=o.vy;
+      if(o.x<0||o.x>W)o.vx*=-1;
+      if(o.y<0||o.y>H)o.vy*=-1;
+      ctx.beginPath();
+      ctx.arc(o.x,o.y,o.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${o.color},${o.alpha})`;
+      ctx.fill();
+    });
+    orbs.forEach((a,i)=>{
+      orbs.slice(i+1).forEach(b=>{
+        const dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<120){
+          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+          ctx.strokeStyle=`rgba(124,58,237,${(1-d/120)*.08})`;
+          ctx.lineWidth=.5;ctx.stroke();
+        }
+      });
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── NAV SCROLL ── */
+const nav=document.getElementById('nav');
+const navLinks=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>50);
+  document.getElementById('btt').classList.toggle('show',window.scrollY>600);
+  let cur='';
+  document.querySelectorAll('section[id],header[id]').forEach(s=>{
+    if(window.scrollY>=s.offsetTop-120)cur=s.id;
+  });
+  navLinks.forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
+  });
+},{passive:true});
+
+/* ── HAMBURGER ── */
+const hbg=document.getElementById('hbg');
+const nl=document.getElementById('navlinks');
+hbg.addEventListener('click',()=>{
+  const o=nl.classList.toggle('open');
+  hbg.setAttribute('aria-expanded',o);
+});
+nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nl.classList.remove('open');hbg.setAttribute('aria-expanded',false);}));
+
+/* ── HERO TABS ── */
+function switchTab(btn,id){
+  document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.panel-content').forEach(c=>c.classList.remove('show'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('show');
+}
+
+/* ── Q&A ── */
+function toggleQA(btn){
+  const ans=btn.nextElementSibling,open=btn.getAttribute('aria-expanded')==='true';
+  document.querySelectorAll('.qa-btn').forEach(b=>{b.setAttribute('aria-expanded','false');b.nextElementSibling.classList.remove('open');});
+  if(!open){btn.setAttribute('aria-expanded','true');ans.classList.add('open');}
+}
+
+/* ── REVEAL ── */
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}}),{threshold:.07});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+/* ── NEWSLETTER ── */
+function subNL(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('button'),inp=e.target.querySelector('input');
+  btn.textContent='✓ You\'re in!';btn.style.background='#064e3b';
+  inp.value='';inp.disabled=true;
+  setTimeout(()=>{btn.textContent='Subscribe →';btn.style.background='';inp.disabled=false;},3500);
+}
+document.querySelectorAll('.mini-sub-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const inp=b.previousElementSibling;
+    if(inp.value&&inp.validity.valid){b.textContent='✓ Done!';b.style.background='#064e3b';inp.value='';inp.disabled=true;setTimeout(()=>{b.textContent='Subscribe →';b.style.background='';inp.disabled=false;},3000);}
+    else{inp.focus();}
+  });
+});
+</script>
+</body>
+</html>
