@@ -1,4 +1,69 @@
 <!DOCTYPE html>
+<!--
+============================================================================
+ HOW TO COLLECT NEWSLETTER EMAILS INTO YOUR GOOGLE SHEET  (one-time, ~3 min)
+ Your sheet: https://docs.google.com/spreadsheets/d/19AUbVwTRxLjqHQ_0shXTrfdazlUno8ovASX-RBu71V0/edit
+============================================================================
+
+ WHY A SETUP STEP IS NEEDED:
+ A Google Sheets link only OPENS the sheet — it can't RECEIVE data from a
+ website. So we add a tiny free Google "script" to the sheet that listens
+ for new emails and writes them in. You do this once.
+
+ ── STEP 1 — Add the script to your sheet ─────────────────────────────────
+ 1. Open your sheet (link above).
+ 2. Top menu:  Extensions  →  Apps Script.
+ 3. Delete anything in the editor, then paste EVERYTHING between the
+    >>> START SCRIPT and <<< END SCRIPT lines below.
+ 4. Click the save icon (💾).
+
+ >>> START SCRIPT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+ var SHEET_ID = "19AUbVwTRxLjqHQ_0shXTrfdazlUno8ovASX-RBu71V0";
+ var TAB_NAME = "Subscribers";
+
+ function doPost(e) {
+   try {
+     var ss = SpreadsheetApp.openById(SHEET_ID);
+     var sheet = ss.getSheetByName(TAB_NAME);
+     if (!sheet) {
+       sheet = ss.insertSheet(TAB_NAME);
+       sheet.appendRow(["Timestamp", "Email", "Source"]);
+     }
+     var email  = (e && e.parameter && e.parameter.email  ? e.parameter.email  : "").toString().trim();
+     var source = (e && e.parameter && e.parameter.source ? e.parameter.source : "").toString().trim();
+     if (email) { sheet.appendRow([new Date(), email, source]); }
+     return ContentService.createTextOutput(JSON.stringify({result:"ok"})).setMimeType(ContentService.MimeType.JSON);
+   } catch (err) {
+     return ContentService.createTextOutput(JSON.stringify({result:"error", message:String(err)})).setMimeType(ContentService.MimeType.JSON);
+   }
+ }
+ function doGet() {
+   return ContentService.createTextOutput("BenchToBedside subscriber endpoint is live.");
+ }
+
+ <<< END SCRIPT <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+ ── STEP 2 — Publish it & copy the link ───────────────────────────────────
+ 1. In the Apps Script editor, click  Deploy  →  New deployment.
+ 2. Click the gear icon ⚙ next to "Select type"  →  choose  Web app.
+ 3. Set:   Execute as  =  Me
+           Who has access  =  Anyone
+ 4. Click Deploy. Approve/allow access if Google asks (click Advanced →
+    "Go to ... (unsafe)" → Allow — this is your own script, it's fine).
+ 5. Copy the "Web app URL". It ends in  /exec.
+
+ ── STEP 3 — Paste that link into this file ───────────────────────────────
+ Scroll down to near the bottom and find this line:
+       const SUBSCRIBE_ENDPOINT = "PASTE_YOUR_WEB_APP_URL_HERE";
+ Replace the PASTE_YOUR_WEB_APP_URL_HERE part with the /exec link you copied.
+ Keep the quotes. Save the file and re-upload it to Netlify.
+
+ DONE. Every subscriber now appears as a new row (Timestamp, Email, Source)
+ in a tab called "Subscribers" in your sheet. Do one test signup and check
+ the row shows up.
+============================================================================
+-->
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -1186,10 +1251,32 @@ function toggleQA(btn){
 const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}}),{threshold:.07});
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
-/* ── NEWSLETTER ── */
+/* ── NEWSLETTER ──────────────────────────────────────────────
+   👉 STEP 3 (see instructions at the very top of this file):
+   Paste your web-app URL between the quotes below. Nothing else
+   to change. Example after pasting:
+   const SUBSCRIBE_ENDPOINT = "https://script.google.com/macros/s/AKfyc.../exec";
+   ───────────────────────────────────────────────────────────── */
+const SUBSCRIBE_ENDPOINT = "PASTE_YOUR_WEB_APP_URL_HERE";
+
+function sendSubscriber(email, source){
+  if(!email) return;
+  if(!SUBSCRIBE_ENDPOINT || SUBSCRIBE_ENDPOINT.indexOf("PASTE_YOUR") === 0){
+    console.warn("Subscriber endpoint not set yet — email not saved:", email);
+    return;
+  }
+  const body = new URLSearchParams({email:email, source:source||"site", ts:new Date().toISOString()});
+  fetch(SUBSCRIBE_ENDPOINT, {
+    method:"POST", mode:"no-cors",
+    headers:{"Content-Type":"application/x-www-form-urlencoded"},
+    body: body.toString()
+  }).catch(err => console.error("Subscribe error:", err));
+}
+
 function subNL(e){
   e.preventDefault();
   const btn=e.target.querySelector('button'),inp=e.target.querySelector('input');
+  sendSubscriber(inp.value.trim(),'newsletter-band');
   btn.textContent='✓ You\'re in!';btn.style.background='#064e3b';
   inp.value='';inp.disabled=true;
   setTimeout(()=>{btn.textContent='Subscribe →';btn.style.background='';inp.disabled=false;},3500);
@@ -1197,7 +1284,7 @@ function subNL(e){
 document.querySelectorAll('.mini-sub-btn').forEach(b=>{
   b.addEventListener('click',()=>{
     const inp=b.previousElementSibling;
-    if(inp.value&&inp.validity.valid){b.textContent='✓ Done!';b.style.background='#064e3b';inp.value='';inp.disabled=true;setTimeout(()=>{b.textContent='Subscribe →';b.style.background='';inp.disabled=false;},3000);}
+    if(inp.value&&inp.validity.valid){sendSubscriber(inp.value.trim(),'mini-card');b.textContent='✓ Done!';b.style.background='#064e3b';inp.value='';inp.disabled=true;setTimeout(()=>{b.textContent='Subscribe →';b.style.background='';inp.disabled=false;},3000);}
     else{inp.focus();}
   });
 });
