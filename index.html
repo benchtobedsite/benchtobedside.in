@@ -57,7 +57,7 @@
  Scroll down to near the bottom and find this line:
        const SUBSCRIBE_ENDPOINT = "PASTE_YOUR_WEB_APP_URL_HERE";
  Replace the PASTE_YOUR_WEB_APP_URL_HERE part with the /exec link you copied.
- Keep the quotes. Save the file and re-upload it to Netlify.
+ Keep the quotes. Save the file and re-upload it to GitHub.
 
  DONE. Every subscriber now appears as a new row (Timestamp, Email, Source)
  in a tab called "Subscribers" in your sheet. Do one test signup and check
@@ -68,8 +68,14 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="BenchToBedside — Clinical microbiology from the lab bench to the bedside. Hepatitis, AMR, diagnostic stewardship and real case insights by Dr. Deepika Chakraborty, GIPMER New Delhi."/>
-<title>BenchToBedside — Dr. Deepika Chakraborty</title>
+<meta name="description" content="Bench to Bedside — Clinical microbiology from the lab bench to the bedside. Hepatitis, AMR, diagnostic stewardship and real case insights by Dr. Deepika Chakraborty, GIPMER New Delhi."/>
+<meta name="keywords" content="bench to bedside, clinical microbiology, hepatitis diagnostics, AMR, diagnostic stewardship, CLSI, GIPMER, Dr Deepika Chakraborty"/>
+<meta name="author" content="Dr. Deepika Chakraborty"/>
+<meta property="og:title" content="Bench to Bedside — Clinical Microbiology Education"/>
+<meta property="og:description" content="Plain-language clinical microbiology for doctors and residents. Hepatitis, AMR, diagnostic stewardship — written from the bench, for the bedside."/>
+<meta property="og:url" content="https://benchtobedsite.github.io/benchtobedside.in/"/>
+<meta property="og:type" content="website"/>
+<title>Bench to Bedside — Clinical Microbiology by Dr. Deepika Chakraborty</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 /* ── TOKENS ── */
@@ -108,12 +114,9 @@ img{max-width:100%;display:block;}
 .skip:focus{left:0;}
 
 /* ── MICRO DOODLES ── */
-/* SVG doodle elements scattered around the page */
 .doodle{position:absolute;pointer-events:none;opacity:.18;z-index:0;}
 .doodle-hero{position:absolute;pointer-events:none;z-index:0;}
 .doodle svg{display:block;}
-
-/* Section doodle containers */
 .sec-doodle-wrap{position:relative;overflow:hidden;}
 
 /* ── NAV ── */
@@ -532,25 +535,18 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
 .rv-d1{transition-delay:.1s;} .rv-d2{transition-delay:.2s;} .rv-d3{transition-delay:.3s;}
 
 /* ── DOODLE STYLES ── */
-/* Hero doodles */
 .hero-doodle{position:absolute;pointer-events:none;}
 .doodle-bacteria-1{top:12%;right:8%;opacity:.12;animation:floatDoodle 8s ease-in-out infinite;}
 .doodle-bacteria-2{bottom:18%;left:4%;opacity:.1;animation:floatDoodle 11s ease-in-out infinite 2s;}
 .doodle-cocci{top:30%;right:2%;opacity:.1;animation:floatDoodle 9s ease-in-out infinite 1s;}
 .doodle-dna{bottom:30%;right:12%;opacity:.09;animation:floatDoodle 12s ease-in-out infinite 3s;}
-
-/* Section doodles (light bg) */
 .doodle-petri{position:absolute;pointer-events:none;opacity:.06;right:-40px;top:40px;}
 .doodle-scope{position:absolute;pointer-events:none;opacity:.06;left:-30px;bottom:20px;}
 .doodle-erlen{position:absolute;pointer-events:none;opacity:.05;right:20px;bottom:60px;}
 .doodle-plate{position:absolute;pointer-events:none;opacity:.05;left:40px;top:20px;}
-
-/* Dark section doodles */
 .doodle-dark{opacity:.07 !important;}
 .doodle-micro-left{position:absolute;left:10px;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.07;}
 .doodle-micro-right{position:absolute;right:10px;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.07;}
-
-/* NL band doodles */
 .nl-doodle-l{position:absolute;left:2%;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.08;}
 .nl-doodle-r{position:absolute;right:2%;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.08;}
 
@@ -560,10 +556,7 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
   66%{transform:translateY(6px) rotate(-2deg);}
 }
 
-/* B2B logo bridge graphic */
-.logo-bridge{
-  display:inline-flex;align-items:center;gap:0;
-}
+.logo-bridge{display:inline-flex;align-items:center;gap:0;}
 .logo-bench{color:#fff;}
 .logo-arrow{color:var(--amber-lt);margin:0 2px;font-style:normal;}
 .logo-bedside{color:var(--violet-lt);}
@@ -601,22 +594,16 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
 <body>
 <a href="#main" class="skip">Skip to content</a>
 
-<!-- CANVAS background -->
 <canvas id="petri-bg" style="position:fixed;inset:0;pointer-events:none;opacity:0;z-index:-1;"></canvas>
 
 <!-- ══ HERO DOODLES ══ -->
-<!-- Bacteria rod (bacilli) - top right -->
 <div class="hero-doodle doodle-bacteria-1">
 <svg width="120" height="80" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Rod-shaped bacterium with flagella -->
   <ellipse cx="60" cy="40" rx="38" ry="16" fill="none" stroke="rgba(167,139,250,0.8)" stroke-width="2.5"/>
-  <!-- Internal dividing line (septum) -->
   <line x1="60" y1="25" x2="60" y2="55" stroke="rgba(167,139,250,0.5)" stroke-width="1.5" stroke-dasharray="2,2"/>
-  <!-- Flagella -->
   <path d="M98 40 Q115 25 112 10 Q109 -2 122 -8" stroke="rgba(167,139,250,0.6)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
   <path d="M98 38 Q118 32 120 20" stroke="rgba(167,139,250,0.5)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
   <path d="M22 40 Q5 50 2 65" stroke="rgba(167,139,250,0.5)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-  <!-- Ribosomes dots inside -->
   <circle cx="45" cy="38" r="2" fill="rgba(167,139,250,0.5)"/>
   <circle cx="55" cy="43" r="2" fill="rgba(167,139,250,0.5)"/>
   <circle cx="70" cy="37" r="2" fill="rgba(167,139,250,0.5)"/>
@@ -625,15 +612,12 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
 </svg>
 </div>
 
-<!-- Cocci cluster - right side -->
 <div class="hero-doodle doodle-cocci">
 <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Staphylococcus-like cluster -->
   <circle cx="30" cy="30" r="13" fill="none" stroke="rgba(252,211,77,0.7)" stroke-width="2"/>
   <circle cx="57" cy="28" r="13" fill="none" stroke="rgba(252,211,77,0.7)" stroke-width="2"/>
   <circle cx="30" cy="57" r="13" fill="none" stroke="rgba(252,211,77,0.7)" stroke-width="2"/>
   <circle cx="57" cy="57" r="13" fill="none" stroke="rgba(252,211,77,0.7)" stroke-width="2"/>
-  <!-- Small dots inside -->
   <circle cx="30" cy="30" r="4" fill="rgba(252,211,77,0.3)"/>
   <circle cx="57" cy="28" r="4" fill="rgba(252,211,77,0.3)"/>
   <circle cx="30" cy="57" r="4" fill="rgba(252,211,77,0.3)"/>
@@ -641,26 +625,17 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
 </svg>
 </div>
 
-<!-- Spiral bacterium (spirochete) - bottom left -->
 <div class="hero-doodle doodle-bacteria-2">
 <svg width="100" height="60" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M5 30 Q15 10 25 30 Q35 50 45 30 Q55 10 65 30 Q75 50 85 30 Q92 16 98 22" 
-        stroke="rgba(167,139,250,0.7)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <!-- Flagellum tip -->
+  <path d="M5 30 Q15 10 25 30 Q35 50 45 30 Q55 10 65 30 Q75 50 85 30 Q92 16 98 22" stroke="rgba(167,139,250,0.7)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
   <path d="M5 30 Q0 20 3 12" stroke="rgba(167,139,250,0.5)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 </svg>
 </div>
 
-<!-- DNA helix - bottom right hero area -->
 <div class="hero-doodle doodle-dna">
 <svg width="60" height="140" viewBox="0 0 60 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Left strand -->
-  <path d="M10 10 Q30 25 10 40 Q-10 55 10 70 Q30 85 10 100 Q-10 115 10 130" 
-        stroke="rgba(167,139,250,0.7)" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <!-- Right strand -->
-  <path d="M50 10 Q30 25 50 40 Q70 55 50 70 Q30 85 50 100 Q70 115 50 130" 
-        stroke="rgba(252,211,77,0.6)" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <!-- Rungs -->
+  <path d="M10 10 Q30 25 10 40 Q-10 55 10 70 Q30 85 10 100 Q-10 115 10 130" stroke="rgba(167,139,250,0.7)" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M50 10 Q30 25 50 40 Q70 55 50 70 Q30 85 50 100 Q70 115 50 130" stroke="rgba(252,211,77,0.6)" stroke-width="2" fill="none" stroke-linecap="round"/>
   <line x1="10" y1="25" x2="50" y2="25" stroke="rgba(200,180,255,0.4)" stroke-width="1.5" stroke-dasharray="3,2"/>
   <line x1="10" y1="40" x2="50" y2="40" stroke="rgba(200,180,255,0.4)" stroke-width="1.5" stroke-dasharray="3,2"/>
   <line x1="10" y1="55" x2="50" y2="55" stroke="rgba(200,180,255,0.4)" stroke-width="1.5" stroke-dasharray="3,2"/>
@@ -700,7 +675,7 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
 <div class="hero-inner">
   <div>
     <div class="hero-pill"><span class="pulse-dot"></span>Clinical Microbiology · benchtobedside.in · New Delhi</div>
-    <h1 class="hero-h1">From the lab bench<br>straight to the<br><span class="hl">bedside — clearly</span></h1>
+    <h1 class="hero-h1">Bench to Bedside —<br>clinical microbiology<br><span class="hl">explained clearly</span></h1>
     <p class="hero-sub">Plain-language clinical microbiology for doctors, residents, and students. Hepatitis diagnostics, AMR, diagnostic stewardship, and real case insights — written from the bench, for the bedside.</p>
     <div class="hero-btns">
       <a href="#articles" class="btn btn-v">Start Reading →</a>
@@ -740,8 +715,8 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
         <div class="panel-footer">💡 SDD ≠ Susceptible. Cefepime SDD requires extended infusion (4h) or high dose. For NDM producers, aztreonam-avibactam is the key combination.</div>
       </div>
       <div class="stat-row-hero">
-  <div class="stat-box"><div class="stat-num">CLSI</div><div class="stat-lbl">Ed36 — latest standards applied</div></div>
-  <div class="stat-box"><div class="stat-num">100%</div><div class="stat-lbl">Sensitivity · For clarity</div></div>
+        <div class="stat-box"><div class="stat-num">CLSI</div><div class="stat-lbl">Ed36 — latest standards applied</div></div>
+        <div class="stat-box"><div class="stat-num">100%</div><div class="stat-lbl">Sensitivity · For clarity</div></div>
       </div>
     </div>
   </div>
@@ -766,16 +741,12 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
 </div>
 </div>
 
-<!-- ARTICLES — with petri dish doodle -->
+<!-- ARTICLES -->
 <section class="sec" id="articles">
-<!-- Petri dish doodle, top-right corner -->
 <div class="doodle-petri">
 <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Outer petri dish -->
   <circle cx="100" cy="100" r="90" fill="none" stroke="#7c3aed" stroke-width="3"/>
-  <!-- Inner agar surface -->
   <circle cx="100" cy="100" r="80" fill="none" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <!-- Colony clusters -->
   <circle cx="70" cy="75" r="10" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
   <circle cx="73" cy="78" r="5" fill="rgba(124,58,237,0.15)"/>
   <circle cx="130" cy="80" r="14" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
@@ -783,27 +754,19 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
   <circle cx="95" cy="130" r="12" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
   <circle cx="98" cy="133" r="6" fill="rgba(124,58,237,0.15)"/>
   <circle cx="145" cy="125" r="8" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
-  <!-- Streaks -->
   <path d="M55 100 Q80 95 110 105 Q135 112 160 100" stroke="#7c3aed" stroke-width="1" fill="none" stroke-dasharray="3,4" opacity="0.5"/>
   <path d="M60 120 Q90 115 110 125 Q140 132 155 120" stroke="#7c3aed" stroke-width="1" fill="none" stroke-dasharray="3,4" opacity="0.5"/>
 </svg>
 </div>
-<!-- Microscope scope doodle, bottom-left -->
 <div class="doodle-scope">
 <svg width="80" height="140" viewBox="0 0 80 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Eyepiece -->
   <rect x="30" y="5" width="20" height="30" rx="4" fill="none" stroke="#7c3aed" stroke-width="2"/>
   <line x1="40" y1="35" x2="40" y2="55" stroke="#7c3aed" stroke-width="2.5"/>
-  <!-- Arm -->
   <path d="M40 55 Q40 70 55 75" stroke="#7c3aed" stroke-width="2.5" fill="none"/>
   <line x1="55" y1="75" x2="55" y2="100" stroke="#7c3aed" stroke-width="2.5"/>
-  <!-- Objective lens -->
   <circle cx="55" cy="105" r="8" fill="none" stroke="#7c3aed" stroke-width="2"/>
-  <!-- Stage -->
   <rect x="25" y="110" width="50" height="6" rx="2" fill="none" stroke="#7c3aed" stroke-width="2"/>
-  <!-- Base -->
   <path d="M15 130 Q40 125 65 130" stroke="#7c3aed" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <!-- Light beam suggestion -->
   <line x1="40" y1="116" x2="40" y2="125" stroke="#7c3aed" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
 </svg>
 </div>
@@ -821,8 +784,6 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
           <div class="af-foot"><span>Dr. Deepika Chakraborty · June 2026 · 9 min</span><a href="/contaminant-or-true-positive.html" class="read-link">Read article →</a></div>
         </div>
       </div>
-
-      <!-- Mini article grid -->
       <div class="article-mini-grid" style="margin-top:1rem;">
         <div class="article-card-sm rv rv-d1">
           <div class="ac-bar bar-c"></div>
@@ -838,8 +799,6 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
         </div>
       </div>
     </div>
-
-    <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="side-widget rv">
         <div class="sw-head">Quick Clinical Facts</div>
@@ -872,31 +831,23 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
 </div>
 </section>
 
-<!-- Q&A — with erlenmeyer flask doodle -->
+<!-- Q&A -->
 <section class="sec sec-alt" id="ask">
-<!-- Erlenmeyer flask doodle -->
 <div class="doodle-erlen">
 <svg width="90" height="130" viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Flask neck -->
   <rect x="32" y="5" width="26" height="35" rx="4" fill="none" stroke="#7c3aed" stroke-width="2"/>
-  <!-- Flask body -->
   <path d="M32 38 L10 115 Q10 125 45 125 Q80 125 80 115 L58 38 Z" fill="none" stroke="#7c3aed" stroke-width="2"/>
-  <!-- Liquid inside -->
   <path d="M20 100 Q45 95 70 100 L75 115 Q45 120 15 115 Z" fill="rgba(124,58,237,0.12)" stroke="none"/>
-  <!-- Bubbles in liquid -->
   <circle cx="35" cy="108" r="3" fill="none" stroke="#7c3aed" stroke-width="1.2"/>
   <circle cx="50" cy="112" r="2" fill="none" stroke="#7c3aed" stroke-width="1.2"/>
   <circle cx="60" cy="106" r="2.5" fill="none" stroke="#7c3aed" stroke-width="1.2"/>
-  <!-- Cap/stopper -->
   <rect x="28" y="2" width="34" height="7" rx="3" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
 </svg>
 </div>
-<!-- Colony plate doodle -->
 <div class="doodle-plate">
 <svg width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
   <circle cx="55" cy="55" r="50" fill="none" stroke="#7c3aed" stroke-width="2"/>
   <circle cx="55" cy="55" r="43" fill="none" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,3"/>
-  <!-- Colony dots of various sizes -->
   <circle cx="38" cy="40" r="5" fill="rgba(124,58,237,0.15)" stroke="#7c3aed" stroke-width="1.5"/>
   <circle cx="70" cy="35" r="7" fill="rgba(124,58,237,0.15)" stroke="#7c3aed" stroke-width="1.5"/>
   <circle cx="55" cy="70" r="6" fill="rgba(124,58,237,0.15)" stroke="#7c3aed" stroke-width="1.5"/>
@@ -974,14 +925,12 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
 </div>
 </section>
 
-<!-- TOPICS — dark section with subtle micro doodles -->
+<!-- TOPICS -->
 <section class="sec sec-dark" id="topics">
-<!-- Micro-left doodle: virus particle -->
 <div class="doodle-micro-left">
 <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
   <circle cx="35" cy="35" r="20" fill="none" stroke="rgba(167,139,250,0.8)" stroke-width="2"/>
   <circle cx="35" cy="35" r="12" fill="rgba(124,58,237,0.15)"/>
-  <!-- Spikes (viral envelope projections) -->
   <line x1="35" y1="15" x2="35" y2="5" stroke="rgba(167,139,250,0.8)" stroke-width="2" stroke-linecap="round"/>
   <line x1="35" y1="55" x2="35" y2="65" stroke="rgba(167,139,250,0.8)" stroke-width="2" stroke-linecap="round"/>
   <line x1="15" y1="35" x2="5" y2="35" stroke="rgba(167,139,250,0.8)" stroke-width="2" stroke-linecap="round"/>
@@ -990,19 +939,14 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
   <line x1="50" y1="50" x2="57" y2="57" stroke="rgba(167,139,250,0.8)" stroke-width="2" stroke-linecap="round"/>
   <line x1="50" y1="20" x2="57" y2="13" stroke="rgba(167,139,250,0.8)" stroke-width="2" stroke-linecap="round"/>
   <line x1="20" y1="50" x2="13" y2="57" stroke="rgba(167,139,250,0.8)" stroke-width="2" stroke-linecap="round"/>
-  <!-- RNA inside -->
   <path d="M26 32 Q32 28 38 32 Q44 36 38 40 Q32 44 26 40 Q20 36 26 32" fill="none" stroke="rgba(252,211,77,0.5)" stroke-width="1.2"/>
 </svg>
 </div>
-<!-- Micro-right doodle: flagellated cell -->
 <div class="doodle-micro-right">
 <svg width="70" height="100" viewBox="0 0 70 100" fill="none" xmlns="http://www.w3.org/2000/svg">
   <ellipse cx="35" cy="45" rx="22" ry="30" fill="none" stroke="rgba(167,139,250,0.8)" stroke-width="2"/>
-  <!-- Nucleus -->
   <ellipse cx="35" cy="42" rx="10" ry="12" fill="none" stroke="rgba(252,211,77,0.5)" stroke-width="1.5" stroke-dasharray="3,2"/>
-  <!-- Flagellum -->
   <path d="M35 75 Q30 85 40 90 Q50 95 42 100" stroke="rgba(167,139,250,0.7)" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <!-- Cilia suggestion -->
   <line x1="14" y1="35" x2="8" y2="28" stroke="rgba(167,139,250,0.5)" stroke-width="1.5" stroke-linecap="round"/>
   <line x1="14" y1="45" x2="7" y2="42" stroke="rgba(167,139,250,0.5)" stroke-width="1.5" stroke-linecap="round"/>
   <line x1="56" y1="35" x2="62" y2="28" stroke="rgba(167,139,250,0.5)" stroke-width="1.5" stroke-linecap="round"/>
@@ -1023,29 +967,21 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
 </div>
 </section>
 
-<!-- CASE OF MONTH — with mould/hyphae doodle -->
+<!-- CASE OF MONTH -->
 <section class="sec" id="case">
-<!-- Hyphae/mould doodle, background right -->
 <div style="position:absolute;right:-10px;top:50px;pointer-events:none;opacity:.05;">
 <svg width="180" height="220" viewBox="0 0 180 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Main hypha -->
   <path d="M20 200 Q30 170 40 140 Q50 110 60 80 Q70 50 80 20" stroke="#7c3aed" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <!-- Branch 1 -->
   <path d="M45 130 Q65 120 85 100 Q100 85 120 80" stroke="#7c3aed" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <!-- Branch 2 -->
   <path d="M55 100 Q80 95 100 80 Q118 65 140 60" stroke="#7c3aed" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <!-- Branch 3 -->
   <path d="M65 70 Q85 65 105 55 Q125 45 145 35" stroke="#7c3aed" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <!-- Conidia (spores) at tips -->
   <circle cx="120" cy="80" r="6" fill="rgba(124,58,237,0.4)" stroke="#7c3aed" stroke-width="1.5"/>
   <circle cx="140" cy="60" r="5" fill="rgba(124,58,237,0.4)" stroke="#7c3aed" stroke-width="1.5"/>
   <circle cx="145" cy="35" r="5" fill="rgba(124,58,237,0.4)" stroke="#7c3aed" stroke-width="1.5"/>
   <circle cx="80" cy="20" r="7" fill="rgba(124,58,237,0.4)" stroke="#7c3aed" stroke-width="1.5"/>
-  <!-- Arthroconidia along main hypha -->
   <rect x="57" y="88" width="8" height="6" rx="2" fill="rgba(124,58,237,0.3)" stroke="#7c3aed" stroke-width="1.2"/>
   <rect x="50" y="115" width="8" height="6" rx="2" fill="rgba(124,58,237,0.3)" stroke="#7c3aed" stroke-width="1.2"/>
   <rect x="38" y="150" width="8" height="6" rx="2" fill="rgba(124,58,237,0.3)" stroke="#7c3aed" stroke-width="1.2"/>
-  <!-- Septa (cross-walls) -->
   <line x1="36" y1="145" x2="44" y2="138" stroke="#7c3aed" stroke-width="1.2"/>
   <line x1="46" y1="118" x2="55" y2="112" stroke="#7c3aed" stroke-width="1.2"/>
   <line x1="58" y1="90" x2="67" y2="84" stroke="#7c3aed" stroke-width="1.2"/>
@@ -1068,9 +1004,7 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
         <a href="/scopulariopsis-keratitis.html" class="btn btn-v" style="font-size:.85rem;margin-top:.4rem;display:inline-flex;">Read the case →</a>
       </div>
       <div>
-        <div class="tb-label">
-          <span>🧫</span> Lab at a glance
-        </div>
+        <div class="tb-label"><span>🧫</span> Lab at a glance</div>
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;">
           <table style="width:100%;border-collapse:collapse;font-size:.8rem;">
             <tbody>
@@ -1107,22 +1041,18 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
 </div>
 </section>
 
-<!-- NEWSLETTER — with floating micro doodles -->
+<!-- NEWSLETTER -->
 <div class="nl-band" id="newsletter">
-<!-- Left doodle: test tube -->
 <div class="nl-doodle-l">
 <svg width="50" height="130" viewBox="0 0 50 130" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect x="15" y="5" width="20" height="90" rx="0" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2"/>
   <path d="M15 95 Q15 125 25 125 Q35 125 35 95" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.8)" stroke-width="2"/>
   <line x1="12" y1="5" x2="38" y2="5" stroke="rgba(255,255,255,0.8)" stroke-width="2.5" stroke-linecap="round"/>
-  <!-- Liquid level -->
   <path d="M16 75 Q25 72 34 75 L34 95 Q34 118 25 118 Q16 118 16 95 Z" fill="rgba(167,139,250,0.25)"/>
-  <!-- Bubbles -->
   <circle cx="22" cy="88" r="2.5" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
   <circle cx="30" cy="82" r="2" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
 </svg>
 </div>
-<!-- Right doodle: petri dish simple -->
 <div class="nl-doodle-r">
 <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
   <circle cx="45" cy="45" r="40" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
@@ -1133,7 +1063,6 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
   <circle cx="62" cy="55" r="5" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
 </svg>
 </div>
-
 <div class="nl-inner">
   <p class="nl-tag">Free Newsletter</p>
   <h2 class="nl-h2">Stay sharp.<br>Straight to your inbox.</h2>
@@ -1205,11 +1134,11 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
     <li><a href="#newsletter">Newsletter</a></li>
   </ul></div>
   <div class="f-col"><h5>Connect</h5><ul>
-    <li><a href="#">LinkedIn</a></li>
-    <li><a href="#">ORCID</a></li>
-    <li><a href="#">ResearchGate</a></li>
-    <li><a href="#">@deepsays (YouTube)</a></li>
-    <li><a href="#">Contact</a></li>
+    <li><a href="https://www.linkedin.com/in/deepika-chakraborty-38b6b7189" target="_blank" rel="noopener">LinkedIn</a></li>
+    <li><a href="https://orcid.org/0000-0003-3270-6457" target="_blank" rel="noopener">ORCID</a></li>
+    <li><a href="https://www.researchgate.net/profile/Deepika-Chakraborty?ev=hdr_xprf" target="_blank" rel="noopener">ResearchGate</a></li>
+    <li><a href="https://www.youtube.com/@deepsays" target="_blank" rel="noopener">@deepsays (YouTube)</a></li>
+    <li><a href="#newsletter">Contact</a></li>
   </ul></div>
 </div>
 <div class="footer-bottom">
@@ -1310,10 +1239,7 @@ const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.tar
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
 /* ── NEWSLETTER ──────────────────────────────────────────────
-   👉 STEP 3 (see instructions at the very top of this file):
-   Paste your web-app URL between the quotes below. Nothing else
-   to change. Example after pasting:
-   const SUBSCRIBE_ENDPOINT = "https://script.google.com/macros/s/AKfyc.../exec";
+   👉 STEP 3: Paste your Google Apps Script /exec URL below.
    ───────────────────────────────────────────────────────────── */
 const SUBSCRIBE_ENDPOINT = "PASTE_YOUR_WEB_APP_URL_HERE";
 
