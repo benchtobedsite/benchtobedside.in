@@ -422,58 +422,6 @@
     .quick-fact-value { color: var(--text); font-weight: 700; }
     .quick-fact-sub { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
 
-    /* ── FLOATING TOC ── */
-    .toc-float {
-      float: right;
-      width: 248px;
-      margin: 0 0 28px 36px;
-      background: var(--surface);
-      border: 1px solid var(--border-strong);
-      border-top: 3px solid var(--accent-mid);
-      border-radius: var(--radius);
-      font-size: 13px;
-      position: relative; z-index: 10;
-      box-shadow: var(--shadow-md);
-    }
-    .toc-float-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 11px 16px;
-      cursor: pointer; user-select: none;
-      border-bottom: 1px solid var(--border);
-      background: #f8fafc;
-      border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
-    }
-    .toc-float-title {
-      font-size: 10px; font-weight: 800;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--accent); display: flex; align-items: center; gap: 7px;
-    }
-    .toc-toggle-icon { font-size: 10px; color: var(--text-faint); transition: transform 0.2s; }
-    .toc-float.collapsed .toc-toggle-icon { transform: rotate(-90deg); }
-    .toc-float-body { padding: 6px 0; }
-    .toc-float.collapsed .toc-float-body { display: none; }
-    .toc-float ol { list-style: none; margin: 0; padding: 0; counter-reset: toc-n; }
-    .toc-float ol li { counter-increment: toc-n; }
-    .toc-float ol li a {
-      display: flex; align-items: baseline; gap: 9px;
-      padding: 6px 16px;
-      color: var(--text-muted); text-decoration: none; line-height: 1.4;
-      transition: background 0.1s, color 0.1s;
-      font-size: 12.5px;
-    }
-    .toc-float ol li a::before {
-      content: counter(toc-n, decimal-leading-zero);
-      font-size: 10px; font-weight: 800; color: var(--accent-mid);
-      flex-shrink: 0; min-width: 18px;
-    }
-    .toc-float ol li a:hover { background: var(--accent-dim); color: var(--accent); }
-    .toc-float ol li a.active {
-      background: var(--accent-light);
-      color: var(--accent); font-weight: 700;
-      border-left: 2px solid var(--accent-mid);
-      padding-left: 14px;
-    }
-    @media (max-width: 680px) { .toc-float { display: none; } }
 
     /* ── FIGURES ── */
     .article-figure {
@@ -541,6 +489,155 @@
       .prose p { font-size: 16px; }
       thead th { font-size: 10px; padding: 10px 12px; }
       tbody td { padding: 9px 12px; font-size: 13px; }
+    }
+
+
+    /* ── FIXED CONTENTS BUTTON (always visible) ── */
+    .toc-fab {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      z-index: 500;
+      display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+    }
+    .btn-top {
+      width: 42px; height: 42px;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      color: var(--text-muted);
+      font-size: 16px;
+      transition: background 0.15s, color 0.15s, opacity 0.2s, transform 0.2s;
+      opacity: 0; pointer-events: none;
+      transform: translateY(8px);
+      text-decoration: none;
+    }
+    .btn-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .btn-top:hover { background: var(--accent-mid); color: #fff; border-color: var(--accent-mid); }
+    .toc-trigger {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--accent-mid);
+      color: #fff;
+      border: none; border-radius: 100px;
+      padding: 11px 18px 11px 14px;
+      font-family: var(--font-body);
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(2,132,199,0.35);
+      transition: background 0.15s, box-shadow 0.15s, transform 0.15s;
+    }
+    .toc-trigger:hover { background: var(--accent); box-shadow: 0 6px 20px rgba(2,132,199,0.45); transform: translateY(-1px); }
+    .toc-backdrop {
+      display: none;
+      position: fixed; inset: 0; z-index: 600;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(2px);
+    }
+    .toc-backdrop.open { display: block; }
+    .toc-drawer {
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: min(340px, 90vw);
+      z-index: 700;
+      background: var(--surface);
+      box-shadow: -8px 0 40px rgba(0,0,0,0.15);
+      transform: translateX(100%);
+      transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+      display: flex; flex-direction: column;
+      overflow: hidden;
+    }
+    .toc-drawer.open { transform: translateX(0); }
+    .toc-drawer-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 22px 16px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, #0c1e35, #0f3460);
+      flex-shrink: 0;
+    }
+    .toc-drawer-title {
+      font-size: 11px; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #7dd3fc; display: flex; align-items: center; gap: 8px;
+    }
+    .toc-close {
+      width: 30px; height: 30px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%; color: rgba(255,255,255,0.7);
+      font-size: 16px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, color 0.15s;
+    }
+    .toc-close:hover { background: rgba(255,255,255,0.25); color: #fff; }
+    .toc-drawer-body { flex: 1; overflow-y: auto; padding: 8px 0 24px; }
+    .toc-drawer-body::-webkit-scrollbar { width: 4px; }
+    .toc-drawer-body::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+    .toc-drawer ol { list-style: none; margin: 0; padding: 0; counter-reset: drawer-n; }
+    .toc-drawer ol li { counter-increment: drawer-n; }
+    .toc-drawer ol li a {
+      display: flex; align-items: baseline; gap: 12px;
+      padding: 8px 22px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px; line-height: 1.45;
+      transition: background 0.1s, color 0.1s;
+      border-left: 3px solid transparent;
+    }
+    .toc-drawer ol li a::before {
+      content: counter(drawer-n, decimal-leading-zero);
+      font-size: 10px; font-weight: 800;
+      color: var(--accent-mid); flex-shrink: 0; min-width: 20px;
+    }
+    .toc-drawer ol li a:hover { background: var(--accent-dim); color: var(--accent); border-left-color: var(--accent-mid); }
+    .toc-drawer ol li a.active { background: var(--accent-light); color: var(--accent); font-weight: 700; border-left-color: var(--accent-mid); }
+    .toc-drawer ol li.toc-sub a { padding-left: 38px; font-size: 13px; }
+    .toc-drawer ol li.toc-sub a::before { color: var(--text-faint); }
+    .toc-drawer-footer { border-top: 1px solid var(--border); padding: 14px 22px; flex-shrink: 0; }
+    .toc-drawer-footer a { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+    .toc-drawer-footer a:hover { color: var(--accent); }
+
+
+    /* ── SIDEBAR STICKY TOC LINKS ── */
+    .article-sidebar {
+      position: sticky;
+      top: 72px;
+      max-height: calc(100vh - 88px);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .article-sidebar::-webkit-scrollbar { width: 3px; }
+    .article-sidebar::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+
+    .stoc-link {
+      display: block;
+      padding: 5px 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      line-height: 1.4;
+      transition: background 0.12s, color 0.12s, border-color 0.12s;
+      margin-bottom: 1px;
+    }
+    .stoc-link.stoc-sub {
+      padding-left: 18px;
+      font-size: 12px;
+      color: var(--text-faint);
+    }
+    .stoc-link:hover {
+      background: var(--accent-dim);
+      color: var(--accent);
+      border-left-color: var(--accent-mid);
+    }
+    .stoc-link.active {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-weight: 700;
+      border-left-color: var(--accent-mid);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -615,31 +712,6 @@
           A patient from the Himalayas. Ocular trauma. Negative KOH. Sterile bacterial cultures.
           Growth detected on day 10 — only because someone didn't throw the plate away.
         </p>
-
-        <!-- FLOATING TABLE OF CONTENTS -->
-        <div class="toc-float" id="tocFloat">
-          <div class="toc-float-header" onclick="toggleToc()">
-            <span class="toc-float-title">📋 Contents</span>
-            <span class="toc-toggle-icon">▼</span>
-          </div>
-          <div class="toc-float-body">
-            <ol>
-              <li><a href="#why-care">Why this organism matters</a></li>
-              <li><a href="#organism">Meet the organism</a></li>
-              <li><a href="#colony">Colony morphology</a></li>
-              <li><a href="#microscopy">Microscopic features</a></li>
-              <li><a href="#traps">The three diagnostic traps</a></li>
-              <li><a href="#trap1">Trap 1 — negative KOH</a></li>
-              <li><a href="#trap2">Trap 2 — discarding plates early</a></li>
-              <li><a href="#trap3">Trap 3 — the contaminant reflex</a></li>
-              <li><a href="#treatment">Treatment: why usual antifungals fail</a></li>
-              <li><a href="#vori">Voriconazole as agent of choice</a></li>
-              <li><a href="#natamycin">A note on natamycin</a></li>
-              <li><a href="#literature">What the literature tells us</a></li>
-              <li><a href="#summary">Five things to walk away with</a></li>
-            </ol>
-          </div>
-        </div>
 
         <!-- ────────────────────────────── -->
         <h2 id="why-care"><span class="h2-num">01</span>Why should you care about a mould you've probably never seen?</h2>
@@ -1124,6 +1196,26 @@
       <!-- SIDEBAR -->
       <aside class="article-sidebar">
 
+        <!-- CONTENTS — sticky TOC, always visible as you scroll -->
+        <div class="sidebar-block" style="padding-bottom: 8px;">
+          <div class="sidebar-heading">📋 &nbsp;Contents</div>
+          <ul style="list-style:none; margin:0; padding:0;">
+            <li><a class="stoc-link" href="#why-care">Why this organism matters</a></li>
+            <li><a class="stoc-link" href="#organism">Meet the organism</a></li>
+            <li><a class="stoc-link stoc-sub" href="#colony">Colony morphology</a></li>
+            <li><a class="stoc-link stoc-sub" href="#microscopy">Microscopic features</a></li>
+            <li><a class="stoc-link" href="#traps">The three diagnostic traps</a></li>
+            <li><a class="stoc-link stoc-sub" href="#trap1">Trap 1 — negative KOH</a></li>
+            <li><a class="stoc-link stoc-sub" href="#trap2">Trap 2 — discarding plates</a></li>
+            <li><a class="stoc-link stoc-sub" href="#trap3">Trap 3 — contaminant reflex</a></li>
+            <li><a class="stoc-link" href="#treatment">Treatment</a></li>
+            <li><a class="stoc-link stoc-sub" href="#vori">Voriconazole as choice</a></li>
+            <li><a class="stoc-link stoc-sub" href="#natamycin">A note on natamycin</a></li>
+            <li><a class="stoc-link" href="#literature">Literature cases</a></li>
+            <li><a class="stoc-link" href="#summary">Five things to walk away with</a></li>
+          </ul>
+        </div>
+
         <div class="sidebar-block">
           <div class="sidebar-heading">Quick facts</div>
 
@@ -1184,21 +1276,78 @@
     </div>
   </footer>
 
-  <script>
-    // Toggle TOC open/closed
-    function toggleToc() {
-      document.getElementById('tocFloat').classList.toggle('collapsed');
-    }
+  
+  <!-- ── BACKDROP ── -->
+  <div class="toc-backdrop" id="tocBackdrop" onclick="closeTocDrawer()"></div>
 
-    // Scrollspy — highlight active section in floating TOC
+  <!-- ── SLIDE-IN DRAWER ── -->
+  <div class="toc-drawer" id="tocDrawer" role="dialog" aria-modal="true" aria-label="Article contents">
+    <div class="toc-drawer-header">
+      <div class="toc-drawer-title">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="2" rx="1" fill="#7dd3fc"/><rect x="1" y="7" width="10" height="2" rx="1" fill="#7dd3fc"/><rect x="1" y="12" width="12" height="2" rx="1" fill="#7dd3fc"/></svg>
+        Contents
+      </div>
+      <button class="toc-close" onclick="closeTocDrawer()" aria-label="Close">✕</button>
+    </div>
+    <div class="toc-drawer-body">
+      <ol>
+        <li><a href="#why-care" onclick="closeTocDrawer()">Why this organism matters</a></li>
+        <li><a href="#organism" onclick="closeTocDrawer()">Meet the organism</a></li>
+        <li class="toc-sub"><a href="#colony" onclick="closeTocDrawer()">Colony morphology</a></li>
+        <li class="toc-sub"><a href="#microscopy" onclick="closeTocDrawer()">Microscopic features</a></li>
+        <li><a href="#traps" onclick="closeTocDrawer()">The three diagnostic traps</a></li>
+        <li class="toc-sub"><a href="#trap1" onclick="closeTocDrawer()">Trap 1 — negative KOH</a></li>
+        <li class="toc-sub"><a href="#trap2" onclick="closeTocDrawer()">Trap 2 — discarding plates</a></li>
+        <li class="toc-sub"><a href="#trap3" onclick="closeTocDrawer()">Trap 3 — contaminant reflex</a></li>
+        <li><a href="#treatment" onclick="closeTocDrawer()">Treatment: why usual antifungals fail</a></li>
+        <li class="toc-sub"><a href="#vori" onclick="closeTocDrawer()">Voriconazole as agent of choice</a></li>
+        <li class="toc-sub"><a href="#natamycin" onclick="closeTocDrawer()">A note on natamycin</a></li>
+        <li><a href="#literature" onclick="closeTocDrawer()">What the literature tells us</a></li>
+        <li><a href="#summary" onclick="closeTocDrawer()">Five things to walk away with</a></li>
+      </ol>
+    </div>
+    <div class="toc-drawer-footer">
+      <a href="https://benchtobedside.netlify.app/#case">← Back to Case of the Month</a>
+    </div>
+  </div>
+
+  <!-- ── FAB: CONTENTS BUTTON + BACK TO TOP ── -->
+  <div class="toc-fab">
+    <a href="#" class="btn-top" id="btnTop" aria-label="Back to top" title="Back to top">↑</a>
+    <button class="toc-trigger" onclick="openTocDrawer()" aria-label="Open article contents">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="2" rx="1" fill="white"/><rect x="1" y="7" width="10" height="2" rx="1" fill="white"/><rect x="1" y="12" width="12" height="2" rx="1" fill="white"/></svg>
+      Contents
+    </button>
+  </div>
+  <script>
+    /* ── DRAWER ── */
+    function openTocDrawer() {
+      document.getElementById('tocDrawer').classList.add('open');
+      document.getElementById('tocBackdrop').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeTocDrawer() {
+      document.getElementById('tocDrawer').classList.remove('open');
+      document.getElementById('tocBackdrop').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTocDrawer(); });
+
+    /* ── BACK TO TOP ── */
+    const btnTop = document.getElementById('btnTop');
+    window.addEventListener('scroll', () => {
+      btnTop.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+
+    /* ── SCROLLSPY: highlight active in BOTH floating TOC and drawer ── */
     const headings = document.querySelectorAll('.prose h2[id], .prose h3[id]');
-    const tocLinks = document.querySelectorAll('.toc-float a');
+    const allTocLinks = document.querySelectorAll('.toc-drawer a[href^="#"], .stoc-link');
 
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const id = entry.target.getAttribute('id');
-          tocLinks.forEach(a => {
+          allTocLinks.forEach(a => {
             a.classList.toggle('active', a.getAttribute('href') === '#' + id);
           });
         }
@@ -1206,6 +1355,7 @@
     }, { rootMargin: '-10% 0px -75% 0px' });
 
     headings.forEach(h => observer.observe(h));
+
   </script>
 
 </body>
