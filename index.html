@@ -218,6 +218,38 @@ canvas#petri{position:absolute;inset:0;opacity:.5;pointer-events:none;}
 .stat-box{background:rgba(255,255,255,.05);border-radius:8px;padding:.9rem;text-align:center;}
 .stat-num{font-family:var(--serif);font-size:1.8rem;font-weight:900;color:var(--violet-lt);line-height:1;}
 .stat-lbl{font-size:.65rem;color:rgba(255,255,255,.5);margin-top:.2rem;font-family:var(--mono);}
+/* ── CAROUSEL (report cards) ── */
+.carousel-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;}
+.carousel-label{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.carousel-meta{display:flex;align-items:center;gap:.6rem;}
+.carousel-counter{font-family:var(--mono);font-size:.6rem;color:rgba(255,255,255,.35);font-variant-numeric:tabular-nums;}
+.carousel-arrows{display:flex;gap:6px;}
+.carr-btn{
+  width:28px;height:28px;border-radius:50%;
+  border:1px solid rgba(124,58,237,.4);background:rgba(124,58,237,.15);
+  color:rgba(255,255,255,.6);font-size:13px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .15s,color .15s;flex-shrink:0;
+  line-height:1;
+}
+.carr-btn:hover{background:rgba(124,58,237,.5);color:#fff;}
+.carr-btn:disabled{opacity:.25;cursor:not-allowed;}
+.carousel-teaching{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1rem;}
+.carousel-cat{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(124,58,237,.8);margin-bottom:.6rem;}
+.carousel-cat-dot{width:4px;height:4px;border-radius:50%;background:var(--violet);flex-shrink:0;}
+.cslide{display:none;}
+.cslide.active{display:block;}
+.carousel-dots{display:flex;justify-content:center;gap:5px;padding-top:.75rem;flex-wrap:wrap;}
+.cdot{width:5px;height:5px;border-radius:50%;background:rgba(124,58,237,.25);border:none;padding:0;cursor:pointer;transition:background .2s,transform .2s;}
+.cdot.active{background:var(--violet);transform:scale(1.4);}
+.rl-tag{display:inline-block;font-size:.5rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:1px 6px;border-radius:20px;margin-left:4px;vertical-align:middle;}
+.rl-tag-invalid{background:rgba(248,113,113,.15);color:#f87171;}
+.rl-tag-new{background:rgba(110,231,183,.15);color:#6ee7b7;}
+.rl-tag-ed36{background:rgba(124,58,237,.2);color:#c4b5fd;}
+.r-strike{text-decoration:line-through;color:rgba(255,255,255,.25);font-size:.72rem;}
+.panel-footer-green{margin-top:1rem;padding:.8rem 1rem;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);border-radius:8px;font-size:.72rem;color:#6ee7b7;line-height:1.5;}
+.panel-footer-red{margin-top:1rem;padding:.8rem 1rem;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.25);border-radius:8px;font-size:.72rem;color:#f87171;line-height:1.5;}
+
 
 /* ── SCROLL MARQUEE ── */
 .marquee-wrap{
@@ -685,40 +717,107 @@ footer{background:var(--ink);padding:4rem 2rem 0;}
   </div>
   <div class="hero-panel">
     <div class="petri-panel">
-      <div class="panel-tabs">
-        <button class="ptab active" onclick="switchTab(this,'hcv')">HCV Report</button>
-        <button class="ptab" onclick="switchTab(this,'hbv')">HBV Report</button>
-        <button class="ptab" onclick="switchTab(this,'amr')">AMR Report</button>
+      <!-- CAROUSEL NAV -->
+      <div class="carousel-nav">
+        <span class="carousel-label">Teaching report cards</span>
+        <div class="carousel-meta">
+          <span class="carousel-counter" id="rc-counter">1 / 7</span>
+          <div class="carousel-arrows">
+            <button class="carr-btn" id="rc-prev" aria-label="Previous card" disabled>&#8592;</button>
+            <button class="carr-btn" id="rc-next" aria-label="Next card">&#8594;</button>
+          </div>
+        </div>
       </div>
-      <p style="font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin:-.8rem 0 1rem;">Illustrative teaching example — not a patient report</p>
-      <div id="hcv" class="panel-content show">
-        <div class="report-line"><span class="rl-key">Anti-HCV ELISA (Gen 4)</span><span class="rl-val r-pos">Reactive</span></div>
-        <div class="report-line"><span class="rl-key">HCV RNA (RT-PCR)</span><span class="rl-val r-neg">Not Detected</span></div>
-        <div class="report-line"><span class="rl-key">Viral Load</span><span class="rl-val r-neg">&lt; LLOQ</span></div>
-        <div class="report-line"><span class="rl-key">Anti-HCV S/CO Ratio</span><span class="rl-val r-flag">3.2</span></div>
-        <div class="report-line"><span class="rl-key">Interpretation</span><span class="rl-val r-flag">Discordant</span></div>
-        <div class="panel-footer">💡 This pattern could mean spontaneous clearance, past treated infection, or rarely a false positive. RNA negativity on two samples ≥12 weeks apart confirms clearance.</div>
+      <p class="carousel-teaching">Illustrative teaching example — not a patient report</p>
+
+      <div id="rc-slides">
+
+        <!-- CARD 1: HCV discordance -->
+        <div class="cslide active">
+          <div class="carousel-cat"><span class="carousel-cat-dot"></span>HCV · Virology</div>
+          <div class="report-line"><span class="rl-key">Anti-HCV ELISA (Gen 4)</span><span class="rl-val r-pos">Reactive</span></div>
+          <div class="report-line"><span class="rl-key">HCV RNA (RT-PCR)</span><span class="rl-val r-neg">Not Detected</span></div>
+          <div class="report-line"><span class="rl-key">Viral Load</span><span class="rl-val" style="color:rgba(255,255,255,.4)">&lt; LLOQ</span></div>
+          <div class="report-line"><span class="rl-key">Anti-HCV S/CO Ratio</span><span class="rl-val r-flag">3.2</span></div>
+          <div class="report-line"><span class="rl-key">Interpretation</span><span class="rl-val r-flag">Discordant</span></div>
+          <div class="panel-footer">Reactive serology + undetectable RNA = discordant. Could be spontaneous clearance, treated infection, or false positive. Repeat RNA at 12 weeks. Two negatives ≥12 weeks apart confirms clearance.</div>
+        </div>
+
+        <!-- CARD 2: Occult HBV -->
+        <div class="cslide">
+          <div class="carousel-cat"><span class="carousel-cat-dot"></span>HBV · Virology</div>
+          <div class="report-line"><span class="rl-key">HBsAg</span><span class="rl-val r-neg">Non-Reactive</span></div>
+          <div class="report-line"><span class="rl-key">Anti-HBc Total</span><span class="rl-val r-pos">Reactive</span></div>
+          <div class="report-line"><span class="rl-key">IgM Anti-HBc</span><span class="rl-val r-neg">Non-Reactive</span></div>
+          <div class="report-line"><span class="rl-key">Anti-HBs</span><span class="rl-val" style="color:rgba(255,255,255,.5)">Non-Reactive</span></div>
+          <div class="report-line"><span class="rl-key">HBV DNA</span><span class="rl-val r-flag">Pending</span></div>
+          <div class="panel-footer-red">HBsAg-negative does not rule out HBV. Anti-HBc reactive = past exposure or occult HBV. Do NOT start immunosuppression until HBV DNA result is available — reactivation can be fatal.</div>
+        </div>
+
+        <!-- CARD 3: NDM-CRE / ATM-AVI -->
+        <div class="cslide">
+          <div class="carousel-cat"><span class="carousel-cat-dot"></span>AMR · Bacteriology</div>
+          <div class="report-line"><span class="rl-key">Organism</span><span class="rl-val" style="color:#c4b5fd">K. pneumoniae</span></div>
+          <div class="report-line"><span class="rl-key">Meropenem</span><span class="rl-val r-pos">R (MIC ≥8)</span></div>
+          <div class="report-line"><span class="rl-key">Cefepime</span><span class="rl-val r-flag">SDD</span></div>
+          <div class="report-line"><span class="rl-key">Aztreonam-Avi</span><span class="rl-val r-neg">S</span></div>
+          <div class="report-line"><span class="rl-key">Carbapenemase</span><span class="rl-val r-flag">NDM (MBL)</span></div>
+          <div class="panel-footer">SDD ≠ Susceptible. Cefepime SDD requires extended infusion (4h) or high dose. For NDM producers, aztreonam-avibactam is the only active β-lactam — CAZ-AVI and MER-VAB are both hydrolysed by NDM.</div>
+          <div class="stat-row-hero" style="margin-top:.8rem;">
+            <div class="stat-box"><div class="stat-num">Ed36</div><div class="stat-lbl">CLSI — latest standards applied</div></div>
+            <div class="stat-box"><div class="stat-num">Tier 3</div><div class="stat-lbl">ATM-AVI — cascade from carbapenem R</div></div>
+          </div>
+        </div>
+
+        <!-- CARD 4: Acinetobacter Ed36 -->
+        <div class="cslide">
+          <div class="carousel-cat"><span class="carousel-cat-dot"></span>AMR · Bacteriology · CLSI Ed36</div>
+          <div class="report-line"><span class="rl-key">Organism</span><span class="rl-val" style="color:#c4b5fd">Acinetobacter baumannii</span></div>
+          <div class="report-line"><span class="rl-key">Imipenem</span><span class="rl-val r-pos">R (MIC ≥8)</span></div>
+          <div class="report-line"><span class="rl-key">Meropenem</span><span class="rl-val r-pos">R (MIC ≥8)</span></div>
+          <div class="report-line"><span class="rl-key">Amikacin <span class="rl-tag rl-tag-ed36">BP revised Ed36</span></span><span class="rl-val r-flag">I</span></div>
+          <div class="report-line"><span class="rl-key">Sulbactam-Durlobactam</span><span class="rl-val r-neg">S</span></div>
+          <div class="report-line"><span class="rl-key">Tobramycin (BC)</span><span class="rl-val"><span class="rl-tag rl-tag-invalid">Removed Ed36</span></span></div>
+          <div class="panel-footer-red">Amikacin BPs revised in Ed36 — isolate may move from S to I. Update LIS before implementing. Tobramycin disk BPs for blood culture temporarily removed — use MIC only. SUL-DUR appears only because both carbapenems are resistant.</div>
+        </div>
+
+        <!-- CARD 5: Gonorrhoea disk BPs removed -->
+        <div class="cslide">
+          <div class="carousel-cat"><span class="carousel-cat-dot"></span>STI · Bacteriology · CLSI Ed36</div>
+          <div class="report-line"><span class="rl-key">Organism</span><span class="rl-val" style="color:#c4b5fd">Neisseria gonorrhoeae</span></div>
+          <div class="report-line"><span class="rl-key">Ceftriaxone (disk)</span><span class="rl-val"><span class="r-strike">S — 28 mm</span> <span class="rl-tag rl-tag-invalid">Invalid Ed36</span></span></div>
+          <div class="report-line"><span class="rl-key">Ceftriaxone (MIC) <span class="rl-tag rl-tag-new">Now required</span></span><span class="rl-val r-neg">S (0.03 µg/mL)</span></div>
+          <div class="report-line"><span class="rl-key">Cefixime (disk)</span><span class="rl-val"><span class="r-strike">S — 24 mm</span> <span class="rl-tag rl-tag-invalid">Invalid Ed36</span></span></div>
+          <div class="report-line"><span class="rl-key">Penicillinase</span><span class="rl-val r-pos">Positive</span></div>
+          <div class="panel-footer-red">CLSI Ed36 has removed ceftriaxone and cefixime disk breakpoints for N. gonorrhoeae — rising MICs have broken the zone-to-MIC correlation. Disk zones can no longer distinguish S from non-S. Transition to MIC testing immediately.</div>
+        </div>
+
+        <!-- CARD 6: Blood culture direct Ed36 -->
+        <div class="cslide">
+          <div class="carousel-cat"><span class="carousel-cat-dot"></span>Blood Culture · Bacteriology · CLSI Ed36</div>
+          <div class="report-line"><span class="rl-key">Organism</span><span class="rl-val" style="color:#c4b5fd">E. coli (direct BC)</span></div>
+          <div class="report-line"><span class="rl-key">Time to positivity</span><span class="rl-val" style="color:rgba(255,255,255,.6)">16 h post-flag</span></div>
+          <div class="report-line"><span class="rl-key">Pip-Tazo (disk) <span class="rl-tag rl-tag-new">New Ed36</span></span><span class="rl-val r-neg">S</span></div>
+          <div class="report-line"><span class="rl-key">Cefepime (direct BC) <span class="rl-tag rl-tag-ed36">Revised Ed36</span></span><span class="rl-val r-flag">SDD</span></div>
+          <div class="report-line"><span class="rl-key">Ceftriaxone</span><span class="rl-val r-pos">R</span></div>
+          <div class="panel-footer-green">Ed36 adds pip-tazo disk BPs for direct blood culture (16–18 h) — actionable susceptibility hours before conventional AST. Cefepime reclassified from I to SDD in the blood culture table. SDD requires 2 g q8h over 4 h extended infusion.</div>
+        </div>
+
+        <!-- CARD 7: AE stewardship -->
+        <div class="cslide">
+          <div class="carousel-cat"><span class="carousel-cat-dot"></span>Diagnostic Stewardship · Neurology</div>
+          <div class="report-line"><span class="rl-key">Graus 2016 criteria</span><span class="rl-val r-pos">Not met</span></div>
+          <div class="report-line"><span class="rl-key">CSF culture</span><span class="rl-val" style="color:rgba(255,255,255,.5)">Pending</span></div>
+          <div class="report-line"><span class="rl-key">CSF CBNAAT</span><span class="rl-val" style="color:rgba(255,255,255,.5)">Pending</span></div>
+          <div class="report-line"><span class="rl-key">MRI Brain</span><span class="rl-val" style="color:rgba(255,255,255,.5)">Not yet done</span></div>
+          <div class="report-line"><span class="rl-key">AE Antibody Panel</span><span class="rl-val r-flag">On hold</span></div>
+          <div class="panel-footer">AE antibody panel should not be ordered until Graus 2016 criteria are met and infectious/structural causes excluded first. CSF culture and CBNAAT before serology.</div>
+        </div>
+
+        <!-- ADD NEW CARDS HERE: copy any cslide block above and paste before this comment -->
+
       </div>
-      <div id="hbv" class="panel-content">
-        <div class="report-line"><span class="rl-key">HBsAg</span><span class="rl-val r-neg">Non-Reactive</span></div>
-        <div class="report-line"><span class="rl-key">Anti-HBc Total</span><span class="rl-val r-pos">Reactive</span></div>
-        <div class="report-line"><span class="rl-key">IgM Anti-HBc</span><span class="rl-val r-neg">Non-Reactive</span></div>
-        <div class="report-line"><span class="rl-key">Anti-HBs</span><span class="rl-val r-neg">Non-Reactive</span></div>
-        <div class="report-line"><span class="rl-key">HBV DNA</span><span class="rl-val r-flag">Pending</span></div>
-        <div class="panel-footer">⚠ HBsAg-negative, anti-HBc-positive pattern: check HBV DNA before immunosuppression. Occult HBV reactivation is a real risk.</div>
-      </div>
-      <div id="amr" class="panel-content">
-        <div class="report-line"><span class="rl-key">Organism</span><span class="rl-val" style="color:#c4b5fd">K. pneumoniae</span></div>
-        <div class="report-line"><span class="rl-key">Meropenem</span><span class="rl-val r-pos">R (MIC ≥8)</span></div>
-        <div class="report-line"><span class="rl-key">Cefepime</span><span class="rl-val r-flag">SDD</span></div>
-        <div class="report-line"><span class="rl-key">Aztreonam-Avi</span><span class="rl-val r-neg">S</span></div>
-        <div class="report-line"><span class="rl-key">Carbapenemase</span><span class="rl-val r-flag">NDM (MBL)</span></div>
-        <div class="panel-footer">💡 SDD ≠ Susceptible. Cefepime SDD requires extended infusion (4h) or high dose. For NDM producers, aztreonam-avibactam is the key combination.</div>
-      </div>
-      <div class="stat-row-hero">
-        <div class="stat-box"><div class="stat-num">CLSI</div><div class="stat-lbl">Ed36 — latest standards applied</div></div>
-        <div class="stat-box"><div class="stat-num">100%</div><div class="stat-lbl">Sensitivity · For clarity</div></div>
-      </div>
+      <div class="carousel-dots" id="rc-dots"></div>
     </div>
   </div>
 </div>
@@ -1220,13 +1319,38 @@ hbg.addEventListener('click',()=>{
 });
 nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nl.classList.remove('open');hbg.setAttribute('aria-expanded',false);}));
 
-/* ── HERO TABS ── */
-function switchTab(btn,id){
-  document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.panel-content').forEach(c=>c.classList.remove('show'));
-  btn.classList.add('active');
-  document.getElementById(id).classList.add('show');
-}
+/* ── REPORT CARD CAROUSEL ── */
+(function(){
+  var slides=document.querySelectorAll('#rc-slides .cslide');
+  var dotsWrap=document.getElementById('rc-dots');
+  var counter=document.getElementById('rc-counter');
+  var prev=document.getElementById('rc-prev');
+  var next=document.getElementById('rc-next');
+  var cur=0,n=slides.length;
+  slides.forEach(function(_,i){
+    var d=document.createElement('button');
+    d.className='cdot'+(i===0?' active':'');
+    d.setAttribute('aria-label','Go to card '+(i+1));
+    dotsWrap.appendChild(d);
+  });
+  function go(i){
+    slides[cur].classList.remove('active');
+    dotsWrap.querySelectorAll('.cdot')[cur].classList.remove('active');
+    cur=i;
+    slides[cur].classList.add('active');
+    dotsWrap.querySelectorAll('.cdot')[cur].classList.add('active');
+    counter.textContent=(cur+1)+' / '+n;
+    prev.disabled=cur===0;
+    next.disabled=cur===n-1;
+  }
+  prev.addEventListener('click',function(){if(cur>0)go(cur-1);});
+  next.addEventListener('click',function(){if(cur<n-1)go(cur+1);});
+  dotsWrap.querySelectorAll('.cdot').forEach(function(d,i){d.addEventListener('click',function(){go(i);});});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowLeft'&&cur>0)go(cur-1);
+    if(e.key==='ArrowRight'&&cur<n-1)go(cur+1);
+  });
+})();
 
 /* ── Q&A ── */
 function toggleQA(btn){
