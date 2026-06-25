@@ -231,111 +231,142 @@ footer p{font-size:13px;margin-bottom:3px}footer a{color:#aaa}
 <h2 class="section-h2">Anatomy of a HEp-2 cell</h2>
 <p class="section-deck">The pattern you see always maps directly to where the antibody's target lives in the cell.</p>
 
-<!-- Big full-width HEp-2 anatomy diagram -->
-<div style="background:#111827; border-radius:12px; overflow:hidden; border:1.5px solid #1e293b; box-shadow:0 4px 24px rgba(0,0,0,0.18); margin:24px 0 8px;">
-  <svg viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg" width="100%" style="display:block;">
+<!-- Big full-width HEp-2 anatomy diagram — geometrically precise -->
+<div style="background:#0d1117; border-radius:12px; overflow:hidden; border:1.5px solid #1e293b; box-shadow:0 4px 24px rgba(0,0,0,0.18); margin:24px 0 8px;">
+  <svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg" width="100%" style="display:block;">
     <defs>
-      <!-- Subtle cytoplasm texture -->
-      <radialGradient id="cellbg" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="#1e2a3a" stop-opacity="1"/>
-        <stop offset="100%" stop-color="#0d1117" stop-opacity="1"/>
+      <radialGradient id="cellbg2" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#1a2535"/>
+        <stop offset="100%" stop-color="#0a0f18"/>
       </radialGradient>
-      <radialGradient id="nucleusbg" cx="50%" cy="45%" r="55%">
-        <stop offset="0%" stop-color="#1a3358" stop-opacity="1"/>
-        <stop offset="100%" stop-color="#0c1e3a" stop-opacity="1"/>
+      <radialGradient id="nucleusbg2" cx="50%" cy="45%" r="55%">
+        <stop offset="0%" stop-color="#152040"/>
+        <stop offset="100%" stop-color="#0a1528"/>
       </radialGradient>
-      <radialGradient id="nucbg" cx="40%" cy="40%" r="60%">
-        <stop offset="0%" stop-color="#1e3d5e" stop-opacity="1"/>
-        <stop offset="100%" stop-color="#0e2440" stop-opacity="1"/>
+      <radialGradient id="nuclbg2" cx="38%" cy="38%" r="62%">
+        <stop offset="0%" stop-color="#1c3a5e"/>
+        <stop offset="100%" stop-color="#0c2040"/>
       </radialGradient>
-      <!-- Glow filter for labels -->
-      <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur stdDeviation="3" result="blur"/>
-        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-      </filter>
     </defs>
 
-    <!-- ── BACKGROUND ── -->
-    <rect width="900" height="480" fill="#0d1117"/>
+    <rect width="900" height="500" fill="#0d1117"/>
 
-    <!-- ── CELL MEMBRANE ── -->
-    <ellipse cx="450" cy="240" rx="410" ry="220" fill="url(#cellbg)" stroke="#4a90b8" stroke-width="2.5" opacity="0.9"/>
+    <!-- ══════════════════════════════════════════
+         STRUCTURES — drawn first (back to front)
+         Cell centre: cx=450 cy=250
+         Cell:    rx=418 ry=228   → membrane at y=22(top) y=478(bottom)
+         Nucleus: rx=222 ry=178   → membrane at y=72(top) y=428(bottom)
+                                     x=228(left) x=672(right)
+         Nucleolus: cx=400 cy=235 rx=56 ry=45
+         ══════════════════════════════════════════ -->
 
-    <!-- ── CYTOPLASM LABEL (top-left) ── -->
-    <text x="58" y="90" fill="#4a90b8" font-size="16" font-family="Caveat, cursive" font-weight="600">cytoplasm</text>
-    <line x1="110" y1="96" x2="160" y2="130" stroke="#4a90b8" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.7"/>
+    <!-- Cell body -->
+    <ellipse cx="450" cy="250" rx="418" ry="228" fill="url(#cellbg2)"/>
+    <!-- Cell MEMBRANE — the blue ring -->
+    <ellipse cx="450" cy="250" rx="418" ry="228" fill="none" stroke="#4a90b8" stroke-width="2.5"/>
 
-    <!-- ── MITOCHONDRIA (left side of cytoplasm) ── -->
-    <g opacity="0.9">
-      <!-- mito 1 -->
-      <ellipse cx="130" cy="200" rx="34" ry="16" fill="none" stroke="#e08040" stroke-width="2.5" transform="rotate(-15,130,200)"/>
-      <path d="M110,196 Q120,185 122,196 Q122,207 110,200" fill="none" stroke="#e08040" stroke-width="2" transform="rotate(-15,130,200)"/>
-      <!-- mito 2 -->
-      <ellipse cx="98" cy="270" rx="30" ry="14" fill="none" stroke="#e08040" stroke-width="2.5" transform="rotate(8,98,270)"/>
-      <path d="M80,267 Q89,257 91,267 Q91,277 80,270" fill="none" stroke="#e08040" stroke-width="2" transform="rotate(8,98,270)"/>
-      <!-- mito 3 -->
-      <ellipse cx="155" cy="330" rx="28" ry="13" fill="none" stroke="#e08040" stroke-width="2.5" transform="rotate(-5,155,330)"/>
-      <path d="M139,327 Q147,318 149,327 Q149,336 139,330" fill="none" stroke="#e08040" stroke-width="2" transform="rotate(-5,155,330)"/>
+    <!-- Mitochondria — 3 ovals in LEFT cytoplasm (between cell wall and nucleus left edge ~228) -->
+    <!-- mito 1: upper left cytoplasm -->
+    <g transform="rotate(-20, 148, 168)">
+      <ellipse cx="148" cy="168" rx="36" ry="15" fill="none" stroke="#e08040" stroke-width="2.5"/>
+      <path d="M127,164 Q136,154 138,164 Q138,174 127,168" fill="none" stroke="#e08040" stroke-width="2"/>
     </g>
-    <!-- Mito label -->
-    <line x1="185" y1="330" x2="260" y2="370" stroke="#e08040" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.8"/>
-    <text x="50" y="390" fill="#e08040" font-size="17" font-family="Caveat, cursive" font-weight="600">mitochondria</text>
-    <text x="50" y="410" fill="#e08040" font-size="13" font-family="Inter, sans-serif" opacity="0.75">(AMA target · AC-21)</text>
-
-    <!-- ── NUCLEUS ── -->
-    <ellipse cx="450" cy="235" rx="230" ry="185" fill="url(#nucleusbg)" stroke="#6ab0e0" stroke-width="2.5"/>
-
-    <!-- Nuclear envelope label (top right of nucleus) -->
-    <line x1="590" y1="95" x2="560" y2="128" stroke="#6ab0e0" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.8"/>
-    <text x="596" y="88" fill="#6ab0e0" font-size="17" font-family="Caveat, cursive" font-weight="600">nuclear envelope</text>
-    <text x="596" y="106" fill="#6ab0e0" font-size="13" font-family="Inter, sans-serif" opacity="0.75">(lamins · AC-11/12)</text>
-
-    <!-- ── CHROMATIN DOTS (nucleoplasm) ── -->
-    <g fill="#4a7db5" opacity="0.8">
-      <circle cx="370" cy="170" r="5.5"/>
-      <circle cx="410" cy="158" r="4.5"/>
-      <circle cx="455" cy="165" r="5.5"/>
-      <circle cx="498" cy="172" r="4.5"/>
-      <circle cx="530" cy="162" r="5"/>
-      <circle cx="360" cy="210" r="4.5"/>
-      <circle cx="510" cy="205" r="5"/>
-      <circle cx="545" cy="215" r="4.5"/>
-      <circle cx="355" cy="285" r="5"/>
-      <circle cx="390" cy="300" r="4.5"/>
-      <circle cx="530" cy="285" r="5.5"/>
-      <circle cx="560" cy="295" r="4.5"/>
-      <circle cx="370" cy="330" r="4.5"/>
-      <circle cx="520" cy="325" r="5"/>
+    <!-- mito 2: mid-left cytoplasm -->
+    <g transform="rotate(10, 120, 258)">
+      <ellipse cx="120" cy="258" rx="32" ry="14" fill="none" stroke="#e08040" stroke-width="2.5"/>
+      <path d="M101,255 Q109,246 111,255 Q111,264 101,258" fill="none" stroke="#e08040" stroke-width="2"/>
     </g>
-    <!-- Chromatin label -->
-    <line x1="545" y1="215" x2="700" y2="190" stroke="#4a7db5" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.8"/>
-    <text x="706" y="185" fill="#6ea8e0" font-size="17" font-family="Caveat, cursive" font-weight="600">nucleoplasm / chromatin</text>
-    <text x="706" y="203" fill="#6ea8e0" font-size="13" font-family="Inter, sans-serif" opacity="0.75">(dsDNA · histones · Sm · RNP)</text>
-
-    <!-- ── NUCLEOLUS ── -->
-    <ellipse cx="430" cy="235" rx="62" ry="50" fill="url(#nucbg)" stroke="#a0d0f0" stroke-width="2.5"/>
-    <!-- small secondary nucleolus -->
-    <ellipse cx="503" cy="265" rx="30" ry="24" fill="#0e2440" stroke="#7ab8e0" stroke-width="1.8" opacity="0.85"/>
-    <!-- Nucleolus label -->
-    <line x1="368" y1="235" x2="260" y2="215" stroke="#a0d0f0" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.8"/>
-    <text x="80" y="210" fill="#a0d0f0" font-size="17" font-family="Caveat, cursive" font-weight="600">nucleolus</text>
-    <text x="80" y="228" fill="#a0d0f0" font-size="13" font-family="Inter, sans-serif" opacity="0.75">(RNA Pol I · fibrillarin · PM-Scl)</text>
-
-    <!-- ── CENTROMERE DOTS ── -->
-    <g fill="#c084e0" opacity="0.95">
-      <circle cx="460" cy="285" r="6.5"/>
-      <circle cx="478" cy="300" r="6"/>
-      <circle cx="445" cy="308" r="6.5"/>
-      <circle cx="463" cy="322" r="6"/>
-      <circle cx="480" cy="315" r="6.5"/>
+    <!-- mito 3: lower-left cytoplasm -->
+    <g transform="rotate(-8, 165, 346)">
+      <ellipse cx="165" cy="346" rx="34" ry="14" fill="none" stroke="#e08040" stroke-width="2.5"/>
+      <path d="M146,343 Q154,334 156,343 Q156,352 146,346" fill="none" stroke="#e08040" stroke-width="2"/>
     </g>
-    <!-- Centromere label -->
-    <line x1="483" y1="320" x2="610" y2="370" stroke="#c084e0" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.8"/>
-    <text x="616" y="365" fill="#c084e0" font-size="17" font-family="Caveat, cursive" font-weight="600">centromeres</text>
-    <text x="616" y="383" fill="#c084e0" font-size="13" font-family="Inter, sans-serif" opacity="0.75">(CENP-A/B/C · AC-3)</text>
 
-    <!-- ── CAPTION ── -->
-    <text x="450" y="466" fill="#556" font-size="13" font-family="Inter, sans-serif" text-anchor="middle">Schematic · interphase HEp-2 cell · not to scale</text>
+    <!-- Nucleus body -->
+    <ellipse cx="450" cy="250" rx="222" ry="178" fill="url(#nucleusbg2)"/>
+    <!-- Nucleus MEMBRANE — the inner blue ring (nuclear envelope) -->
+    <ellipse cx="450" cy="250" rx="222" ry="178" fill="none" stroke="#6ab0e0" stroke-width="2.5"/>
+
+    <!-- Chromatin dots — scattered INSIDE nucleus, OUTSIDE nucleolus -->
+    <!-- Top area of nucleus -->
+    <circle cx="390" cy="152" r="5" fill="#4a7db5" opacity="0.82"/>
+    <circle cx="420" cy="140" r="4" fill="#4a7db5" opacity="0.75"/>
+    <circle cx="455" cy="148" r="5.5" fill="#4a7db5" opacity="0.82"/>
+    <circle cx="490" cy="143" r="4" fill="#4a7db5" opacity="0.75"/>
+    <circle cx="520" cy="155" r="5" fill="#4a7db5" opacity="0.82"/>
+    <!-- Right area -->
+    <circle cx="558" cy="195" r="4.5" fill="#4a7db5" opacity="0.75"/>
+    <circle cx="572" cy="230" r="5" fill="#4a7db5" opacity="0.82"/>
+    <circle cx="565" cy="265" r="4" fill="#4a7db5" opacity="0.75"/>
+    <!-- Bottom area -->
+    <circle cx="510" cy="330" r="5" fill="#4a7db5" opacity="0.82"/>
+    <circle cx="470" cy="345" r="4" fill="#4a7db5" opacity="0.75"/>
+    <circle cx="430" cy="340" r="5" fill="#4a7db5" opacity="0.82"/>
+    <circle cx="385" cy="332" r="4" fill="#4a7db5" opacity="0.75"/>
+    <circle cx="352" cy="308" r="5" fill="#4a7db5" opacity="0.82"/>
+    <circle cx="340" cy="265" r="4" fill="#4a7db5" opacity="0.75"/>
+    <circle cx="345" cy="228" r="5" fill="#4a7db5" opacity="0.82"/>
+
+    <!-- NUCLEOLUS — the bright inner oval -->
+    <ellipse cx="400" cy="235" rx="56" ry="45" fill="url(#nuclbg2)" stroke="#a0d0f0" stroke-width="2.5"/>
+
+    <!-- Centromere dots — clustered group in lower-right of nucleus -->
+    <circle cx="530" cy="295" r="7" fill="#c084e0" opacity="0.95"/>
+    <circle cx="548" cy="308" r="6.5" fill="#c084e0" opacity="0.95"/>
+    <circle cx="516" cy="312" r="7" fill="#c084e0" opacity="0.95"/>
+    <circle cx="534" cy="324" r="6.5" fill="#c084e0" opacity="0.95"/>
+    <circle cx="550" cy="322" r="7" fill="#c084e0" opacity="0.95"/>
+
+    <!-- ══════════════════════════════════════════
+         LABELS — each with a leader line that
+         starts at the label text edge and ends
+         exactly ON the structure it describes
+         ══════════════════════════════════════════ -->
+
+    <!-- 1. CYTOPLASM — label in top-left cytoplasm gap, no leader needed -->
+    <text x="52" y="118" fill="#5ba3cc" font-size="17" font-family="Caveat, cursive" font-weight="600" opacity="0.9">cytoplasm</text>
+
+    <!-- 2. NUCLEAR ENVELOPE — label top-right, leader → touches nucleus ring
+         Nucleus ring upper-right at ~θ=-50° from centre:
+         x = 450 + 222*cos(-50°) = 450+143 = 593,  y = 250 + 178*sin(-50°) = 250-136 = 114
+         So leader goes from label area → (593,114) on the ring -->
+    <text x="618" y="88" fill="#6ab0e0" font-size="17" font-family="Caveat, cursive" font-weight="600">nuclear envelope</text>
+    <text x="618" y="107" fill="#6ab0e0" font-size="13" font-family="Inter, sans-serif" opacity="0.72">(lamins · AC-11/12)</text>
+    <!-- leader: from (618,112) → (593,114) — touches the nucleus ring -->
+    <line x1="614" y1="100" x2="596" y2="114" stroke="#6ab0e0" stroke-width="1.8" stroke-dasharray="5,4" opacity="0.85"/>
+    <circle cx="593" cy="114" r="3.5" fill="#6ab0e0" opacity="0.9"/>
+
+    <!-- 3. NUCLEOPLASM / CHROMATIN — label top-right, leader → chromatin dot at (558,195) -->
+    <text x="618" y="178" fill="#6ea8e0" font-size="17" font-family="Caveat, cursive" font-weight="600">nucleoplasm</text>
+    <text x="618" y="197" fill="#6ea8e0" font-size="17" font-family="Caveat, cursive" font-weight="600">/ chromatin</text>
+    <text x="618" y="215" fill="#6ea8e0" font-size="13" font-family="Inter, sans-serif" opacity="0.72">(dsDNA · histones · Sm · RNP)</text>
+    <!-- leader: from (618,190) → chromatin dot at (572,230) -->
+    <line x1="616" y1="192" x2="576" y2="230" stroke="#6ea8e0" stroke-width="1.8" stroke-dasharray="5,4" opacity="0.85"/>
+    <circle cx="572" cy="230" r="3.5" fill="#4a7db5" opacity="0.9"/>
+
+    <!-- 4. NUCLEOLUS — label bottom-left, leader → left edge of nucleolus at (344,235) -->
+    <text x="58" y="430" fill="#a0d0f0" font-size="17" font-family="Caveat, cursive" font-weight="600">nucleolus</text>
+    <text x="58" y="449" fill="#a0d0f0" font-size="13" font-family="Inter, sans-serif" opacity="0.72">(RNA Pol I · fibrillarin · PM-Scl)</text>
+    <!-- leader: goes up from label → bottom of nucleolus at (400,280) -->
+    <line x1="180" y1="420" x2="400" y2="282" stroke="#a0d0f0" stroke-width="1.8" stroke-dasharray="5,4" opacity="0.85"/>
+    <circle cx="400" cy="280" r="3.5" fill="#a0d0f0" opacity="0.9"/>
+
+    <!-- 5. CENTROMERES — label bottom-right, leader → centromere dot cluster at (534,324) -->
+    <text x="618" y="368" fill="#c084e0" font-size="17" font-family="Caveat, cursive" font-weight="600">centromeres</text>
+    <text x="618" y="387" fill="#c084e0" font-size="13" font-family="Inter, sans-serif" opacity="0.72">(CENP-A/B/C · AC-3)</text>
+    <!-- leader: from (616,375) → centromere cluster at (550,322) -->
+    <line x1="616" y1="375" x2="556" y2="323" stroke="#c084e0" stroke-width="1.8" stroke-dasharray="5,4" opacity="0.85"/>
+    <circle cx="550" cy="322" r="3.5" fill="#c084e0" opacity="0.9"/>
+
+    <!-- 6. MITOCHONDRIA — label left-centre, leader → mito 2 centre ~(120,258) -->
+    <text x="30" y="218" fill="#e08040" font-size="17" font-family="Caveat, cursive" font-weight="600">mitochondria</text>
+    <text x="30" y="237" fill="#e08040" font-size="13" font-family="Inter, sans-serif" opacity="0.72">(AMA target · AC-21)</text>
+    <!-- leader: from right of label → mito 2 body -->
+    <line x1="170" y1="228" x2="135" y2="255" stroke="#e08040" stroke-width="1.8" stroke-dasharray="5,4" opacity="0.85"/>
+    <circle cx="131" cy="257" r="3.5" fill="#e08040" opacity="0.9"/>
+
+    <!-- Caption -->
+    <text x="450" y="488" fill="#445" font-size="13" font-family="Inter, sans-serif" text-anchor="middle" opacity="0.7">Schematic · interphase HEp-2 cell · not to scale</text>
   </svg>
 </div>
 
