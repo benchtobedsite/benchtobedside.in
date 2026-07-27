@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>World Hepatitis Day 2026: Let's Break It Down | benchtobedside.in</title>
+<meta name="description" content="An interactive evidence-based review for World Hepatitis Day 2026 — quiz yourself, explore the HBV panel, bust myths, and test your clinical decisions."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#181815;--ink-2:#3a3a35;--ink-3:#6b6b63;
+  --rule:#e4e3de;--bg:#fafaf8;--card-bg:#f4f3ee;
+  --nav-bg:#16160f;--nav-text:#e8e7df;--nav-sub:#9b9a91;
+  --hcv:#c05621;--hbv:#1a5a8a;--diag:#2d6a4f;
+  --accent:#b34a00;--link:#1a5a8a;
+  --warn-bg:#fef9ec;--warn-bdr:#d4a017;
+  --green:#166534;--red:#b91c1c;--amber:#92400e;
+  --green-bg:#f0fdf4;--red-bg:#fef2f2;--amber-bg:#fffbeb;
+}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
+
+/* PROGRESS BAR */
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--hbv),var(--hcv));width:0%;z-index:200;transition:width .1s linear}
+
+/* NAV */
+nav{background:var(--nav-bg);position:sticky;top:0;z-index:50;border-bottom:1px solid #2a2a20}
+.nav-inner{max-width:1080px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;gap:2rem;height:54px}
+.nav-brand{color:var(--nav-text);text-decoration:none;font-weight:700;font-size:.97rem;letter-spacing:-.01em;white-space:nowrap;flex-shrink:0}
+.nav-brand span{color:var(--nav-sub);font-weight:400;font-size:.78rem;margin-left:.4rem}
+.nav-links{display:flex;gap:1.5rem;list-style:none;margin-left:auto}
+.nav-links a{color:var(--nav-sub);text-decoration:none;font-size:.83rem;font-weight:500;transition:color .15s}
+.nav-links a:hover{color:var(--nav-text)}
+.nav-links .sub a{color:#fff;background:var(--accent);padding:.28rem .75rem;border-radius:4px;font-size:.79rem}
+
+/* LAYOUT */
+main{max-width:740px;margin:0 auto;padding:0 1.5rem 5rem}
+
+/* BREADCRUMB */
+.breadcrumb{font-size:.78rem;color:var(--ink-3);padding:1.5rem 0 1rem;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
+.breadcrumb a{color:var(--link);text-decoration:none}
+
+/* EYEBROW */
+.eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin-bottom:1.25rem}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:.2rem .6rem;border-radius:3px;background:#f0ede4;color:#4a4a40}
+.tag.hbv{background:#e8f1f8;color:var(--hbv)}
+.tag.hcv{background:#fdf0e6;color:var(--hcv)}
+.tag.diag{background:#e9f5ef;color:var(--diag)}
+.tag.whd{background:#fdf0e6;color:#8b4200}
+.esep{color:var(--rule);font-size:.9rem}
+.emeta{font-size:.8rem;color:var(--ink-3)}
+
+/* HERO TITLE */
+h1.title{font-family:'Lora',Georgia,serif;font-size:2.2rem;line-height:1.2;font-weight:600;color:var(--ink);letter-spacing:-.02em;margin-bottom:.9rem}
+h1.title em{font-style:italic;color:var(--accent)}
+.deck{font-size:1.08rem;color:var(--ink-2);line-height:1.55;margin-bottom:1.75rem;font-family:'Lora',Georgia,serif;font-style:italic}
+
+/* BYLINE */
+.byline{display:flex;align-items:center;gap:.85rem;padding:1.1rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:2.5rem}
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--hbv);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0}
+.byline-name{font-weight:600;font-size:.88rem}
+.byline-role{font-size:.77rem;color:var(--ink-3);margin-top:.1rem}
+.byline-date{margin-left:auto;font-size:.77rem;color:var(--ink-3);flex-shrink:0}
+
+/* PROSE */
+.prose p{margin-bottom:1.3rem;font-size:1rem}
+.prose h2{font-family:'Lora',Georgia,serif;font-size:1.42rem;font-weight:600;letter-spacing:-.015em;color:var(--ink);margin:2.8rem 0 .9rem;line-height:1.3}
+.prose h2 .emoji{margin-right:.4rem}
+.prose strong{font-weight:700}
+.prose ul{padding-left:1.4rem;margin-bottom:1.3rem}
+.prose ul li{margin-bottom:.45rem}
+.rule{border:none;border-top:1px solid var(--rule);margin:2.5rem 0}
+sup.r{font-size:.65rem;color:var(--link);font-weight:700;vertical-align:super;line-height:0}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ANIMATED STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2rem 0}
+.stat-card{border:1px solid var(--rule);border-radius:12px;padding:1.25rem 1rem;text-align:center;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.stat-num{font-family:'Lora',Georgia,serif;font-size:2.1rem;font-weight:600;line-height:1.1;color:var(--ink)}
+.stat-unit{font-size:1rem;color:var(--ink-2)}
+.stat-label{font-size:.7rem;color:var(--ink-3);margin-top:.35rem;text-transform:uppercase;letter-spacing:.04em;font-weight:500}
+
+/* QUIZ */
+.quiz-wrap{background:var(--card-bg);border-radius:12px;padding:2rem;margin:2.5rem 0;border:1px solid var(--rule);border-top:3px solid var(--accent)}
+.quiz-intro{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem}
+.quiz-icon{font-size:1.8rem}
+.quiz-intro-text h3{font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:.2rem}
+.quiz-intro-text p{font-size:.83rem;color:var(--ink-3);line-height:1.4}
+.q-progress{display:flex;gap:.4rem;margin-bottom:1.5rem}
+.q-dot{width:8px;height:8px;border-radius:50%;background:var(--rule);border:1px solid #ccc;transition:background .3s}
+.q-dot.done{background:var(--hbv);border-color:var(--hbv)}
+.q-dot.active{background:var(--accent);border-color:var(--accent)}
+.q-text{font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:.3rem;line-height:1.4}
+.q-context{font-size:.78rem;color:var(--ink-3);margin-bottom:1rem;font-style:italic}
+.q-opts{display:grid;gap:.5rem}
+.q-opt{background:#fff;border:1px solid var(--rule);border-radius:8px;padding:.7rem 1rem;color:var(--ink-2);font-size:.87rem;cursor:pointer;text-align:left;transition:all .15s;line-height:1.4}
+.q-opt:hover:not(:disabled){background:var(--card-bg);border-color:var(--hbv);color:var(--ink)}
+.q-opt.correct{background:#14532d;border-color:#22c55e;color:#dcfce7}
+.q-opt.wrong{background:#450a0a;border-color:#ef4444;color:#fee2e2}
+.q-opt.reveal-correct{background:#14532d;border-color:#22c55e;color:#dcfce7}
+.q-opt:disabled{cursor:not-allowed}
+.q-explain{margin-top:1rem;background:var(--warn-bg);border-left:3px solid var(--warn-bdr);border-radius:0 6px 6px 0;padding:.75rem 1rem;font-size:.82rem;color:var(--ink-2);line-height:1.5;display:none}
+.q-explain.show{display:block}
+.q-next{margin-top:1rem;background:var(--accent);color:#fff;border:none;border-radius:7px;padding:.6rem 1.2rem;font-size:.85rem;font-weight:600;cursor:pointer;transition:background .15s;display:none}
+.q-next.show{display:inline-flex;align-items:center;gap:.4rem}
+.q-next:hover{background:#963f00}
+.quiz-score{text-align:center;padding:1rem 0;display:none}
+.quiz-score h3{font-size:1.5rem;font-weight:800;color:var(--ink);margin-bottom:.5rem}
+.quiz-score .score-num{font-size:3rem;font-weight:800;font-family:'Lora',Georgia,serif}
+.score-msg{font-size:.88rem;color:var(--ink-3);margin-top:.5rem}
+.quiz-restart{margin-top:1.25rem;background:transparent;border:1px solid var(--rule);color:var(--ink-3);border-radius:7px;padding:.5rem 1rem;font-size:.82rem;cursor:pointer;transition:all .15s;font-family:inherit}
+.quiz-restart:hover{border-color:var(--ink-3);color:var(--ink)}
+
+/* CARE CASCADE */
+.cascade-wrap{margin:2rem 0}
+.cascade-row{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding-bottom:.5rem}
+.cs{flex:1;min-width:80px;cursor:pointer;border:2px solid var(--rule);border-right:none;padding:.7rem .5rem;text-align:center;transition:all .2s;background:#fff;position:relative}
+.cs:first-child{border-radius:8px 0 0 8px}
+.cs:last-child{border-radius:0 8px 8px 0;border-right:2px solid var(--rule)}
+.cs:hover,.cs.active{border-color:var(--hbv);background:#e8f1f8;z-index:1}
+.cs-icon{font-size:1.3rem;display:block;margin-bottom:.25rem}
+.cs-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-2)}
+.cs-pct{font-size:.65rem;font-weight:700;margin-top:.2rem}
+.cs.gap .cs-pct{color:var(--red)}
+.cs.gap{border-color:#fca5a5;background:#fef2f2}
+.cs.gap:hover,.cs.gap.active{border-color:var(--red);background:#fee2e2}
+.cs-detail{display:none;margin-top:.75rem;background:#fff;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem;font-size:.85rem;line-height:1.55;color:var(--ink-2)}
+.cs-detail.open{display:block}
+.cs-detail strong{color:var(--ink)}
+.cs-detail .hint{font-size:.78rem;color:var(--ink-3);margin-top:.4rem;font-style:italic}
+
+/* MYTHS FLIP CARDS */
+.myths-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1.5rem 0}
+.flip-card{height:160px;cursor:pointer;perspective:1000px}
+.flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.flip-card.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{position:absolute;inset:0;border-radius:10px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;text-align:center}
+.flip-front{background:#fff;border:2px solid var(--rule);color:var(--ink)}
+.flip-front .myth-label{font-size:.65rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem}
+.flip-front .myth-text{font-size:.88rem;font-weight:600;line-height:1.35}
+.flip-front .myth-hint{font-size:.68rem;color:var(--ink-3);margin-top:.5rem}
+.flip-back{transform:rotateY(180deg);border:2px solid transparent}
+.flip-back.myth-false{background:#fef2f2;border-color:#fca5a5;color:var(--red)}
+.flip-back.myth-nuanced{background:#fffbeb;border-color:#fcd34d;color:var(--amber)}
+.flip-back .verdict{font-size:1.3rem;font-weight:800;letter-spacing:.05em;margin-bottom:.4rem}
+.flip-back .verdict-text{font-size:.8rem;line-height:1.35;font-weight:500}
+
+/* HBV MARKER EXPLORER */
+.hbv-explorer{border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin:1.5rem 0;background:#fff}
+.hbv-explorer-header{background:var(--hbv);padding:.85rem 1.2rem;display:flex;justify-content:space-between;align-items:center}
+.hbv-explorer-header span{font-weight:700;font-size:.8rem;letter-spacing:.03em;text-transform:uppercase;color:#fff}
+.hbv-explorer-header small{font-size:.7rem;color:rgba(255,255,255,.7)}
+.marker-row{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--rule)}
+.marker-row:last-child{border-bottom:none}
+.marker-btn{padding:.75rem .5rem;text-align:center;cursor:pointer;border-right:1px solid var(--rule);border:none;background:transparent;transition:background .15s;font-family:inherit}
+.marker-btn:last-child{border-right:none}
+.marker-btn:hover{background:var(--card-bg)}
+.marker-btn.active{background:#e8f1f8}
+.marker-name{font-weight:700;font-size:.82rem;color:var(--hbv);display:block}
+.marker-sub{font-size:.65rem;color:var(--ink-3);margin-top:.1rem;display:block}
+.marker-detail{padding:1.1rem 1.2rem;background:var(--warn-bg);border-top:1px solid var(--warn-bdr);min-height:100px;display:none}
+.marker-detail.open{display:block}
+.marker-detail h4{font-size:.82rem;font-weight:700;color:var(--ink);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.04em}
+.marker-detail p{font-size:.87rem;line-height:1.55;color:var(--ink-2);margin-bottom:.4rem}
+.marker-detail .status-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem}
+.m-status{font-size:.72rem;font-weight:600;padding:.2rem .55rem;border-radius:4px}
+.m-status.pos{background:#dcfce7;color:#14532d}
+.m-status.neg{background:#fee2e2;color:#7f1d1d}
+.m-status.both{background:#fef9c3;color:#713f12}
+
+/* SCENARIO ACCORDION */
+.scenario{border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin-bottom:1rem;background:#fff}
+.scenario-q{padding:1rem 1.2rem;cursor:pointer;display:flex;align-items:flex-start;gap:.85rem;transition:background .15s;border:none;width:100%;text-align:left;font-family:inherit;background:transparent}
+.scenario-q:hover{background:var(--card-bg)}
+.scenario-icon{font-size:1.3rem;flex-shrink:0;margin-top:.05rem}
+.scenario-title{font-weight:700;font-size:.92rem;color:var(--ink);margin-bottom:.2rem}
+.scenario-sub{font-size:.8rem;color:var(--ink-3)}
+.scenario-chevron{margin-left:auto;color:var(--ink-3);font-size:1.1rem;transition:transform .3s;flex-shrink:0}
+.scenario-q.open .scenario-chevron{transform:rotate(180deg)}
+.scenario-report{background:var(--card-bg);padding:.9rem 1.2rem;border-top:1px solid var(--rule);display:none}
+.scenario-report.open{display:block}
+.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:.25rem;margin-bottom:.75rem}
+.report-row{display:contents}
+.report-row .rk{font-size:.78rem;color:var(--ink-3);font-weight:500;padding:.3rem .5rem;background:var(--card-bg)}
+.report-row .rv{font-size:.82rem;font-weight:700;padding:.3rem .5rem}
+.rv.r{color:var(--red)}
+.rv.g{color:var(--green)}
+.rv.o{color:var(--amber)}
+.scenario-q-inner{font-size:.88rem;font-weight:700;color:var(--ink);margin:.75rem 0 .5rem;padding:.5rem .75rem;background:#fff;border-radius:6px;border:1px dashed var(--rule)}
+.reveal-btn{background:var(--hbv);color:#fff;border:none;border-radius:7px;padding:.5rem 1rem;font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s;display:inline-flex;align-items:center;gap:.4rem}
+.reveal-btn:hover{background:#154d7a}
+.reveal-btn.revealed{background:var(--diag)}
+.scenario-answer{margin-top:.75rem;background:#fff;border:1px solid var(--rule);border-left:3px solid var(--green);border-radius:0 7px 7px 0;padding:.85rem 1rem;font-size:.85rem;line-height:1.55;color:var(--ink-2);display:none}
+.scenario-answer.show{display:block}
+.scenario-answer strong{color:var(--ink)}
+
+/* CALLOUT */
+.callout{background:var(--card-bg);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:1rem 1.25rem;margin:1.8rem 0;font-size:.93rem}
+.callout-label{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.callout p{margin-bottom:.5rem;font-size:.9rem}
+.callout p:last-child{margin-bottom:0}
+blockquote.pq{font-family:'Lora',Georgia,serif;font-style:italic;font-size:1.18rem;line-height:1.5;color:var(--ink-2);border-left:3px solid var(--accent);padding:.6rem 1.3rem;margin:2.2rem 0}
+
+/* TAKEAWAY */
+.takeaway-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:1.5rem 0}
+.tw-card{border-radius:9px;padding:.9rem 1rem;font-size:.85rem;line-height:1.45}
+.tw-card.hbv-tw{background:#e8f1f8;border:1px solid #bfdbf7}
+.tw-card.hcv-tw{background:#fdf0e6;border:1px solid #fbd5b8}
+.tw-card .tw-icon{font-size:1.1rem;margin-bottom:.35rem;display:block}
+.tw-card strong{color:var(--ink);display:block;margin-bottom:.2rem;font-size:.87rem}
+
+/* REFERENCES */
+.ref-section{margin-top:2.5rem}
+.ref-toggle{width:100%;background:none;border:1px solid var(--rule);border-radius:8px;padding:.75rem 1.1rem;font-family:inherit;font-size:.87rem;font-weight:600;color:var(--ink-2);cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background .15s}
+.ref-toggle:hover{background:var(--card-bg)}
+.ref-toggle-chev{transition:transform .3s;font-size:1rem}
+.ref-toggle.open .ref-toggle-chev{transform:rotate(180deg)}
+.ref-body{display:none;border:1px solid var(--rule);border-top:none;border-radius:0 0 8px 8px;padding:1rem 1.1rem}
+.ref-body.open{display:block}
+.ref-list{list-style:none;counter-reset:rc}
+.ref-list li{counter-increment:rc;display:grid;grid-template-columns:1.8rem 1fr;gap:.3rem;margin-bottom:.5rem;font-size:.75rem;color:var(--ink-2);line-height:1.5}
+.ref-list li::before{content:counter(rc)".";font-weight:700;color:var(--ink-3);padding-top:.05rem}
+.ref-list a{color:var(--link);text-decoration:none}
+.ref-list a:hover{text-decoration:underline}
+.ref-list em{font-style:italic}
+
+/* DISCLAIMER */
+.disclaimer{background:#fffbeb;border:1px solid #fcd34d;border-radius:6px;padding:.9rem 1.1rem;font-size:.8rem;color:#78350f;margin-top:2.5rem;line-height:1.55}
+
+/* NEWSLETTER */
+.newsletter{border:1px solid var(--rule);border-radius:8px;padding:2rem 1.75rem;text-align:center;margin:3rem 0 0;background:#fff}
+.newsletter h2{font-family:'Lora',Georgia,serif;font-size:1.5rem;font-weight:600;letter-spacing:-.015em;margin-bottom:.5rem;color:var(--ink)}
+.newsletter h2 em{color:var(--accent)}
+.newsletter p{font-size:.88rem;color:var(--ink-3);margin-bottom:1.2rem;line-height:1.5}
+.nl-btn{display:inline-block;background:var(--ink);color:#fff;padding:.65rem 1.5rem;border-radius:5px;text-decoration:none;font-weight:600;font-size:.87rem;transition:background .15s}
+.nl-btn:hover{background:var(--accent)}
+.nl-note{font-size:.72rem;color:var(--ink-3);margin-top:.75rem}
+
+/* FOOTER */
+footer{background:var(--nav-bg);color:var(--nav-sub);margin-top:4rem;padding:2.5rem 1.5rem 2rem}
+.footer-inner{max-width:1080px;margin:0 auto}
+.fbrand{color:var(--nav-text);font-weight:700;font-size:.95rem;margin-bottom:.35rem}
+.fdesc{font-size:.78rem;line-height:1.55;max-width:440px;margin-bottom:1.75rem}
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;border-top:1px solid #2a2a20;padding-top:1.5rem;margin-bottom:1.5rem}
+.fcol h4{color:var(--nav-text);font-size:.73rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.fcol ul{list-style:none}
+.fcol ul li{margin-bottom:.45rem}
+.fcol ul li a{color:var(--nav-sub);text-decoration:none;font-size:.8rem;transition:color .15s}
+.fcol ul li a:hover{color:var(--nav-text)}
+.fcopy{border-top:1px solid #2a2a20;padding-top:1.2rem;font-size:.75rem;color:#55554a}
+
+@media(max-width:640px){
+  h1.title{font-size:1.65rem}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .myths-grid{grid-template-columns:1fr}
+  .takeaway-grid{grid-template-columns:1fr}
+  .marker-row{grid-template-columns:repeat(2,1fr)}
+  .fgrid{grid-template-columns:1fr 1fr}
+  .nav-links li:not(.sub):not(:nth-last-child(-n+3)){display:none}
+  .byline-date{display:none}
+  .report-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="progress-bar" role="progressbar" aria-label="Reading progress"></div>
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="https://benchtobedside.in/">Bench→Bedside <span>benchtobedside.in · Dr. Deepika Chakraborty</span></a>
+    <ul class="nav-links">
+      <li><a href="https://benchtobedside.in/#articles">Articles</a></li>
+      <li><a href="https://benchtobedside.in/#ask">Q&A</a></li>
+      <li><a href="https://benchtobedside.in/#topics">Topics</a></li>
+      <li><a href="https://benchtobedside.in/#case">Case</a></li>
+      <li><a href="https://benchtobedside.in/#about">About</a></li>
+      <li class="sub"><a href="https://benchtobedside.in/#newsletter">Subscribe Free</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <nav class="breadcrumb"><a href="https://benchtobedside.in/">Home</a> <span>›</span> <a href="https://benchtobedside.in/#articles">Articles</a> <span>›</span> Hepatitis Diagnostics</nav>
+
+  <div class="eyebrow">
+    <span class="tag whd">World Hepatitis Day 2026</span>
+    <span class="esep">·</span>
+    <span class="tag hbv">HBV</span><span class="tag hcv">HCV</span><span class="tag diag">Stewardship</span>
+    <span class="esep">·</span>
+    <span class="emeta">28 July 2026 · 12 min · Interactive</span>
+  </div>
+
+  <h1 class="title">Hepatitis: <em>Let's Break It Down</em></h1>
+  <p class="deck">354 million people. 90% undiagnosed. Curative treatment sitting unused. Today we break down what's in the way — starting with a quick quiz to see where you stand.</p>
+
+  <div class="byline">
+    <div class="avatar">DC</div>
+    <div><div class="byline-name">Dr. Deepika Chakraborty</div><div class="byline-role">Senior Resident · Dept. of Microbiology · GIPMER, New Delhi</div></div>
+    <div class="byline-date">28 July 2026</div>
+  </div>
+
+  <div class="prose">
+    <p>World Hepatitis Day is observed on 28 July — the birthday of Dr. Baruch Blumberg, who discovered the hepatitis B surface antigen in 1967 and went on to develop the first vaccine against HBV. The WHO's 2026 theme, <strong>"Hepatitis: Let's Break It Down,"</strong> calls for dismantling the financial, social, and systemic barriers preventing millions from accessing prevention, diagnosis, treatment, and care.<sup class="r">1,2</sup></p>
+    <p>The tools to eliminate viral hepatitis exist. An effective HBV vaccine has been available since the 1980s. Direct-acting antivirals cure HCV in 8–12 weeks with &gt;95% success rates. And yet — approximately 89.7% of people with hepatitis B and 78.6% of those with hepatitis C remain undiagnosed.<sup class="r">13</sup> That gap does not require new science to close. It requires breaking down the barriers that sit between patients and the care they need.</p>
+    <p>Before we go further — <strong>let's see where you actually stand.</strong></p>
+  </div>
+
+  <!-- ═══════ QUIZ ═══════ -->
+  <div class="quiz-wrap reveal" id="quiz">
+    <div class="quiz-intro">
+      <div class="quiz-icon">🩺</div>
+      <div class="quiz-intro-text">
+        <h3>Quick Clinical Quiz — 4 Questions</h3>
+        <p>Real scenarios. Immediate feedback. No stakes — just your clinical instincts.</p>
+      </div>
+    </div>
+    <div class="q-progress" id="qprogress">
+      <div class="q-dot active" id="dot0"></div>
+      <div class="q-dot" id="dot1"></div>
+      <div class="q-dot" id="dot2"></div>
+      <div class="q-dot" id="dot3"></div>
+    </div>
+    <div id="question-area"></div>
+    <div class="quiz-score" id="quiz-score">
+      <div class="score-num" id="score-num"></div>
+      <h3 id="score-title"></h3>
+      <p class="score-msg" id="score-msg"></p>
+      <button class="quiz-restart" onclick="restartQuiz()">↺ Try again</button>
+    </div>
+  </div>
+
+  <!-- ═══════ GLOBAL BURDEN ═══════ -->
+  <div class="prose">
+    <h2><span class="emoji">🌍</span>The Numbers That Should Bother Everyone</h2>
+  </div>
+
+  <div class="stats-grid reveal">
+    <div class="stat-card">
+      <div class="stat-num"><span class="counter" data-target="295.9" data-suffix="M" data-decimal="1">0</span></div>
+      <div class="stat-label">People with chronic HBV (2019)<sup class="r">13</sup></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num"><span class="counter" data-target="57.8" data-suffix="M" data-decimal="1">0</span></div>
+      <div class="stat-label">People with chronic HCV (2019)<sup class="r">13</sup></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">&gt;<span class="counter" data-target="1.1" data-suffix="M" data-decimal="1">0</span></div>
+      <div class="stat-label">Deaths from viral hepatitis per year<sup class="r">2</sup></div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>Between 1990 and 2019, global HBV prevalence fell by 31.4% — vaccination working. But HBV mortality fell by only 26.7%, and in some regions it is rising.<sup class="r">1</sup> For HCV, paradoxically, mortality <em>increased</em> by 10% over the same period — despite curative treatment becoming available in 2014.<sup class="r">1</sup> In Africa, Western Africa alone recorded 33,603 HBV-related deaths in 2021; projections show a 42.5% increase in HBV deaths in Eastern Africa by 2030 without course correction.<sup class="r">3</sup></p>
+    <p>The Asia-Pacific region, carrying more than half of the global chronic hepatitis burden, saw HBV prevalence decline from 4.69% to 4.30% between 2015 and 2020 — but only 13% of chronic HBV infections were diagnosed, and treatment rates among those diagnosed were just 25%.<sup class="r">10</sup></p>
+    <blockquote class="pq">"The 2008 economic crisis had lasting negative impacts on hepatitis outcomes in Southern Europe. Healthcare investment, once withdrawn, does not easily recover — and the hepatitis burden it leaves behind is permanent."<sup class="r" style="font-style:normal">9</sup></blockquote>
+  </div>
+
+  <hr class="rule">
+
+  <!-- ═══════ CARE CASCADE ═══════ -->
+  <div class="prose">
+    <h2><span class="emoji">📉</span>The Care Cascade — Click Each Step</h2>
+    <p>The hepatitis care cascade runs from infection to cure. The largest single gap is right at the beginning — diagnosis. Click each step below to see what's happening there.<sup class="r">13,16</sup></p>
+  </div>
+
+  <div class="cascade-wrap reveal">
+    <div class="cascade-row" role="group" aria-label="Care cascade steps">
+      <div class="cs gap" onclick="showStep(0)" id="cs0"><span class="cs-icon">🦠</span><span class="cs-label">Infected</span><span class="cs-pct">100%</span></div>
+      <div class="cs gap" onclick="showStep(1)" id="cs1"><span class="cs-icon">🔬</span><span class="cs-label">Diagnosed</span><span class="cs-pct">~10–21%</span></div>
+      <div class="cs" onclick="showStep(2)" id="cs2"><span class="cs-icon">🏥</span><span class="cs-label">Linked</span><span class="cs-pct"> </span></div>
+      <div class="cs" onclick="showStep(3)" id="cs3"><span class="cs-icon">💊</span><span class="cs-label">Treated</span><span class="cs-pct"> </span></div>
+      <div class="cs" onclick="showStep(4)" id="cs4"><span class="cs-icon">📈</span><span class="cs-label">Response</span><span class="cs-pct"> </span></div>
+      <div class="cs" onclick="showStep(5)" id="cs5"><span class="cs-icon">✅</span><span class="cs-label">Follow-up</span><span class="cs-pct"> </span></div>
+    </div>
+    <div id="cascade-detail" class="cs-detail"></div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- ═══════ MYTHS ═══════ -->
+  <div class="prose">
+    <h2><span class="emoji">🃏</span>Myth or Reality? Flip the Cards</h2>
+    <p>Five statements clinicians say every week. Tap each card to find out if it holds up.</p>
+  </div>
+
+  <div class="myths-grid reveal">
+    <div class="flip-card" onclick="this.classList.toggle('flipped')" tabindex="0" role="button" aria-label="Flip card">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="myth-label">Myth or Reality?</span><span class="myth-text">"HBsAg is negative — no hepatitis B to worry about."</span><span class="myth-hint">Tap to reveal ↩</span></div>
+        <div class="flip-back myth-false"><div class="verdict">❌ MYTH</div><div class="verdict-text">Occult HBV: detectable HBV DNA despite HBsAg negativity. Anti-HBc reactive patients can reactivate fatally on immunosuppression.<sup class="r">17</sup></div></div>
+      </div>
+    </div>
+    <div class="flip-card" onclick="this.classList.toggle('flipped')" tabindex="0" role="button" aria-label="Flip card">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="myth-label">Myth or Reality?</span><span class="myth-text">"Anti-HCV positive = the patient has hepatitis C."</span><span class="myth-hint">Tap to reveal ↩</span></div>
+        <div class="flip-back myth-false"><div class="verdict">❌ MYTH</div><div class="verdict-text">Antibody persists after clearance. ~25–30% clear spontaneously. Reactive serology + no RNA = unknown status. Confirm with HCV RNA.<sup class="r">14</sup></div></div>
+      </div>
+    </div>
+    <div class="flip-card" onclick="this.classList.toggle('flipped')" tabindex="0" role="button" aria-label="Flip card">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="myth-label">Myth or Reality?</span><span class="myth-text">"LFTs are normal — safe to start rituximab."</span><span class="myth-hint">Tap to reveal ↩</span></div>
+        <div class="flip-back myth-false"><div class="verdict">❌ MYTH</div><div class="verdict-text">Chronic HBV, including occult infection, can coexist with completely normal transaminases. LFTs do not screen for HBV.<sup class="r">12,17</sup></div></div>
+      </div>
+    </div>
+    <div class="flip-card" onclick="this.classList.toggle('flipped')" tabindex="0" role="button" aria-label="Flip card">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="myth-label">Myth or Reality?</span><span class="myth-text">"Negative anti-HCV rules out hepatitis C."</span><span class="myth-hint">Tap to reveal ↩</span></div>
+        <div class="flip-back myth-false"><div class="verdict">❌ MYTH</div><div class="verdict-text">Antibody may be absent for 8–12 weeks post-exposure. In high-risk patients with acute hepatitis, order HCV RNA regardless of serology.<sup class="r">14</sup></div></div>
+      </div>
+    </div>
+    <div class="flip-card" onclick="this.classList.toggle('flipped')" tabindex="0" role="button" aria-label="Flip card">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="myth-label">Myth or Reality?</span><span class="myth-text">"HCV is incurable — management is supportive."</span><span class="myth-hint">Tap to reveal ↩</span></div>
+        <div class="flip-back myth-false"><div class="verdict">❌ MYTH</div><div class="verdict-text">Pan-genotypic DAAs (sofosbuvir/velpatasvir, glecaprevir/pibrentasvir) cure &gt;95% in 8–12 weeks. The barrier is diagnosis, not treatment.<sup class="r">18</sup></div></div>
+      </div>
+    </div>
+    <div class="flip-card" onclick="this.classList.toggle('flipped')" tabindex="0" role="button" aria-label="Flip card">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="myth-label">Myth or Reality?</span><span class="myth-text">"We don't have a vaccine for hepatitis C — nothing to prevent it."</span><span class="myth-hint">Tap to reveal ↩</span></div>
+        <div class="flip-back myth-nuanced"><div class="verdict">⚠️ PARTIAL</div><div class="verdict-text">No vaccine, but HCV prevention is well-established: needle/syringe exchange, opioid substitution therapy, blood safety screening.<sup class="r">18</sup></div></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- ═══════ HBV EXPLORER ═══════ -->
+  <div class="prose">
+    <h2><span class="emoji">🔬</span>Explore the HBV Serology Panel</h2>
+    <p>Click each marker to understand what it means — and what happens if you stop before ordering it.<sup class="r">14</sup></p>
+  </div>
+
+  <div class="hbv-explorer reveal">
+    <div class="hbv-explorer-header"><span>HBV Serological Markers</span><small>Click any marker to explore</small></div>
+    <div class="marker-row">
+      <button class="marker-btn" onclick="showMarker(0)" id="mb0"><span class="marker-name">HBsAg</span><span class="marker-sub">Surface Ag</span></button>
+      <button class="marker-btn" onclick="showMarker(1)" id="mb1"><span class="marker-name">Anti-HBs</span><span class="marker-sub">Surface Ab</span></button>
+      <button class="marker-btn" onclick="showMarker(2)" id="mb2"><span class="marker-name">Anti-HBc Total</span><span class="marker-sub">Core Ab</span></button>
+      <button class="marker-btn" onclick="showMarker(3)" id="mb3"><span class="marker-name">IgM Anti-HBc</span><span class="marker-sub">Acute marker</span></button>
+    </div>
+    <div class="marker-row">
+      <button class="marker-btn" onclick="showMarker(4)" id="mb4"><span class="marker-name">HBeAg</span><span class="marker-sub">e Antigen</span></button>
+      <button class="marker-btn" onclick="showMarker(5)" id="mb5"><span class="marker-name">Anti-HBe</span><span class="marker-sub">e Antibody</span></button>
+      <button class="marker-btn" onclick="showMarker(6)" id="mb6"><span class="marker-name">HBV DNA</span><span class="marker-sub">Viral load</span></button>
+      <button class="marker-btn" onclick="showMarker(7)" id="mb7"><span class="marker-name">HBsAg alone?</span><span class="marker-sub">⚠️ The trap</span></button>
+    </div>
+    <div class="marker-detail" id="marker-detail"></div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- ═══════ SCENARIOS ═══════ -->
+  <div class="prose">
+    <h2><span class="emoji">📋</span>You Receive This Report. What Now?</h2>
+    <p>Three real failure scenarios. Expand each one, look at the report, decide what you'd do — then reveal the answer.</p>
+  </div>
+
+  <div class="reveal">
+  <!-- Scenario 1 -->
+  <div class="scenario">
+    <button class="scenario-q" onclick="toggleScenario(this)">
+      <span class="scenario-icon">🔵</span>
+      <div><div class="scenario-title">Scenario A — Pre-biologics HBV screen</div><div class="scenario-sub">Rheumatology ward · RA patient starting rituximab in 10 days</div></div>
+      <span class="scenario-chevron">▾</span>
+    </button>
+    <div class="scenario-report">
+      <div style="font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.6rem">Laboratory Report</div>
+      <table style="width:100%;border-collapse:collapse;font-size:.84rem">
+        <tr><td style="padding:.3rem .5rem;background:var(--card-bg);color:var(--ink-3);font-size:.78rem;font-weight:500;width:50%">HBsAg</td><td style="padding:.3rem .5rem;font-weight:700;color:var(--green)">Non-Reactive</td></tr>
+        <tr><td style="padding:.3rem .5rem;background:var(--card-bg);color:var(--ink-3);font-size:.78rem;font-weight:500">Anti-HBs</td><td style="padding:.3rem .5rem;font-weight:700;color:var(--red)">Non-Reactive</td></tr>
+        <tr><td style="padding:.3rem .5rem;background:var(--card-bg);color:var(--ink-3);font-size:.78rem;font-weight:500">Anti-HBc Total</td><td style="padding:.3rem .5rem;font-weight:700;color:var(--red)">Reactive ⚠</td></tr>
+        <tr><td style="padding:.3rem .5rem;background:var(--card-bg);color:var(--ink-3);font-size:.78rem;font-weight:500">HBV DNA</td><td style="padding:.3rem .5rem;font-weight:700;color:var(--amber)">Not ordered</td></tr>
+      </table>
+      <div class="scenario-q-inner">🤔 The rheumatologist plans to proceed. HBsAg is negative — what's your call?</div>
+      <button class="reveal-btn" onclick="revealAnswer(this,'ans-a')">Reveal the answer ▾</button>
+      <div class="scenario-answer" id="ans-a">
+        <strong>🛑 Do not clear this patient for rituximab yet.</strong><br><br>
+        Anti-HBc reactive + HBsAg negative + Anti-HBs negative = isolated anti-HBc pattern. This is occult HBV territory. HBV DNA is <em>mandatory</em> before immunosuppression is started. If DNA is detectable — even at low level — prophylactic tenofovir or entecavir must be initiated before and continued during therapy.<sup class="r">14,17</sup><br><br>
+        Reactivation on rituximab in this pattern can cause fulminant hepatic failure. The anti-HBc test that could have caught this was already run. The DNA test that would confirm or exclude risk was not ordered.<br><br>
+        <strong>Lab action:</strong> Add reflexive comment — "Anti-HBc reactive: HBV DNA recommended before immunosuppression to exclude occult HBV."
+      </div>
+    </div>
+  </div>
+
+  <!-- Scenario 2 -->
+  <div class="scenario">
+    <button class="scenario-q" onclick="toggleScenario(this)">
+      <span class="scenario-icon">🟠</span>
+      <div><div class="scenario-title">Scenario B — Anti-HCV reactive, action not taken</div><div class="scenario-sub">Medicine OPD · Incidental finding on pre-operative workup</div></div>
+      <span class="scenario-chevron">▾</span>
+    </button>
+    <div class="scenario-report">
+      <div style="font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.6rem">Laboratory Report</div>
+      <table style="width:100%;border-collapse:collapse;font-size:.84rem">
+        <tr><td style="padding:.3rem .5rem;background:var(--card-bg);color:var(--ink-3);font-size:.78rem;font-weight:500;width:50%">Anti-HCV ELISA (Gen 4)</td><td style="padding:.3rem .5rem;font-weight:700;color:var(--red)">Reactive</td></tr>
+        <tr><td style="padding:.3rem .5rem;background:var(--card-bg);color:var(--ink-3);font-size:.78rem;font-weight:500">S/CO Ratio</td><td style="padding:.3rem .5rem;font-weight:700;color:var(--amber)">2.8</td></tr>
+        <tr><td style="padding:.3rem .5rem;background:var(--card-bg);color:var(--ink-3);font-size:.78rem;font-weight:500">HCV RNA</td><td style="padding:.3rem .5rem;font-weight:700;color:var(--amber)">Not ordered</td></tr>
+        <tr><td style="padding:.3rem .5rem;background:var(--card-bg);color:var(--ink-3);font-size:.78rem;font-weight:500">Patient plan</td><td style="padding:.3rem .5rem;font-weight:700;color:var(--red)">Surgery scheduled, discharged</td></tr>
+      </table>
+      <div class="scenario-q-inner">🤔 Report filed as "Hepatitis C positive." Patient discharged. Is this acceptable?</div>
+      <button class="reveal-btn" onclick="revealAnswer(this,'ans-b')">Reveal the answer ▾</button>
+      <div class="scenario-answer" id="ans-b">
+        <strong>❌ This is an incomplete result — and a missed opportunity.</strong><br><br>
+        Reactive anti-HCV ELISA cannot distinguish active infection from spontaneous clearance (~25–30% of exposed individuals), treated past infection, or false positive. An S/CO ratio of 2.8 is in the intermediate range — lower ratios have lower positive predictive value, especially in lower-prevalence populations.<sup class="r">14</sup><br><br>
+        HCV RNA is the only test that answers the clinical question: is this patient currently infected? Without it, the patient cannot be referred for treatment, cannot be reassured they are clear, and cannot be correctly classified for elimination data.<br><br>
+        <strong>Lab action:</strong> Reflexive comment on all reactive ELISA reports — "Confirmatory HCV RNA testing is required to determine active infection status. ELISA positivity alone is insufficient for clinical management."<br><br>
+        <strong>Good news:</strong> If RNA-positive, pan-genotypic DAAs offer &gt;95% cure in 8–12 weeks.<sup class="r">18</sup> This patient can be cured. The barrier is the RNA test that was not ordered.
+      </div>
+    </div>
+  </div>
+
+  <!-- Scenario 3 -->
+  <div class="scenario">
+    <button class="scenario-q" onclick="toggleScenario(this)">
+      <span class="scenario-icon">🔵</span>
+      <div><div class="scenario-title">Scenario C — Acute hepatitis, negative serology</div><div class="scenario-sub">Emergency · 26-year-old PWID, jaundice for 5 days, anti-HCV non-reactive</div></div>
+      <span class="scenario-chevron">▾</span>
+    </button>
+    <div class="scenario-report">
+      <div style="font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.6rem">Laboratory Report</div>
+      <table style="width:100%;border-collapse:collapse;font-size:.84rem">
+        <tr><td style="padding:.3rem .5rem;background:var(--card-bg);color:var(--ink-3);font-size:.78rem;font-weight:500;width:50%">Anti-HCV ELISA</td><td style="padding:.3rem .5rem;font-weight:700;color:var(--green)">Non-Reactive</td></tr>
+        <tr><td style="padding:.3rem .5rem;background:var(--card-bg);color:var(--ink-3);font-size:.78rem;font-weight:500">Estimated exposure</td><td style="padding:.3rem .5rem;font-weight:700">~4–5 weeks ago</td></tr>
+        <tr><td style="padding:.3rem .5rem;background:var(--card-bg);color:var(--ink-3);font-size:.78rem;font-weight:500">ALT</td><td style="padding:.3rem .5rem;font-weight:700;color:var(--red)">1,340 U/L</td></tr>
+        <tr><td style="padding:.3rem .5rem;background:var(--card-bg);color:var(--ink-3);font-size:.78rem;font-weight:500">Bilirubin</td><td style="padding:.3rem .5rem;font-weight:700;color:var(--red)">Elevated</td></tr>
+        <tr><td style="padding:.3rem .5rem;background:var(--card-bg);color:var(--ink-3);font-size:.78rem;font-weight:500">Plan</td><td style="padding:.3rem .5rem;font-weight:700;color:var(--amber)">Hepatitis C ruled out</td></tr>
+      </table>
+      <div class="scenario-q-inner">🤔 Anti-HCV is negative. The team wants to discharge. Do you agree?</div>
+      <button class="reveal-btn" onclick="revealAnswer(this,'ans-c')">Reveal the answer ▾</button>
+      <div class="scenario-answer" id="ans-c">
+        <strong>⚠️ Do not discharge without HCV RNA.</strong><br><br>
+        Anti-HCV antibodies take 4–10 weeks to appear after infection — sometimes longer in immunocompromised individuals. HCV RNA, by contrast, becomes detectable within 1–2 weeks of infection.<sup class="r">14</sup> This patient, with known high-risk exposure ~4–5 weeks ago and acute hepatitis, is squarely in the window period where RNA can be positive and ELISA negative.<br><br>
+        Calling HCV "ruled out" on the basis of a negative ELISA in this context is a diagnostic error.<br><br>
+        <strong>Order:</strong> HCV RNA (quantitative RT-PCR). If positive, this is acute HCV — treatment during the acute phase may prevent chronicity entirely. If negative, repeat at 12 weeks to confirm.<br><br>
+        <strong>Remember:</strong> ~75–85% of those exposed to HCV develop chronic infection without treatment.<sup class="r">11</sup> The window to intervene and prevent chronicity is now.
+      </div>
+    </div>
+  </div>
+  </div><!-- /reveal -->
+
+  <hr class="rule">
+
+  <!-- ═══════ BARRIERS SECTION ═══════ -->
+  <div class="prose">
+    <h2><span class="emoji">🧱</span>Breaking Down the Barriers: What the Theme Actually Means</h2>
+    <p>The WHO's 2026 theme is not metaphorical. There are identifiable, categorisable barriers preventing elimination — and they have documented solutions.<sup class="r">4</sup></p>
+    <p><strong>Financial barriers:</strong> cost of DAAs, molecular testing, clinic visits, and transport; lack of insurance; insufficient birth-dose vaccination funding in LMICs. Generic DAAs have transformed the picture in some settings — Egypt treated over 4 million HCV patients between 2014 and 2020 using affordable generics.<sup class="r">18</sup> But access remains deeply unequal.</p>
+    <p><strong>Stigma and social barriers:</strong> Hepatitis B and C carry stigma disproportionate to their transmission risk — linked in public perception to injection drug use and sexual behaviour. This leads to delayed testing, non-disclosure, and avoidance of healthcare. Transgender populations have pooled HCV prevalence of 9% and HBV prevalence of 11% globally — significantly higher than the general population — yet face consistent discrimination in healthcare settings that deters engagement.<sup class="r">5</sup></p>
+    <p><strong>Systemic barriers:</strong> Fragmented care, no national hepatitis strategy in many countries, specialist-only models, complex multi-step cascades. Decentralised, primary-care-integrated service delivery, task-shifting to non-specialists, and point-of-care molecular testing have shown concrete results in addressing these.<sup class="r">4</sup> The Xpert HCV Viral Load Fingerstick test (Cepheid) — results in approximately one hour from a fingerstick sample — increases treatment initiation in marginalised populations precisely because same-day diagnosis eliminates the return-visit dropout.<sup class="r">4</sup></p>
+    <p><strong>Health inequities:</strong> Migrants from conflict-affected regions face structural, financial, and societal barriers including fear of arrest and xenophobia.<sup class="r">4</sup> People who inject drugs account for a significant proportion of new HCV infections globally, yet face criminalisation and exclusion from healthcare services. Needle and syringe exchange programmes and opioid substitution therapy are proven prevention tools — coverage remains inadequate.<sup class="r">18</sup></p>
+  </div>
+
+  <hr class="rule">
+
+  <!-- ═══════ PREVENTION ═══════ -->
+  <div class="prose">
+    <h2><span class="emoji">💉</span>Prevention: What Works and What's Being Left Undone</h2>
+    <p>HBV vaccination is one of the most effective public health interventions in existence. Universal childhood vaccination programmes have dramatically reduced HBV prevalence where coverage is high.<sup class="r">21</sup> Yet global birth-dose coverage — the dose that must be given within 24 hours of delivery to prevent mother-to-child transmission — reached only 43% in 2019, with rates below 10% in many African countries.<sup class="r">2,16</sup></p>
+    <p>Infants infected perinatally have approximately a 90% chance of developing chronic HBV. Adults infected have less than 5% risk.<sup class="r">11</sup> The birth dose is not a routine vaccine — it is a narrow-window intervention that sits at the most critical moment of hepatitis B transmission. Missing it because of cold chain failures, home delivery, or underfunding is a preventable catastrophe repeated daily.</p>
+    <p>For MTCT prevention, HBsAg screening alone is insufficient. <strong>Pregnant women with HBV DNA &gt;200,000 IU/mL at delivery remain at high MTCT risk despite vaccination and HBIG.</strong> Tenofovir prophylaxis in the third trimester reduces this risk — but it can only be offered if HBV DNA is measured.<sup class="r">21</sup> The complete antenatal protocol runs: HBsAg → HBeAg → HBV DNA → decision on antiviral prophylaxis → birth-dose within 24h + HBIG → post-vaccination serology at 9–12 months.</p>
+    <p>For HCV, there is no vaccine. Prevention is through harm reduction (NSP, OST, supervised consumption) and blood safety (universal NAT screening of donations, mandatory donor deferral).<sup class="r">18</sup></p>
+  </div>
+
+  <hr class="rule">
+
+  <!-- ═══════ TREATMENT ═══════ -->
+  <div class="prose">
+    <h2><span class="emoji">💊</span>Treatment: One Has a Cure, One Doesn't — Yet</h2>
+    <p><strong>Hepatitis B:</strong> Current approved treatments — nucleos(t)ide analogues (entecavir, tenofovir TDF/TAF) and pegylated interferon-alpha — suppress HBV DNA but do not eliminate covalently closed circular DNA (cccDNA), the viral reservoir in hepatocyte nuclei. Most patients require indefinite NA therapy; discontinuation triggers virological relapse in the majority. Functional cure (sustained HBsAg loss) is the treatment goal but is achieved in fewer than 10% of NA-treated patients.<sup class="r">12</sup> Research into curative combinations — capsid assembly modulators, RNA interference therapies, therapeutic vaccines — is active but as yet no functional cure is routinely available.</p>
+    <p><strong>Hepatitis C:</strong> Pan-genotypic DAA regimens — sofosbuvir/velpatasvir and glecaprevir/pibrentasvir — achieve sustained virological response (SVR, i.e. virological cure) in &gt;95% of patients across all genotypes with 8–12 weeks of oral therapy and excellent tolerability.<sup class="r">18</sup> Between 2014 and 2023, 12.7 million patients received DAA treatment globally.<sup class="r">7</sup> SVR is associated with regression of liver fibrosis, reduced HCC risk, and improved survival.</p>
+    <p>The statement worth repeating: for hepatitis C, the elimination bottleneck is not the drug — it is the diagnostic step that never happened. Every undiagnosed HCV patient is sitting at the beginning of a pathway that ends in cure.</p>
+  </div>
+
+  <hr class="rule">
+
+  <!-- ═══════ TAKEAWAYS ═══════ -->
+  <div class="prose">
+    <h2><span class="emoji">📌</span>Key Takeaways — What You Can Do Tomorrow</h2>
+  </div>
+
+  <div class="takeaway-grid reveal">
+    <div class="tw-card hbv-tw"><span class="tw-icon">🔵</span><strong>Anti-HBc is not optional before immunosuppression</strong>HBsAg negative does not mean HBV free. Anti-HBc total must be part of every pre-biologic/pre-chemo screen.<sup class="r">14,17</sup></div>
+    <div class="tw-card hcv-tw"><span class="tw-icon">🟠</span><strong>Reactive anti-HCV = incomplete result, not a diagnosis</strong>RNA confirmation is the only way to distinguish active infection from cleared/treated/false positive.<sup class="r">14</sup></div>
+    <div class="tw-card hbv-tw"><span class="tw-icon">🔵</span><strong>IgM anti-HBc distinguishes acute from chronic flare</strong>This distinction changes management. Total anti-HBc alone misses it.<sup class="r">14</sup></div>
+    <div class="tw-card hcv-tw"><span class="tw-icon">🟠</span><strong>Window period: order RNA despite negative ELISA</strong>In high-risk acute hepatitis, HCV RNA becomes positive weeks before antibody.<sup class="r">14</sup></div>
+    <div class="tw-card hbv-tw"><span class="tw-icon">🔵</span><strong>Antenatal HBV needs DNA, not just HBsAg</strong>High viraemia predicts MTCT despite vaccination. Tenofovir in T3 closes this gap.<sup class="r">21</sup></div>
+    <div class="tw-card hcv-tw"><span class="tw-icon">🟠</span><strong>HCV is curable — help patients reach the RNA test</strong>The drug works. The failure point is the diagnostic step that does not happen.<sup class="r">18</sup></div>
+  </div>
+
+  <!-- REFERENCES -->
+  <div class="ref-section">
+    <button class="ref-toggle" onclick="this.classList.toggle('open');document.getElementById('ref-body').classList.toggle('open')">
+      <span>References (21)</span><span class="ref-toggle-chev">▾</span>
+    </button>
+    <div class="ref-body" id="ref-body">
+      <ol class="ref-list">
+        <li>Alvis-Guzman N et al. How Possible Is the Elimination of Viral Hepatitis? GBD 1990–2019. <em>Microorganisms.</em> 2024. doi:<a href="https://doi.org/10.20944/preprints202310.1139.v1" target="_blank">10.20944/preprints202310.1139.v1</a></li>
+        <li>Larkin HD. As Unexplained Hepatitis Spreads, WHO Urges Action. <em>JAMA.</em> 2022;328(3):234. doi:<a href="https://doi.org/10.1001/jama.2022.11420" target="_blank">10.1001/jama.2022.11420</a></li>
+        <li>Ou TY et al. Regional Mortality from Chronic Liver Diseases in African Countries, 1990–2021. <em>Open Forum Infect Dis.</em> 2025. doi:<a href="https://doi.org/10.1093/ofid/ofaf573" target="_blank">10.1093/ofid/ofaf573</a></li>
+        <li>Bruggmann P. Eliminating viral hepatitis B and C in times of war and increasing global refugee crisis. <em>Swiss Med Wkly.</em> 2023. doi:<a href="https://doi.org/10.57187/smw.2023.40058" target="_blank">10.57187/smw.2023.40058</a></li>
+        <li>Moradi Y. Prevalence of HCV and HBV in LGBT+ populations: systematic review. <em>Eur J Med Res.</em> 2022. doi:<a href="https://doi.org/10.1186/s40001-022-00677-0" target="_blank">10.1186/s40001-022-00677-0</a></li>
+        <li>Pourkarim M et al. Digital Marketing towards Elimination of Viral Hepatitis. <em>Pathogens.</em> 2022;11(6):626. doi:<a href="https://doi.org/10.3390/pathogens11060626" target="_blank">10.3390/pathogens11060626</a></li>
+        <li>Li M, Cao W, Xie Y. World Hepatitis Day 2025: Progress and Challenges. 2025;7(30):987–990. doi:<a href="https://doi.org/10.46234/ccdcw2025.167" target="_blank">10.46234/ccdcw2025.167</a></li>
+        <li>Cornberg M, Sandmann L. Screening und Prävention der chronischen Virushepatitis. <em>Dtsch Med Wochenschr.</em> 2025. doi:<a href="https://doi.org/10.1055/a-2532-6320" target="_blank">10.1055/a-2532-6320</a></li>
+        <li>Palladino C et al. Impact of 2008 economic crisis on hepatitis burden in Southern Europe. <em>BMC Public Health.</em> 2024. doi:<a href="https://doi.org/10.1186/s12889-024-18912-0" target="_blank">10.1186/s12889-024-18912-0</a></li>
+        <li>Le LV et al. Viral hepatitis B and C elimination in Asia-Pacific. <em>Liver Int.</em> doi:<a href="https://doi.org/10.1111/liv.15131" target="_blank">10.1111/liv.15131</a></li>
+        <li>Usuda D et al. Current perspectives of viral hepatitis. <em>World J Gastroenterol.</em> 2024;30(18):2402. doi:<a href="https://doi.org/10.3748/wjg.v30.i18.2402" target="_blank">10.3748/wjg.v30.i18.2402</a></li>
+        <li>Liu X et al. Pathogenesis, prevention, therapeutic advances in hepatitis B, C, D. <em>Virol J.</em> 2025. doi:<a href="https://doi.org/10.1186/s12985-025-02907-3" target="_blank">10.1186/s12985-025-02907-3</a></li>
+        <li>Cui F et al. Global reporting of progress towards elimination of HBV and HCV. WHO, 2024. doi:<a href="https://doi.org/10.60692/zms8w-h9z52" target="_blank">10.60692/zms8w-h9z52</a></li>
+        <li>Patrascu I. Quantitative RT-PCR in control of HBV and HCV. <em>Acta Marisiensis.</em> 2025;71:284–289. doi:<a href="https://doi.org/10.2478/amma-2025-0046" target="_blank">10.2478/amma-2025-0046</a></li>
+        <li>Razavi H. Polaris Observatory. <em>Antivir Ther.</em> 2022;27(2). doi:<a href="https://doi.org/10.1177/13596535221083179" target="_blank">10.1177/13596535221083179</a></li>
+        <li>Hui RW, Fung J. World Hepatitis Day 2023: Are we close to the target? <em>Indian J Med Res.</em> 2023;158:1–4. doi:<a href="https://doi.org/10.4103/ijmr.ijmr_1250_23" target="_blank">10.4103/ijmr.ijmr_1250_23</a></li>
+        <li>de Almeida, de Paula. Occult Hepatitis B and challenges for elimination. <em>J Appl Microbiol.</em> 2022. doi:<a href="https://doi.org/10.1111/jam.15351" target="_blank">10.1111/jam.15351</a></li>
+        <li>Toma D et al. HCV: Epidemiological Challenges and Global Strategies for Elimination. <em>Viruses.</em> 2025;17(8):1069. doi:<a href="https://doi.org/10.3390/v17081069" target="_blank">10.3390/v17081069</a></li>
+        <li>Bai J et al. Global burden of hepatitis C 1990–2021 and projections to 2030. <em>BMC Infect Dis.</em> 2025;26(1):25. doi:<a href="https://doi.org/10.1186/s12879-025-12396-y" target="_blank">10.1186/s12879-025-12396-y</a></li>
+        <li>Pheng P et al. HCV seroprevalence among PLWHA and pregnant women in Cambodia. <em>BMC Infect Dis.</em> 2022. doi:<a href="https://doi.org/10.1186/s12879-022-07163-2" target="_blank">10.1186/s12879-022-07163-2</a></li>
+        <li>Xu M, Terrault NA. Hepatitis B Virus Elimination Strategies. <em>Curr Hepatol Rep.</em> 2024. doi:<a href="https://doi.org/10.1007/s11901-024-00658-3" target="_blank">10.1007/s11901-024-00658-3</a></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="disclaimer">⚠️ <strong>Educational content only.</strong> All articles on BenchToBedside are for educational purposes and do not constitute clinical advice. Not a substitute for professional judgement, local guidelines, or direct consultation with a clinical microbiologist.</div>
+
+  <div class="newsletter">
+    <h2>Stay sharp.<br><em>Straight to your inbox.</em></h2>
+    <p>New articles, case vignettes, and AMR updates as they publish — written for clinicians and residents who want to stay current without wading through journals.</p>
+    <a class="nl-btn" href="https://benchtobedside.in/#newsletter">Subscribe Free →</a>
+    <p class="nl-note">No spam. Unsubscribe any time.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="fbrand">Bench→Bedside</div>
+    <p class="fdesc">Clinical microbiology explained clearly — from the lab bench to the patient's bedside. Written from GIPMER, New Delhi.</p>
+    <div class="fgrid">
+      <div class="fcol"><h4>Topics</h4><ul><li><a href="https://benchtobedside.in/#articles">Hepatitis Diagnostics</a></li><li><a href="https://benchtobedside.in/#articles">Diagnostic Stewardship</a></li><li><a href="https://benchtobedside.in/#articles">AMR &amp; CLSI Updates</a></li><li><a href="https://benchtobedside.in/#articles">Rare Organisms</a></li></ul></div>
+      <div class="fcol"><h4>Learn</h4><ul><li><a href="https://benchtobedside.in/#ask">Q&amp;A Explorer</a></li><li><a href="https://benchtobedside.in/#topics">Article Series</a></li><li><a href="https://benchtobedside.in/#case">Case Vignettes</a></li><li><a href="https://benchtobedside.in/#newsletter">Newsletter</a></li></ul></div>
+      <div class="fcol"><h4>Connect</h4><ul><li><a href="https://www.linkedin.com/in/deepika-chakraborty-38b6b7189">LinkedIn</a></li><li><a href="https://orcid.org/0000-0003-3270-6457">ORCID</a></li><li><a href="https://www.researchgate.net/profile/Deepika-Chakraborty?ev=hdr_xprf">ResearchGate</a></li><li><a href="https://www.youtube.com/@deepsays">@deepsays (YouTube)</a></li></ul></div>
+    </div>
+    <div class="fcopy">© 2026 Dr. Deepika Chakraborty · benchtobedside.in · Educational content only — not clinical advice</div>
+  </div>
+</footer>
+<script>
+// ── PROGRESS BAR ──
+window.addEventListener('scroll',()=>{
+  const s=document.documentElement;
+  const pct=(s.scrollTop/(s.scrollHeight-s.clientHeight))*100;
+  document.getElementById('progress-bar').style.width=pct+'%';
+});
+
+// ── SCROLL REVEAL ──
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');if(e.target.classList.contains('stats-grid'))startCounters();}});
+},{threshold:0.15});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// ── ANIMATED COUNTERS ──
+let counted=false;
+function startCounters(){
+  if(counted)return;counted=true;
+  document.querySelectorAll('.counter').forEach(el=>{
+    const target=parseFloat(el.dataset.target);
+    const suffix=el.dataset.suffix||'';
+    const dec=parseInt(el.dataset.decimal)||0;
+    let current=0;const steps=60;const inc=target/steps;
+    const timer=setInterval(()=>{
+      current=Math.min(current+inc,target);
+      el.textContent=current.toFixed(dec)+suffix;
+      if(current>=target)clearInterval(timer);
+    },25);
+  });
+}
+
+// ── QUIZ ──
+const questions=[
+  {
+    text:"A 52-year-old woman with RA is starting rituximab in 10 days. Her HBV screen shows: HBsAg non-reactive, Anti-HBc total reactive, Anti-HBs non-reactive. Her rheumatologist asks for clearance. What do you do?",
+    context:"Pre-biologic HBV screening",
+    opts:["Clear her for rituximab — HBsAg is negative","Order a repeat HBsAg in 4 weeks","Order HBV DNA before any decision — this is the isolated anti-HBc pattern","Vaccinate her against HBV and proceed"],
+    answer:2,
+    explain:"Isolated anti-HBc (HBsAg-negative, anti-HBs-negative, anti-HBc-reactive) is the occult HBV pattern. HBV DNA is mandatory before immunosuppression. Reactivation on rituximab without prophylaxis can cause fulminant hepatic failure. Do NOT clear until DNA result is available. [Ref 14,17]"
+  },
+  {
+    text:"Anti-HCV ELISA returns reactive with S/CO ratio 2.8. The patient has no symptoms. HCV RNA has not been ordered. What is the correct interpretation?",
+    context:"HCV serological result, OPD",
+    opts:["Reactive serology confirms active hepatitis C — refer for DAA therapy","The result is inconclusive — repeat ELISA in 6 weeks","This is an incomplete result. HCV RNA is required to determine active infection status","S/CO >1.0 is sufficient — label as hepatitis C positive"],
+    answer:2,
+    explain:"Anti-HCV antibody persists after clearance (spontaneous or treatment-induced). S/CO 2.8 is intermediate and has lower PPV, especially in lower-prevalence populations. HCV RNA is the only test that answers whether the patient is currently infected. Reactive ELISA alone cannot support a treatment decision. [Ref 14]"
+  },
+  {
+    text:"A 26-year-old person who injects drugs presents with jaundice and ALT 1,340 U/L for 5 days. Estimated exposure approximately 4–5 weeks ago. Anti-HCV ELISA: Non-Reactive. The team wants to discharge, ruling out hepatitis C.",
+    context:"Acute hepatitis with exposure history",
+    opts:["Agree — anti-HCV non-reactive excludes hepatitis C","Order HCV RNA urgently — this patient may be in the window period","Repeat anti-HCV ELISA in 2 weeks and discharge now","Order HCV genotype to determine treatment eligibility"],
+    answer:1,
+    explain:"Anti-HCV antibodies may take 4–10 weeks to appear. HCV RNA, by contrast, becomes positive within 1–2 weeks of infection. This patient at 4–5 weeks post-exposure with acute hepatitis is textbook window period — seronegative viraemia is the expected finding. Discharging without RNA is a diagnostic error. [Ref 14]"
+  },
+  {
+    text:"Antenatal HBV screen at 28 weeks: HBsAg reactive, HBeAg reactive, HBV DNA 3.2 × 10⁸ IU/mL. The obstetrician plans to give birth-dose vaccine and HBIG at delivery. Is anything else needed?",
+    context:"Antenatal HBV management",
+    opts:["No — birth-dose vaccine + HBIG is the standard protocol","Yes — tenofovir from the third trimester is indicated to reduce MTCT risk given high viraemia","Yes — start tenofovir immediately and deliver at 34 weeks","No action needed — HBeAg-positive mothers rarely transmit if HBIG is given"],
+    answer:1,
+    explain:"In mothers with HBV DNA >200,000 IU/mL, the combination of birth-dose vaccine + HBIG does not fully prevent MTCT. Tenofovir (or telbivudine) from the third trimester (typically from 28–32 weeks) substantially reduces maternal viraemia and MTCT risk. This is an internationally recommended strategy. [Ref 21]"
+  }
+];
+let qIndex=0,score=0;
+function renderQ(){
+  if(qIndex>=questions.length){showScore();return;}
+  const q=questions[qIndex];
+  document.getElementById('question-area').innerHTML=`
+    <p class="q-text">${q.text}</p>
+    <p class="q-context">📍 ${q.context}</p>
+    <div class="q-opts">${q.opts.map((o,i)=>`<button class="q-opt" onclick="selectOpt(this,${i},${q.answer},'${q.explain.replace(/'/g,"&#39;")}')">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}</div>
+    <div class="q-explain" id="q-explain"></div>
+    <button class="q-next" id="q-next" onclick="nextQ()">${qIndex<3?'Next question →':'See my score →'}</button>
+  `;
+  document.querySelectorAll('#qprogress .q-dot').forEach((d,i)=>{
+    d.className='q-dot'+(i<qIndex?' done':i===qIndex?' active':'');
+  });
+}
+function selectOpt(btn,chosen,correct,explain){
+  const opts=document.querySelectorAll('.q-opt');
+  opts.forEach(o=>o.disabled=true);
+  if(chosen===correct){btn.classList.add('correct');score++;}
+  else{btn.classList.add('wrong');opts[correct].classList.add('reveal-correct');}
+  const ex=document.getElementById('q-explain');
+  ex.textContent=explain;ex.classList.add('show');
+  document.getElementById('q-next').classList.add('show');
+}
+function nextQ(){qIndex++;renderQ();}
+function showScore(){
+  document.getElementById('question-area').style.display='none';
+  document.getElementById('q-next') && (document.getElementById('q-next').style.display='none');
+  const titles=['Keep reading — this article has everything you need!','Solid foundation — a few gaps worth revisiting.','Strong clinical instincts — good eye for the traps.','Perfect score 🎉 — bench to bedside, no gaps.'];
+  const s=document.getElementById('quiz-score');
+  s.style.display='block';
+  document.getElementById('score-num').textContent=score+'/4';
+  document.getElementById('score-num').style.color=score===4?'#4ade80':score>=2?'#facc15':'#f87171';
+  document.getElementById('score-title').textContent=titles[score];
+  document.getElementById('score-msg').textContent='All four scenarios are covered in detail below — with the evidence behind each answer.';
+}
+function restartQuiz(){
+  qIndex=0;score=0;
+  document.getElementById('quiz-score').style.display='none';
+  document.getElementById('question-area').style.display='';
+  renderQ();
+}
+renderQ();
+
+// ── CARE CASCADE ──
+const cascadeData=[
+  {title:"Infected",text:"<strong>~354 million people</strong> are living with chronic HBV or HCV globally.<sup>13</sup> The majority are unaware of their status. Hepatitis rarely announces itself — it causes no specific symptoms until cirrhosis or hepatocellular carcinoma intervenes, often decades later.<p class='hint'>This is why systematic screening matters more than symptom-driven testing.</p>"},
+  {title:"Diagnosed — The biggest gap 🚨",text:"<strong>Only ~10.3% of people with HBV and ~21% with HCV knew their diagnosis in 2019.</strong><sup>13</sup> This is where the elimination effort is most stalled. Barriers include: lack of awareness, stigma, limited access to healthcare, and the absence of routine screening programmes.<p class='hint'>Breaking this step open — through POC testing, integrated screening, reflex RNA ordering — is the single highest-leverage intervention in the entire cascade.</p>"},
+  {title:"Linked to Care",text:"After diagnosis, many patients fail to link to specialised care. Barriers include absent referral systems, long wait times, geographic distance, competing priorities, and lack of social support.<sup>13,16</sup><p class='hint'>Same-day or rapid linkage protocols, patient navigation, co-located testing and treatment, and telehealth consultations are proven strategies.</p>"},
+  {title:"Treatment",text:"For HBV, restrictive eligibility criteria (ALT, HBV DNA thresholds, fibrosis stage) may exclude patients who would benefit. For HCV, cost, insurance restrictions, and provider reluctance have historically delayed DAA initiation — though DAA access has improved significantly.<sup>13,16</sup><p class='hint'>Simplified eligibility criteria, task-shifting to non-specialists, and financial assistance programmes increase initiation rates.</p>"},
+  {title:"Virological Response",text:"For HCV, pan-genotypic DAAs achieve SVR (cure) in &gt;95% of patients with 8–12 weeks of treatment. For HBV, NAs suppress HBV DNA effectively in most patients — but do not achieve functional cure. Patients on lifelong NA therapy require adherence support and monitoring.<sup>12,18</sup><p class='hint'>Long-term adherence is supported by patient education, reminder systems, and integration with chronic disease management programmes.</p>"},
+  {title:"Long-term Follow-up",text:"HBV patients on lifelong NAs require ongoing virological, biochemical, and HCC surveillance. HCV patients with cirrhosis remain at risk for HCC despite SVR and need continued follow-up.<sup>13,16</sup><p class='hint'>Loss to follow-up at this stage is common. Integration with primary care rather than specialist-only models improves long-term retention.</p>"}
+];
+function showStep(i){
+  document.querySelectorAll('.cs').forEach((c,idx)=>{c.classList.toggle('active',idx===i)});
+  const d=document.getElementById('cascade-detail');
+  d.innerHTML=`<strong>${cascadeData[i].title}</strong><br>${cascadeData[i].text}`;
+  d.classList.add('open');
+}
+
+// ── HBV MARKER EXPLORER ──
+const markers=[
+  {name:"HBsAg",full:"Hepatitis B Surface Antigen",desc:"The primary screening test for HBV infection. Reactive = active HBV (acute or chronic). Persistence beyond 6 months defines chronic infection. Critically, <strong>HBsAg negativity does not exclude HBV</strong> — occult infection and the window period are both HBsAg-negative states.",statuses:[{label:"Reactive → Active infection (acute or chronic)",type:"pos"},{label:"Non-reactive → Does NOT rule out HBV",type:"both"}]},
+  {name:"Anti-HBs",full:"Antibody to HBsAg",desc:"The immunity marker. Reactive without HBsAg = protected, either from vaccination or resolved past infection. Non-reactive alongside reactive anti-HBc and negative HBsAg = the isolated anti-HBc pattern — occult HBV territory requiring DNA confirmation.",statuses:[{label:"Reactive → Immune (vaccinated or recovered)",type:"pos"},{label:"Non-reactive + anti-HBc reactive → Check HBV DNA",type:"neg"}]},
+  {name:"Anti-HBc Total",full:"Total Antibody to Core Antigen (IgG + IgM)",desc:"Appears early in infection and <strong>persists lifelong.</strong> Present in active, resolved, or occult HBV infection. Isolated anti-HBc reactivity (with negative HBsAg and anti-HBs) may indicate occult HBV, resolved infection with waning anti-HBs, or — rarely — false positive. <strong>Never skip this test before immunosuppression.</strong>",statuses:[{label:"Reactive → Past or present HBV contact",type:"both"},{label:"Isolated reactive → Order HBV DNA",type:"neg"}]},
+  {name:"IgM Anti-HBc",full:"IgM Antibody to Core Antigen",desc:"High-titre IgM anti-HBc = acute or recent HBV infection. This is the <strong>critical marker that distinguishes acute hepatitis B from an acute flare of chronic HBV</strong> — a distinction with completely different management implications. Not ordered by default; must be specifically requested in the right clinical context.",statuses:[{label:"High titre → Acute HBV infection",type:"neg"},{label:"Low titre / negative in HBsAg-positive patient → Chronic HBV flare",type:"pos"}]},
+  {name:"HBeAg",full:"Hepatitis B e Antigen",desc:"Marker of active viral replication and high infectivity. HBeAg-positive patients typically have high HBV DNA levels. <strong>HBeAg-positive mothers have a 70–90% MTCT risk without intervention.</strong> HBeAg seroconversion to anti-HBe often signals reduced viral replication — but HBeAg-negative chronic hepatitis B with active disease can still occur.",statuses:[{label:"Reactive → High replication, high infectivity, high MTCT risk",type:"neg"},{label:"Non-reactive → Lower replication (but HBeAg-negative CHB still possible)",type:"both"}]},
+  {name:"Anti-HBe",full:"Antibody to HBeAg",desc:"Seroconversion from HBeAg to anti-HBe often correlates with reduced disease activity — but not always. HBeAg-negative chronic hepatitis B (with reactive HBsAg, anti-HBe, and detectable HBV DNA) remains an active form of chronic HBV requiring treatment consideration.",statuses:[{label:"Reactive + HBsAg positive → HBeAg-negative chronic HBV possible",type:"both"},{label:"Does not indicate inactive disease alone",type:"both"}]},
+  {name:"HBV DNA",full:"HBV Viral Load (Quantitative PCR)",desc:"The gold standard for disease activity and treatment monitoring. Essential for: guiding treatment initiation, monitoring virological response to NAs, detecting occult HBV infection (low-level viraemia despite negative HBsAg), monitoring reactivation risk in immunosuppressed patients, and stratifying MTCT risk in pregnancy. DNA ≥200,000 IU/mL in pregnancy warrants third-trimester antiviral prophylaxis.",statuses:[{label:"Detected → Viraemia present; level guides management",type:"neg"},{label:"Not detected → Not necessarily HBV-free if anti-HBc reactive",type:"both"}]},
+  {name:"HBsAg alone?",full:"⚠️ The Single-Test Trap",desc:"<strong>Ordering HBsAg alone and stopping there is the most common and consequential HBV diagnostic error in clinical practice.</strong> It misses: occult HBV infection (HBsAg-negative, DNA-positive), the window period of acute infection, the isolated anti-HBc pattern (reactivation risk under immunosuppression), and the distinction between acute HBV and chronic HBV flare (requires IgM anti-HBc).<br><br>A complete pre-immunosuppression screen is at minimum: HBsAg + anti-HBs + anti-HBc total. If anti-HBc is reactive and HBsAg negative — add HBV DNA.",statuses:[{label:"HBsAg alone is never a complete HBV workup",type:"neg"},{label:"Always consider what clinical question you are actually answering",type:"both"}]}
+];
+function showMarker(i){
+  document.querySelectorAll('.marker-btn').forEach((b,idx)=>b.classList.toggle('active',idx===i));
+  const m=markers[i];
+  const statHtml=m.statuses.map(s=>`<span class="m-status ${s.type}">${s.label}</span>`).join('');
+  document.getElementById('marker-detail').innerHTML=`<h4>${m.name} — ${m.full}</h4><p>${m.desc}</p><div class="status-row">${statHtml}</div>`;
+  document.getElementById('marker-detail').classList.add('open');
+}
+
+// ── SCENARIOS ──
+function toggleScenario(btn){
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+function revealAnswer(btn,id){
+  btn.classList.add('revealed');
+  btn.innerHTML='Answer ✓';
+  document.getElementById(id).classList.add('show');
+}
+
+// ── KEYBOARD for flip cards ──
+document.querySelectorAll('.flip-card').forEach(card=>{
+  card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();card.classList.toggle('flipped');}});
+});
+</script>
+</body>
+</html>
