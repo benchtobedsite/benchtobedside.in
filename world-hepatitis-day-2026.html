@@ -36,7 +36,11 @@ nav{background:var(--nav-bg);position:sticky;top:0;z-index:50;border-bottom:1px 
 .nav-links .sub a{color:#fff;background:var(--accent);padding:.28rem .75rem;border-radius:4px;font-size:.79rem}
 
 /* LAYOUT */
-main{max-width:740px;margin:0 auto;padding:0 1.5rem 5rem}
+main{max-width:1200px;margin:0 auto;padding:0 2.5rem 5rem}
+.prose{max-width:780px}
+h1.title{max-width:780px}
+.deck{max-width:780px}
+.byline{max-width:780px}
 
 /* BREADCRUMB */
 .breadcrumb{font-size:.78rem;color:var(--ink-3);padding:1.5rem 0 1rem;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
@@ -79,7 +83,7 @@ sup.r{font-size:.65rem;color:var(--link);font-weight:700;vertical-align:super;li
 .reveal.visible{opacity:1;transform:none}
 
 /* ANIMATED STATS */
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2rem 0}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin:2rem 0;max-width:900px}
 .stat-card{border:1px solid var(--rule);border-radius:12px;padding:1.25rem 1rem;text-align:center;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.05)}
 .stat-num{font-family:'Lora',Georgia,serif;font-size:2.1rem;font-weight:600;line-height:1.1;color:var(--ink)}
 .stat-unit{font-size:1rem;color:var(--ink-2)}
@@ -135,7 +139,7 @@ sup.r{font-size:.65rem;color:var(--link);font-weight:700;vertical-align:super;li
 .cs-detail .hint{font-size:.78rem;color:var(--ink-3);margin-top:.4rem;font-style:italic}
 
 /* MYTHS FLIP CARDS */
-.myths-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1.5rem 0}
+.myths-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0}
 .flip-card{height:160px;cursor:pointer;perspective:1000px}
 .flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1)}
 .flip-card.flipped .flip-inner{transform:rotateY(180deg)}
@@ -207,7 +211,7 @@ sup.r{font-size:.65rem;color:var(--link);font-weight:700;vertical-align:super;li
 blockquote.pq{font-family:'Lora',Georgia,serif;font-style:italic;font-size:1.18rem;line-height:1.5;color:var(--ink-2);border-left:3px solid var(--accent);padding:.6rem 1.3rem;margin:2.2rem 0}
 
 /* TAKEAWAY */
-.takeaway-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:1.5rem 0}
+.takeaway-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin:1.5rem 0}
 .tw-card{border-radius:9px;padding:.9rem 1rem;font-size:.85rem;line-height:1.45}
 .tw-card.hbv-tw{background:#e8f1f8;border:1px solid #bfdbf7}
 .tw-card.hcv-tw{background:#fdf0e6;border:1px solid #fbd5b8}
@@ -254,6 +258,10 @@ footer{background:var(--nav-bg);color:var(--nav-sub);margin-top:4rem;padding:2.5
 .fcol ul li a:hover{color:var(--nav-text)}
 .fcopy{border-top:1px solid #2a2a20;padding-top:1.2rem;font-size:.75rem;color:#55554a}
 
+@media(max-width:900px){
+  .myths-grid{grid-template-columns:repeat(2,1fr)}
+  .takeaway-grid{grid-template-columns:1fr 1fr}
+}
 @media(max-width:640px){
   h1.title{font-size:1.65rem}
   .stats-grid{grid-template-columns:1fr 1fr}
@@ -304,7 +312,7 @@ footer{background:var(--nav-bg);color:var(--nav-sub);margin-top:4rem;padding:2.5
   </div>
 
   <div class="prose">
-    <p>World Hepatitis Day is observed on 28 July — the birthday of Dr. Baruch Blumberg, who discovered the hepatitis B surface antigen in 1967 and went on to develop the first vaccine against HBV. The WHO's 2026 theme, <strong>"Hepatitis: Let's Break It Down,"</strong> calls for dismantling the financial, social, and systemic barriers preventing millions from accessing prevention, diagnosis, treatment, and care.<sup class="r">1,2</sup></p>
+    <p>World Hepatitis Day is observed on 28 July — the birthday of Dr. Baruch Blumberg, who first described the Australia antigen in 1965 (later confirmed as the hepatitis B surface antigen in 1967) and went on to co-develop the first vaccine against HBV. The WHO's 2026 theme, <strong>"Hepatitis: Let's Break It Down,"</strong> calls for dismantling the financial, social, and systemic barriers preventing millions from accessing prevention, diagnosis, treatment, and care.<sup class="r">1,2</sup></p>
     <p>The tools to eliminate viral hepatitis exist. An effective HBV vaccine has been available since the 1980s. Direct-acting antivirals cure HCV in 8–12 weeks with &gt;95% success rates. And yet — approximately 89.7% of people with hepatitis B and 78.6% of those with hepatitis C remain undiagnosed.<sup class="r">13</sup> That gap does not require new science to close. It requires breaking down the barriers that sit between patients and the care they need.</p>
     <p>Before we go further — <strong>let's see where you actually stand.</strong></p>
   </div>
@@ -349,12 +357,12 @@ footer{background:var(--nav-bg);color:var(--nav-sub);margin-top:4rem;padding:2.5
     </div>
     <div class="stat-card">
       <div class="stat-num">&gt;<span class="counter" data-target="1.1" data-suffix="M" data-decimal="1">0</span></div>
-      <div class="stat-label">Deaths from viral hepatitis per year<sup class="r">2</sup></div>
+      <div class="stat-label">Deaths from viral hepatitis per year<sup class="r">13</sup></div>
     </div>
   </div>
 
   <div class="prose">
-    <p>Between 1990 and 2019, global HBV prevalence fell by 31.4% — vaccination working. But HBV mortality fell by only 26.7%, and in some regions it is rising.<sup class="r">1</sup> For HCV, paradoxically, mortality <em>increased</em> by 10% over the same period — despite curative treatment becoming available in 2014.<sup class="r">1</sup> In Africa, Western Africa alone recorded 33,603 HBV-related deaths in 2021; projections show a 42.5% increase in HBV deaths in Eastern Africa by 2030 without course correction.<sup class="r">3</sup></p>
+    <p>Between 1990 and 2019, global HBV prevalence fell by 31.4% — vaccination working. But HBV mortality fell by only 26.7%, and in some regions it is rising.<sup class="r">1</sup> For HCV, paradoxically, mortality <em>increased</em> by 10% over the same period — despite curative treatment (sofosbuvir) receiving regulatory approval in late 2013.<sup class="r">1</sup> In Africa, Western Africa alone recorded 33,603 HBV-related deaths in 2021; projections show a 42.5% increase in HBV deaths in Eastern Africa by 2030 without course correction.<sup class="r">3</sup></p>
     <p>The Asia-Pacific region, carrying more than half of the global chronic hepatitis burden, saw HBV prevalence decline from 4.69% to 4.30% between 2015 and 2020 — but only 13% of chronic HBV infections were diagnosed, and treatment rates among those diagnosed were just 25%.<sup class="r">10</sup></p>
     <blockquote class="pq">"The 2008 economic crisis had lasting negative impacts on hepatitis outcomes in Southern Europe. Healthcare investment, once withdrawn, does not easily recover — and the hepatitis burden it leaves behind is permanent."<sup class="r" style="font-style:normal">9</sup></blockquote>
   </div>
@@ -397,7 +405,7 @@ footer{background:var(--nav-bg);color:var(--nav-sub);margin-top:4rem;padding:2.5
     <div class="flip-card" onclick="this.classList.toggle('flipped')" tabindex="0" role="button" aria-label="Flip card">
       <div class="flip-inner">
         <div class="flip-front"><span class="myth-label">Myth or Reality?</span><span class="myth-text">"Anti-HCV positive = the patient has hepatitis C."</span><span class="myth-hint">Tap to reveal ↩</span></div>
-        <div class="flip-back myth-false"><div class="verdict">❌ MYTH</div><div class="verdict-text">Antibody persists after clearance. ~25–30% clear spontaneously. Reactive serology + no RNA = unknown status. Confirm with HCV RNA.<sup class="r">14</sup></div></div>
+        <div class="flip-back myth-false"><div class="verdict">❌ MYTH</div><div class="verdict-text">Antibody persists after clearance. ~20–25% clear spontaneously. Reactive serology + no RNA = unknown status. Confirm with HCV RNA.<sup class="r">14</sup></div></div>
       </div>
     </div>
     <div class="flip-card" onclick="this.classList.toggle('flipped')" tabindex="0" role="button" aria-label="Flip card">
@@ -409,7 +417,7 @@ footer{background:var(--nav-bg);color:var(--nav-sub);margin-top:4rem;padding:2.5
     <div class="flip-card" onclick="this.classList.toggle('flipped')" tabindex="0" role="button" aria-label="Flip card">
       <div class="flip-inner">
         <div class="flip-front"><span class="myth-label">Myth or Reality?</span><span class="myth-text">"Negative anti-HCV rules out hepatitis C."</span><span class="myth-hint">Tap to reveal ↩</span></div>
-        <div class="flip-back myth-false"><div class="verdict">❌ MYTH</div><div class="verdict-text">Antibody may be absent for 8–12 weeks post-exposure. In high-risk patients with acute hepatitis, order HCV RNA regardless of serology.<sup class="r">14</sup></div></div>
+        <div class="flip-back myth-false"><div class="verdict">❌ MYTH</div><div class="verdict-text">Antibody may be absent for 8–12 weeks post-exposure (average ~8 weeks with 3rd-gen ELISA). In high-risk patients with acute hepatitis, order HCV RNA regardless of serology.<sup class="r">14</sup></div></div>
       </div>
     </div>
     <div class="flip-card" onclick="this.classList.toggle('flipped')" tabindex="0" role="button" aria-label="Flip card">
@@ -505,7 +513,7 @@ footer{background:var(--nav-bg);color:var(--nav-sub);margin-top:4rem;padding:2.5
       <button class="reveal-btn" onclick="revealAnswer(this,'ans-b')">Reveal the answer ▾</button>
       <div class="scenario-answer" id="ans-b">
         <strong>❌ This is an incomplete result — and a missed opportunity.</strong><br><br>
-        Reactive anti-HCV ELISA cannot distinguish active infection from spontaneous clearance (~25–30% of exposed individuals), treated past infection, or false positive. An S/CO ratio of 2.8 is in the intermediate range — lower ratios have lower positive predictive value, especially in lower-prevalence populations.<sup class="r">14</sup><br><br>
+        Reactive anti-HCV ELISA cannot distinguish active infection from spontaneous clearance (~20–25% of exposed individuals), treated past infection, or false positive. An S/CO ratio of 2.8 is in the intermediate range — lower ratios have lower positive predictive value, especially in lower-prevalence populations.<sup class="r">14</sup><br><br>
         HCV RNA is the only test that answers the clinical question: is this patient currently infected? Without it, the patient cannot be referred for treatment, cannot be reassured they are clear, and cannot be correctly classified for elimination data.<br><br>
         <strong>Lab action:</strong> Reflexive comment on all reactive ELISA reports — "Confirmatory HCV RNA testing is required to determine active infection status. ELISA positivity alone is insufficient for clinical management."<br><br>
         <strong>Good news:</strong> If RNA-positive, pan-genotypic DAAs offer &gt;95% cure in 8–12 weeks.<sup class="r">18</sup> This patient can be cured. The barrier is the RNA test that was not ordered.
@@ -533,7 +541,7 @@ footer{background:var(--nav-bg);color:var(--nav-sub);margin-top:4rem;padding:2.5
       <button class="reveal-btn" onclick="revealAnswer(this,'ans-c')">Reveal the answer ▾</button>
       <div class="scenario-answer" id="ans-c">
         <strong>⚠️ Do not discharge without HCV RNA.</strong><br><br>
-        Anti-HCV antibodies take 4–10 weeks to appear after infection — sometimes longer in immunocompromised individuals. HCV RNA, by contrast, becomes detectable within 1–2 weeks of infection.<sup class="r">14</sup> This patient, with known high-risk exposure ~4–5 weeks ago and acute hepatitis, is squarely in the window period where RNA can be positive and ELISA negative.<br><br>
+        Anti-HCV antibodies take 8–12 weeks to appear after infection on average — sometimes longer in immunocompromised individuals. HCV RNA, by contrast, becomes detectable within 1–2 weeks of infection.<sup class="r">14</sup> This patient, with known high-risk exposure ~4–5 weeks ago and acute hepatitis, is squarely in the window period where RNA can be positive and ELISA negative.<br><br>
         Calling HCV "ruled out" on the basis of a negative ELISA in this context is a diagnostic error.<br><br>
         <strong>Order:</strong> HCV RNA (quantitative RT-PCR). If positive, this is acute HCV — treatment during the acute phase may prevent chronicity entirely. If negative, repeat at 12 weeks to confirm.<br><br>
         <strong>Remember:</strong> ~75–85% of those exposed to HCV develop chronic infection without treatment.<sup class="r">11</sup> The window to intervene and prevent chronicity is now.
@@ -560,7 +568,7 @@ footer{background:var(--nav-bg);color:var(--nav-sub);margin-top:4rem;padding:2.5
   <div class="prose">
     <h2><span class="emoji">💉</span>Prevention: What Works and What's Being Left Undone</h2>
     <p>HBV vaccination is one of the most effective public health interventions in existence. Universal childhood vaccination programmes have dramatically reduced HBV prevalence where coverage is high.<sup class="r">21</sup> Yet global birth-dose coverage — the dose that must be given within 24 hours of delivery to prevent mother-to-child transmission — reached only 43% in 2019, with rates below 10% in many African countries.<sup class="r">2,16</sup></p>
-    <p>Infants infected perinatally have approximately a 90% chance of developing chronic HBV. Adults infected have less than 5% risk.<sup class="r">11</sup> The birth dose is not a routine vaccine — it is a narrow-window intervention that sits at the most critical moment of hepatitis B transmission. Missing it because of cold chain failures, home delivery, or underfunding is a preventable catastrophe repeated daily.</p>
+    <p>Infants infected perinatally have approximately a 90% chance of developing chronic HBV. Immunocompetent adults infected have a 5–10% risk.<sup class="r">11</sup> The birth dose is not a routine vaccine — it is a narrow-window intervention that sits at the most critical moment of hepatitis B transmission. Missing it because of cold chain failures, home delivery, or underfunding is a preventable catastrophe repeated daily.</p>
     <p>For MTCT prevention, HBsAg screening alone is insufficient. <strong>Pregnant women with HBV DNA &gt;200,000 IU/mL at delivery remain at high MTCT risk despite vaccination and HBIG.</strong> Tenofovir prophylaxis in the third trimester reduces this risk — but it can only be offered if HBV DNA is measured.<sup class="r">21</sup> The complete antenatal protocol runs: HBsAg → HBeAg → HBV DNA → decision on antiviral prophylaxis → birth-dose within 24h + HBIG → post-vaccination serology at 9–12 months.</p>
     <p>For HCV, there is no vaccine. Prevention is through harm reduction (NSP, OST, supervised consumption) and blood safety (universal NAT screening of donations, mandatory donor deferral).<sup class="r">18</sup></p>
   </div>
@@ -690,14 +698,14 @@ const questions=[
     context:"HCV serological result, OPD",
     opts:["Reactive serology confirms active hepatitis C — refer for DAA therapy","The result is inconclusive — repeat ELISA in 6 weeks","This is an incomplete result. HCV RNA is required to determine active infection status","S/CO >1.0 is sufficient — label as hepatitis C positive"],
     answer:2,
-    explain:"Anti-HCV antibody persists after clearance (spontaneous or treatment-induced). S/CO 2.8 is intermediate and has lower PPV, especially in lower-prevalence populations. HCV RNA is the only test that answers whether the patient is currently infected. Reactive ELISA alone cannot support a treatment decision. [Ref 14]"
+    explain:"Anti-HCV antibody persists after clearance (spontaneous in ~20–25%, or treatment-induced). S/CO 2.8 is intermediate and has lower PPV, especially in lower-prevalence populations. HCV RNA is the only test that answers whether the patient is currently infected. Reactive ELISA alone cannot support a treatment decision. [Ref 14]"
   },
   {
     text:"A 26-year-old person who injects drugs presents with jaundice and ALT 1,340 U/L for 5 days. Estimated exposure approximately 4–5 weeks ago. Anti-HCV ELISA: Non-Reactive. The team wants to discharge, ruling out hepatitis C.",
     context:"Acute hepatitis with exposure history",
     opts:["Agree — anti-HCV non-reactive excludes hepatitis C","Order HCV RNA urgently — this patient may be in the window period","Repeat anti-HCV ELISA in 2 weeks and discharge now","Order HCV genotype to determine treatment eligibility"],
     answer:1,
-    explain:"Anti-HCV antibodies may take 4–10 weeks to appear. HCV RNA, by contrast, becomes positive within 1–2 weeks of infection. This patient at 4–5 weeks post-exposure with acute hepatitis is textbook window period — seronegative viraemia is the expected finding. Discharging without RNA is a diagnostic error. [Ref 14]"
+    explain:"Anti-HCV antibodies may take 8–12 weeks to appear (average ~8 weeks with 3rd-gen ELISA). HCV RNA, by contrast, becomes positive within 1–2 weeks of infection. This patient at 4–5 weeks post-exposure with acute hepatitis is textbook window period — seronegative viraemia is the expected finding. Discharging without RNA is a diagnostic error. [Ref 14]"
   },
   {
     text:"Antenatal HBV screen at 28 weeks: HBsAg reactive, HBeAg reactive, HBV DNA 3.2 × 10⁸ IU/mL. The obstetrician plans to give birth-dose vaccine and HBIG at delivery. Is anything else needed?",
